@@ -1,7 +1,7 @@
 import { SidebarContainer } from './style';
 
-import UserInfo from '../UserInfo';
-import Nav from '../Nav';
+import UserInfo from './UserInfo';
+import Nav from './Nav';
 
 const Sidebar = () => {
 	return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import user from '../../assets/images/user.png';
+import user from '../../../assets/images/user.png';
 
 import { UserContainer, UserAvatar, UserName, UserOccupation } from './style';
 
