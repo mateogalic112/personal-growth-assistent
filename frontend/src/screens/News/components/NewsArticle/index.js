@@ -10,13 +10,15 @@ import {
 	Published,
 } from './style';
 
-const NewsArticle = ({ src, title, source, author, url, published }) => {
+const NewsArticle = ({
+	article: { urlToImage, title, source, author, publishedAt, url },
+}) => {
 	return (
 		<Container>
-			<Image src={src} />
+			<Image src={urlToImage} />
 			<Content>
 				<Title>{title}</Title>
-				<Source>{source}</Source>
+				<Source>{source.name}</Source>
 				<div
 					style={{
 						display: 'flex',
@@ -24,7 +26,7 @@ const NewsArticle = ({ src, title, source, author, url, published }) => {
 					}}
 				>
 					<Author>{author},</Author>
-					<Published>{published}</Published>
+					<Published>{publishedAt}</Published>
 				</div>
 				<Button as='a' href={url} target='_blank'>
 					Read More

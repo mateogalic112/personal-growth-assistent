@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import News from './screens/News';
 
-import Main from './components/Main';
-import Glass from './components/Glass';
-import Circles from './components/Circles';
+import Main from './layout/Main';
+import Glass from './layout/Glass';
+import Circles from './layout/Circles';
 import Sidebar from './components/Sidebar';
-import Board from './components/Board';
+import Board from './layout/Board';
 import WidgetBar from './components/WidgetBar';
-import Illustration from './components/Illustration';
+import Illustration from './layout/Illustration';
 
 const App = () => {
 	return (

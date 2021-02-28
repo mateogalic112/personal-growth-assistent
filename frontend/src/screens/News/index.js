@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import { useQuery } from 'react-query';
 
 import Container from '../../layout/Container';
@@ -13,13 +15,19 @@ import FeaturedArticle from './components/FeaturedArticle';
 import NewsArticle from './components/NewsArticle';
 
 const News = () => {
+	console.log('rerender');
 	const { data, error, isLoading, isError } = useQuery('news', getLatestNews);
+	const [articles, setArticles] = useState(null);
+
+	useEffect(() => {
+		if (!isLoading) {
+			setArticles(data.articles ?? []);
+		}
+	}, [data?.articles, isError, isLoading]);
 
 	if (isLoading) return <h1>Loading</h1>;
 
-	console.log(data.articles);
-
-	const featuredArticle = data.articles.shift();
+	if (isError) return <h1>{error}</h1>;
 
 	return (
 		<Container>
@@ -28,25 +36,14 @@ const News = () => {
 				<Filter />
 			</TitleBar>
 			<NewsGrid>
-				<FeaturedArticle
-					src={featuredArticle.urlToImage}
-					title={featuredArticle.title}
-					author={featuredArticle.author}
-					source={featuredArticle.source.name}
-					description={featuredArticle.description}
-					date={featuredArticle.publishedAt}
-					url={featuredArticle.url}
-				/>
-				{data.articles.map((article) => (
-					<NewsArticle
-						src={article.urlToImage}
-						title={article.title}
-						source={article.source.name}
-						author={article.author}
-						url={article.url}
-						published={article.publishedAt}
-					/>
-				))}
+				{Array.isArray(articles) && articles.length && (
+					<FeaturedArticle article={articles.shift()} />
+				)}
+				{Array.isArray(articles) &&
+					articles.length &&
+					articles.map((article) => (
+						<NewsArticle key={article.title} article={article} />
+					))}
 			</NewsGrid>
 		</Container>
 	);

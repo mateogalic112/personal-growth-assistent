@@ -13,17 +13,19 @@ import {
 } from './style';
 
 const FeaturedArticle = ({
-	source,
-	author,
-	date,
-	src,
-	title,
-	description,
-	url,
+	article: {
+		urlToImage,
+		source,
+		author,
+		publishedAt,
+		title,
+		description,
+		url,
+	},
 }) => {
 	return (
 		<Container>
-			<CoverImage src={src} />
+			<CoverImage src={urlToImage} />
 			<Content>
 				<div
 					style={{
@@ -33,10 +35,10 @@ const FeaturedArticle = ({
 						marginBottom: '.5rem',
 					}}
 				>
-					<Source>{source}</Source>
+					<Source>{source.name}</Source>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<Author>{author}, </Author>
-						<Published>{date}</Published>
+						<Published>{publishedAt}</Published>
 					</div>
 				</div>
 				<Title>{title}</Title>

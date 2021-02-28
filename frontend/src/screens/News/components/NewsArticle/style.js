@@ -6,6 +6,13 @@ export const Container = styled.div`
 	box-shadow: 0px 0px 10px 5px rgba(68, 68, 68, 0.2);
 	border-radius: 2rem;
 	overflow: hidden;
+	transform: scale(1);
+	transition: box-shadow 0.2s, transform 0.15s;
+
+	&:hover {
+		box-shadow: 0px 0px 15px 10px rgba(68, 68, 68, 0.2);
+		transform: scale(1.02);
+	}
 `;
 
 export const Image = styled.img`
