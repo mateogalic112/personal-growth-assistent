@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import News from './screens/News';
+
 import Main from './components/Main';
 import Glass from './components/Glass';
 import Circles from './components/Circles';
@@ -17,7 +19,13 @@ const App = () => {
 					<Illustration />
 					<WidgetBar />
 					<Sidebar />
-					<Board />
+					<Board>
+						<Switch>
+							<Route path='/news'>
+								<News />
+							</Route>
+						</Switch>
+					</Board>
 				</Glass>
 			</Main>
 		</Router>

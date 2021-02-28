@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const SearchBar = styled.div`
-	height: 1.95rem;
-	width: 14rem;
+	height: 2rem;
+	width: 16rem;
 	position: relative;
 	font-size: 0.7rem;
 	transition: box-shadow 0.2s, opacity 0.2s;
@@ -15,8 +15,8 @@ export const SearchBar = styled.div`
 	}
 
 	input {
-		height: 1.95rem;
-		width: 14rem;
+		height: 2rem;
+		width: 16rem;
 		padding: 0 2rem;
 		border-radius: 5rem;
 		border: none;
