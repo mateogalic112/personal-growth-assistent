@@ -22,10 +22,10 @@ const NewsArticle = ({
 				<div
 					style={{
 						display: 'flex',
-						marginBottom: '.25rem',
+						marginBottom: '.5rem',
 					}}
 				>
-					<Author>{author},</Author>
+					{!!author && <Author>{author},</Author>}
 					<Published>{publishedAt}</Published>
 				</div>
 				<Button as='a' href={url} target='_blank'>

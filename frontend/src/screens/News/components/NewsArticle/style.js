@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	min-height: 320px;
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	box-shadow: 0px 0px 10px 5px rgba(68, 68, 68, 0.2);
 	border-radius: 2rem;
@@ -17,38 +18,37 @@ export const Container = styled.div`
 
 export const Image = styled.img`
 	display: block;
-	height: 50%;
 	width: 100%;
 	object-fit: cover;
 `;
 
 export const Content = styled.div`
-	height: 50%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	padding: 0.5rem 1rem 1rem 1rem;
+	justify-content: space-evenly;
+	padding: 2rem 1rem;
 	color: 'black';
 `;
 
 export const Title = styled.h6`
-	font-size: 0.85rem;
+	font-size: 1rem;
 	line-height: 1.3;
-	margin-bottom: 0.25rem;
+	margin-bottom: 0.75rem;
 `;
 
 export const Source = styled.h6`
-	font-size: 0.7rem;
+	font-size: 0.8rem;
+	margin-bottom: 0.5rem;
 `;
 
 export const Author = styled.h6`
-	font-size: 0.65rem;
+	font-size: 0.75rem;
 `;
 
 export const Published = styled.p`
-	font-size: 0.5rem;
+	font-size: 0.75rem;
 	margin-left: 0.25rem;
-	line-height: 2;
 `;
 
 export const Button = styled.h6`
@@ -56,7 +56,7 @@ export const Button = styled.h6`
 	color: black;
 	text-decoration: none;
 	border: 1px solid black;
-	padding: 0.2rem 0.85rem;
+	padding: 0.45rem 1rem;
 	font-size: 0.65rem;
 	width: fit-content;
 	border-radius: 1rem;

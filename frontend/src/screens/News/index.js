@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 import Container from '../../layout/Container';
 
-import Title from '../../components/Title';
+import Title from '../../components/TitleBar/Title';
 import TitleBar from '../../components/TitleBar';
 import Filter from '../../widgets/Filter';
 import NewsGrid from '../../layout/Grid/NewsGrid';
@@ -15,9 +15,12 @@ import FeaturedArticle from './components/FeaturedArticle';
 import NewsArticle from './components/NewsArticle';
 
 const News = () => {
-	console.log('rerender');
-	const { data, error, isLoading, isError } = useQuery('news', getLatestNews);
 	const [articles, setArticles] = useState(null);
+	const { data, error, isLoading, isError } = useQuery(
+		'news',
+		getLatestNews,
+		{ refetchOnWindowFocus: false, refetchOnMount: false }
+	);
 
 	useEffect(() => {
 		if (!isLoading) {
