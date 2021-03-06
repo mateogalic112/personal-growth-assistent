@@ -9,24 +9,39 @@ import TitleBar from '../../components/TitleBar';
 import Filter from '../../widgets/Filter';
 import NewsGrid from '../../layout/Grid/NewsGrid';
 
-import { getLatestNews } from '../../api/news';
+import { newsQuery } from '../../api/news';
 
 import FeaturedArticle from './components/FeaturedArticle';
 import NewsArticle from './components/NewsArticle';
+import NewsFilter from './components/NewsFilter';
+
+import { LoadMoreBtn } from '../../theme/Button';
 
 const News = () => {
-	const [articles, setArticles] = useState(null);
+	const [articles, setArticles] = useState([]);
+	const [articleLimit, setArticleLimit] = useState(3);
+	const [isFilterOpen, setIsFilterOpen] = useState(false);
+	const [queryString, setQueryString] = useState('');
+
 	const { data, error, isLoading, isError } = useQuery(
-		'news',
-		getLatestNews,
-		{ refetchOnWindowFocus: false, refetchOnMount: false }
+		['news', queryString],
+		() => newsQuery(queryString)
 	);
 
 	useEffect(() => {
 		if (!isLoading) {
-			setArticles(data.articles ?? []);
+			setArticles(data.articles);
+			setArticleLimit(3);
 		}
-	}, [data?.articles, isError, isLoading]);
+	}, [data, isLoading]);
+
+	const toggleFilter = () => {
+		setIsFilterOpen((filterState) => !filterState);
+	};
+
+	const loadMore = () => {
+		setArticleLimit((prevLimit) => prevLimit + 4);
+	};
 
 	if (isLoading) return <h1>Loading</h1>;
 
@@ -35,19 +50,28 @@ const News = () => {
 	return (
 		<Container>
 			<TitleBar>
-				<Title>News</Title>
-				<Filter />
+				<Title>Latest News</Title>
+				<Filter openFilter={toggleFilter} />
 			</TitleBar>
+			<NewsFilter active={isFilterOpen} setQueryString={setQueryString} />
 			<NewsGrid>
 				{Array.isArray(articles) && articles.length && (
-					<FeaturedArticle article={articles.shift()} />
+					<FeaturedArticle article={articles[0]} />
 				)}
 				{Array.isArray(articles) &&
 					articles.length &&
-					articles.map((article) => (
-						<NewsArticle key={article.title} article={article} />
-					))}
+					articles
+						.slice(1, articleLimit)
+						.map((article) => (
+							<NewsArticle
+								key={article.title}
+								article={article}
+							/>
+						))}
 			</NewsGrid>
+			{articleLimit < articles.length && (
+				<LoadMoreBtn onClick={loadMore}>Load More</LoadMoreBtn>
+			)}
 		</Container>
 	);
 };

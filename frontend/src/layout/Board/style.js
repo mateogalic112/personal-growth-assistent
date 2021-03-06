@@ -9,4 +9,5 @@ export const BoardContainer = styled.section`
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 	border-radius: 1rem;
+	position: relative;
 `;

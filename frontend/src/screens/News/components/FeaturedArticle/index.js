@@ -9,8 +9,11 @@ import {
 	Published,
 	Title,
 	Description,
-	Button,
 } from './style';
+
+import { BtnOutlined } from '../../../../theme/Button';
+
+import { displayDate } from '../../../../helper/date';
 
 const FeaturedArticle = ({
 	article: {
@@ -38,14 +41,14 @@ const FeaturedArticle = ({
 					<Source>{source.name}</Source>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<Author>{author}, </Author>
-						<Published>{publishedAt}</Published>
+						<Published>{displayDate(publishedAt)}</Published>
 					</div>
 				</div>
 				<Title>{title}</Title>
 				<Description>{description}</Description>
-				<Button as='a' href={url} target='_blank'>
+				<BtnOutlined as='a' href={url} target='_blank' white>
 					Read more
-				</Button>
+				</BtnOutlined>
 			</Content>
 		</Container>
 	);

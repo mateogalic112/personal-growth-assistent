@@ -4,9 +4,9 @@ import { BsFilterRight } from 'react-icons/bs';
 
 import { FilterIcon, Text, FilterContainer } from './style';
 
-const Filter = () => {
+const Filter = ({ openFilter }) => {
 	return (
-		<FilterContainer>
+		<FilterContainer onClick={openFilter}>
 			<Text>Filters</Text>
 			<FilterIcon>
 				<BsFilterRight />

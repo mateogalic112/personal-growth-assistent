@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const FilterContainer = styled.div`
-	padding: 0.25rem 0.5rem;
+export const FilterContainer = styled.button`
+	padding: 0.25rem 1rem;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 10rem;
 	display: flex;
@@ -14,11 +14,15 @@ export const FilterContainer = styled.div`
 		background-color: rgba(255, 255, 255, 0.8);
 		border: 1px solid rgba(0, 0, 0, 0);
 	}
+
+	&:focus {
+		outline: none;
+	}
 `;
 
 export const FilterIcon = styled.i`
 	margin-left: 0.5rem;
-	font-size: 1rem;
+	font-size: 1.25rem;
 
 	& svg {
 		display: inline-block;
@@ -27,6 +31,6 @@ export const FilterIcon = styled.i`
 `;
 
 export const Text = styled.p`
-	font-size: 0.7rem;
+	font-size: 0.85rem;
 	color: #14121f;
 `;

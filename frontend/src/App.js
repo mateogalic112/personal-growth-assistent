@@ -4,11 +4,11 @@ import News from './screens/News';
 
 import Main from './layout/Main';
 import Glass from './layout/Glass';
-import Circles from './layout/Circles';
+import Circles from './components/Circles';
 import Sidebar from './components/Sidebar';
 import Board from './layout/Board';
 import WidgetBar from './components/WidgetBar';
-import Illustration from './layout/Illustration';
+import Illustration from './components/Illustration';
 
 const App = () => {
 	return (

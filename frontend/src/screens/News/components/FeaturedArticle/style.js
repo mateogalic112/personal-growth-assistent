@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	grid-column: 1 / span 2;
+	grid-column: 1 / 2;
 	grid-row: 1 / 2;
 	height: 360px;
 	position: relative;
@@ -19,7 +19,11 @@ export const Container = styled.div`
 		right: 0;
 		bottom: 0;
 		left: 0;
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+
+	@media (min-width: 768px) {
+		grid-column: 1 / span 2;
 	}
 `;
 
@@ -70,8 +74,8 @@ export const Button = styled.button`
 	color: white;
 	text-decoration: none;
 	border: 1px solid white;
-	padding: 0.5rem 1.5rem;
-	font-size: 0.75rem;
+	padding: 0.45rem 1.15rem;
+	font-size: 0.9rem;
 	width: fit-content;
 	border-radius: 1rem;
 	transition: background-color 0.2s, color 0.2s;
