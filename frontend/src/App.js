@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar';
 import Board from './layout/Board';
 import WidgetBar from './components/WidgetBar';
 import Illustration from './components/Illustration';
+import Crypto from './screens/Crypto';
 
 const App = () => {
 	return (
@@ -23,6 +24,9 @@ const App = () => {
 						<Switch>
 							<Route path='/news'>
 								<News />
+							</Route>
+							<Route path='/crypto'>
+								<Crypto />
 							</Route>
 						</Switch>
 					</Board>

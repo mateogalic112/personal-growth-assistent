@@ -18,7 +18,7 @@ export const CircleOne = styled(Circle)`
 `;
 
 export const CircleTwo = styled(Circle)`
-	bottom: -10%;
+	bottom: 10%;
 	left: 0;
 `;
 

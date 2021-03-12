@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Source Sans Pro', sans-serif;
     }
 
+    a {
+        color: inherit;
+        text-decoration: none
+    }
 `;
 
 export default GlobalStyle;
