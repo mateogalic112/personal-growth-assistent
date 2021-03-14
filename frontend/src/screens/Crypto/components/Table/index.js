@@ -42,9 +42,12 @@ const Table = ({ portfolioCoins, balance }) => {
 						{coin.portfolioAmount} {coin.symbol.toUpperCase()}
 					</Amount>
 					<Value>
-						{currencyFormatter.format(coin.current_price, {
-							code: 'USD',
-						})}
+						{currencyFormatter.format(
+							coin.current_price * coin.portfolioAmount,
+							{
+								code: 'USD',
+							}
+						)}
 					</Value>
 				</TableCoinRow>
 			))}
