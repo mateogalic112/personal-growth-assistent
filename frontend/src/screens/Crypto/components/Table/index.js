@@ -9,8 +9,6 @@ import {
 	Icon,
 } from './style';
 
-import Subtitle from '../../../../components/Subtitle';
-
 const currencyFormatter = require('currency-formatter');
 
 const Table = ({ portfolioCoins, balance }) => {
@@ -24,7 +22,6 @@ const Table = ({ portfolioCoins, balance }) => {
 		}));
 	return (
 		<TableContainer>
-			<Subtitle>Coins</Subtitle>
 			<TableRow>
 				<Title>Coin</Title>
 				<Allocation>Allocation</Allocation>
