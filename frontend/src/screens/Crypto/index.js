@@ -12,6 +12,7 @@ import Filter from '../../widgets/Filter';
 import Card from './components/Card';
 import Graph from './components/Graph';
 import Table from './components/Table';
+import Loader from '../../components/Loader';
 
 import CryptoGrid from '../../layout/Grid/CryptoGrid';
 import Subtitle from '../../components/Subtitle';
@@ -141,7 +142,7 @@ const Crypto = () => {
 	// TODO This will come from DB
 	const invested = 3000;
 
-	if (isLoading) return <h1>Loading</h1>;
+	if (isLoading) return <Loader />;
 
 	if (isError) return <h1>{error}</h1>;
 

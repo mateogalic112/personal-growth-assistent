@@ -8,6 +8,7 @@ import Title from '../../components/TitleBar/Title';
 import TitleBar from '../../components/TitleBar';
 import Filter from '../../widgets/Filter';
 import NewsGrid from '../../layout/Grid/NewsGrid';
+import Loader from '../../components/Loader';
 
 import { newsQuery } from '../../api/news';
 
@@ -43,7 +44,7 @@ const News = () => {
 		setArticleLimit((prevLimit) => prevLimit + 4);
 	};
 
-	if (isLoading) return <h1>Loading</h1>;
+	if (isLoading) return <Loader />;
 
 	if (isError) return <h1>{error}</h1>;
 

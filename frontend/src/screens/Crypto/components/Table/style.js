@@ -37,7 +37,7 @@ export const Icon = styled.img`
 
 export const Title = styled.p`
 	font-size: 1rem;
-	flex-basis: 25%;
+	flex-basis: 20%;
 	display: flex;
 	align-items: center;
 `;
@@ -45,6 +45,8 @@ export const Title = styled.p`
 export const Allocation = styled(Title)`
 	display: flex;
 	align-items: center;
+	flex-basis: 30%;
+	flex-shrink: 0;
 
 	label {
 		margin-right: 0.5rem;
@@ -55,4 +57,6 @@ export const Allocation = styled(Title)`
 	}
 `;
 export const Amount = styled(Title)``;
-export const Value = styled(Title)``;
+export const Value = styled(Title)`
+	flex-basis: 10%;
+`;
