@@ -13,7 +13,7 @@ import {
 
 import { BtnOutlined } from '../../../../theme/Button';
 
-import { displayDate } from '../../../../helper/date';
+import { displayHour } from '../../../../helper/date';
 
 const FeaturedArticle = ({
 	article: {
@@ -41,7 +41,7 @@ const FeaturedArticle = ({
 					<Source>{source.name}</Source>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<Author>{author}, </Author>
-						<Published>{displayDate(publishedAt)}</Published>
+						<Published>{displayHour(publishedAt)}</Published>
 					</div>
 				</div>
 				<Title>{title}</Title>

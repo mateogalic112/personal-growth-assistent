@@ -11,7 +11,7 @@ import {
 
 import { BtnOutlined } from '../../../../theme/Button';
 
-import { displayDate } from '../../../../helper/date';
+import { displayHour } from '../../../../helper/date';
 
 const NewsArticle = ({
 	article: { urlToImage, title, source, author, publishedAt, url },
@@ -29,7 +29,7 @@ const NewsArticle = ({
 					}}
 				>
 					{!!author && <Author>{author},</Author>}
-					<Published>{displayDate(publishedAt)}</Published>
+					<Published>{displayHour(publishedAt)}</Published>
 				</div>
 				<BtnOutlined as='a' href={url} target='_blank' black>
 					Read More

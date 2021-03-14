@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const GlassContainer = styled.section`
 	background-color: rgba(255, 255, 255, 0.2);
 	margin: 4rem 2rem;
-	max-width: 1440px;
+	max-width: 1100px;
 	min-height: 90vh;
 	width: 95%;
 	border-radius: 2rem;
