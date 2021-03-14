@@ -107,11 +107,14 @@ const Crypto = () => {
 		},
 	};
 
-	const latestPortfolioBalanceDate =
-		portfolio[Object.keys(portfolio)[Object.keys(portfolio).length - 1]];
-
 	useEffect(() => {
+		const latestPortfolioBalanceDate =
+			portfolio[
+				Object.keys(portfolio)[Object.keys(portfolio).length - 1]
+			];
+
 		const portfolioCoinNames = portfolio[Object.keys(portfolio).slice(-1)];
+
 		if (!isLoading && !isError && data.length) {
 			setPortfolioCoins(
 				data
@@ -123,6 +126,7 @@ const Crypto = () => {
 					}))
 			);
 		}
+		//eslint-disable-next-line
 	}, [isLoading, isError, data]);
 
 	useEffect(() => {
@@ -150,11 +154,10 @@ const Crypto = () => {
 			<Subtitle>Portfolio</Subtitle>
 			<CryptoGrid>
 				<Balance invested={invested} balance={balance} />
-				{Array.isArray(data) &&
-					data.length &&
-					data
-						.slice(0, 3)
-						.map((coin) => <Card key={coin.id} {...coin} />)}
+				{Array.isArray(portfolioCoins) &&
+					portfolioCoins.map((coin) => (
+						<Card key={coin.id} {...coin} />
+					))}
 				<Graph portfolio={portfolio} />
 				<Table portfolioCoins={portfolioCoins} balance={balance} />
 			</CryptoGrid>

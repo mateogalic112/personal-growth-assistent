@@ -13,10 +13,15 @@ import Subtitle from '../../../../components/Subtitle';
 
 const currencyFormatter = require('currency-formatter');
 
-const Table = ({ portfolioCoins }) => {
-	const displayValidCoins = portfolioCoins.filter(
-		(coin) => coin.portfolioAmount > 0
-	);
+const Table = ({ portfolioCoins, balance }) => {
+	const displayValidCoins = portfolioCoins
+		.filter((coin) => coin.portfolioAmount > 0)
+		.map((coin) => ({
+			...coin,
+			allocation: parseFloat(
+				((coin.portfolioAmount * coin.current_price) / balance) * 100
+			).toFixed(2),
+		}));
 	return (
 		<TableContainer>
 			<Subtitle>Coins</Subtitle>
@@ -33,8 +38,8 @@ const Table = ({ portfolioCoins }) => {
 						{coin.name}
 					</Title>
 					<Allocation>
-						<label htmlFor='coin'>10%</label>
-						<progress id='coin' value={1} max='100' />
+						<label htmlFor='coin'>{coin.allocation}%</label>
+						<progress id='coin' value={coin.allocation} max='100' />
 					</Allocation>
 					<Amount>
 						{coin.portfolioAmount} {coin.symbol.toUpperCase()}

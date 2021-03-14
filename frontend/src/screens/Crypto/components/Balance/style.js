@@ -39,6 +39,7 @@ export const Percentage = styled.span`
 
 export const BalanceSheet = styled.div`
 	margin-right: 1rem;
+	color: #8c95a6;
 `;
 
 export const BalanceLabel = styled.p`
@@ -49,7 +50,6 @@ export const BalanceLabel = styled.p`
 export const BalanceValue = styled.h3`
 	font-size: 1.25rem;
 	font-weight: 600;
-	color: #8c95a6;
 
 	& + p {
 		margin-top: 0.5rem;
