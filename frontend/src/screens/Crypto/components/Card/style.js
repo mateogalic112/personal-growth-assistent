@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const CardContainer = styled.a`
-	display: block;
+	display: flex;
+	justify-content: space-between;
 	min-width: 200px;
 	padding: 1rem 2rem;
 	background-color: rgba(255, 255, 255, 0.35);
@@ -22,6 +23,13 @@ export const CardContainer = styled.a`
 	&:focus {
 		outline: none;
 	}
+`;
+
+export const IconWrapper = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 1rem;
 `;
 
 export const CardTitle = styled.h5`

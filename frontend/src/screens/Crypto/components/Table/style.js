@@ -32,7 +32,7 @@ export const Icon = styled.img`
 	width: 1.75rem;
 	height: 1.75rem;
 	border-radius: 50%;
-	margin-right: 0.25rem;
+	margin-right: 0.35rem;
 `;
 
 export const Title = styled.p`

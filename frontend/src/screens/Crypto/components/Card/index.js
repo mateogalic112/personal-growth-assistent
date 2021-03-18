@@ -1,4 +1,11 @@
-import { CardContainer, Icon, CardTitle, Price, PriceChange } from './style';
+import {
+	CardContainer,
+	Icon,
+	CardTitle,
+	Price,
+	PriceChange,
+	IconWrapper,
+} from './style';
 
 const currencyFormatter = require('currency-formatter');
 
@@ -19,18 +26,22 @@ const Card = ({
 			href={`${BASE_URL}/${id}`}
 			priceChange={price_change_percentage_24h}
 		>
-			<Icon src={image} />
-			<CardTitle>
-				#{market_cap_rank} {name} - {symbol.toUpperCase()}
-			</CardTitle>
-			<Price>
-				{currencyFormatter.format(current_price, {
-					code: 'USD',
-				})}
-			</Price>
-			<PriceChange priceChange={price_change_percentage_24h}>
-				{price_change_percentage_24h} %
-			</PriceChange>
+			<div>
+				<CardTitle>
+					#{market_cap_rank} {name} - {symbol.toUpperCase()}
+				</CardTitle>
+				<Price>
+					{currencyFormatter.format(current_price, {
+						code: 'USD',
+					})}
+				</Price>
+				<PriceChange priceChange={price_change_percentage_24h}>
+					{price_change_percentage_24h} %
+				</PriceChange>
+			</div>
+			<IconWrapper>
+				<Icon src={image} />
+			</IconWrapper>
 		</CardContainer>
 	);
 };
