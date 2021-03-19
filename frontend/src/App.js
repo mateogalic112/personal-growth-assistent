@@ -20,11 +20,11 @@ const App = () => {
 				<Glass>
 					<Switch>
 						<Route
-							path='/api/v1/users/login'
+							path='/api/users/login'
 							component={(props) => <Login {...props} />}
 						/>
 						<Route
-							path='/api/v1/users/register'
+							path='/api/users/register'
 							component={(props) => <SignUp {...props} />}
 						/>
 						<Route

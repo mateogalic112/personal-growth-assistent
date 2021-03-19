@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../../actions/userActions'
+
 import { AiOutlineMail } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
 
 import { LoadMoreBtn } from '../../theme/Button';
 import InputField from '../../components/InputField';
+import Loader from '../../components/Loader';
 
 import { StyledForm } from './style';
 
@@ -15,7 +19,6 @@ const Login = () => {
 		email: '',
 		password: '',
 	});
-	const [loading, setLoading] = useState(false);
 
 	const history = useHistory();
 
@@ -25,7 +28,6 @@ const Login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true);
 		await axios
 			.post('/api/v1/users/login', {
 				email: state.email,
@@ -35,11 +37,9 @@ const Login = () => {
 				if (res.status === 200) {
 					window.localStorage.setItem('token', res.data);
 				}
-				setLoading(false);
 				history.push('/');
 			})
 			.catch((error) => {
-				setLoading(false);
 				console.dir(error);
 			});
 	};
@@ -56,6 +56,7 @@ const Login = () => {
 		<div>
 			<StyledForm onSubmit={handleSubmit}>
 				<InputField
+					big
 					icon={<AiOutlineMail />}
 					input={
 						<input
@@ -69,6 +70,7 @@ const Login = () => {
 					}
 				/>
 				<InputField
+					big
 					icon={<RiLockPasswordLine />}
 					input={
 						<input

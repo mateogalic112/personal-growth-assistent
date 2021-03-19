@@ -4,7 +4,7 @@ export const StyledInput = styled.div`
 	height: 2rem;
 	width: 16rem;
 	position: relative;
-	font-size: 0.7rem;
+	font-size: ${(props) => (props.big ? '1rem' : '0.7rem')};
 	transition: box-shadow 0.2s, opacity 0.2s;
 	border-radius: 5rem;
 	opacity: 0.7;
@@ -16,8 +16,8 @@ export const StyledInput = styled.div`
 
 	input {
 		height: 2rem;
-		width: 16rem;
-		padding: 0 2rem;
+		width: ${(props) => (props.big ? '25rem' : '16rem')};
+		padding: ${(props) => (props.big ? '1rem 3rem' : '0 2rem')};
 		border-radius: 5rem;
 		border: none;
 		outline: none;
