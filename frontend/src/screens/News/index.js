@@ -22,7 +22,7 @@ const News = () => {
 	const [articles, setArticles] = useState([]);
 	const [articleLimit, setArticleLimit] = useState(3);
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
-	const [queryString, setQueryString] = useState('');
+	const [queryString, setQueryString] = useState('popular');
 
 	const { data, error, isLoading, isError } = useQuery(
 		['news', queryString],

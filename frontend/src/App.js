@@ -20,19 +20,19 @@ const App = () => {
 				<Glass>
 					<Switch>
 						<Route
-							exact
-							path='/api/v1'
-							component={(props) => (
-								<ScreenWrapper component={Home} {...props} />
-							)}
-						/>
-						<Route
 							path='/api/v1/users/login'
 							component={(props) => <Login {...props} />}
 						/>
 						<Route
 							path='/api/v1/users/register'
 							component={(props) => <SignUp {...props} />}
+						/>
+						<Route
+							exact
+							path='/'
+							component={(props) => (
+								<ScreenWrapper component={Home} {...props} />
+							)}
 						/>
 						<Route
 							path='/news'

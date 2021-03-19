@@ -25,6 +25,12 @@ export const CardContainer = styled.a`
 	}
 `;
 
+export const CardInfo = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+`
+
 export const IconWrapper = styled.div`
 	display: flex;
 	justify-content: center;

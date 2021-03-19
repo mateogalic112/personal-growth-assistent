@@ -3,18 +3,21 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux'
 import GlobalStyle from './theme/global';
 import { QueryClientProvider, QueryClient } from 'react-query';
+
+import store from './store'
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
-	<React.StrictMode>
+	<Provider store={store}>
 		<QueryClientProvider client={queryClient}>
 			<GlobalStyle />
 			<App />
 		</QueryClientProvider>
-	</React.StrictMode>,
+	</Provider>,
 	document.getElementById('root')
 );
 
