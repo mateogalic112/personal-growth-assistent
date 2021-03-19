@@ -20,7 +20,8 @@ router.post('/register', async (req, res) => {
 		const newUser = await user.save();
 		res.status(201).json(newUser);
 	} catch (e) {
-		res.status(400).send(e);
+		res.status(400)
+		throw new Error('Error occured while logging in...PLease try again.')
 	}
 });
 

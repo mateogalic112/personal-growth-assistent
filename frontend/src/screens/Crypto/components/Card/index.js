@@ -5,6 +5,7 @@ import {
 	Price,
 	PriceChange,
 	IconWrapper,
+	CardInfo
 } from './style';
 
 const currencyFormatter = require('currency-formatter');
@@ -26,7 +27,7 @@ const Card = ({
 			href={`${BASE_URL}/${id}`}
 			priceChange={price_change_percentage_24h}
 		>
-			<div>
+			<CardInfo>
 				<CardTitle>
 					#{market_cap_rank} {name} - {symbol.toUpperCase()}
 				</CardTitle>
@@ -38,7 +39,7 @@ const Card = ({
 				<PriceChange priceChange={price_change_percentage_24h}>
 					{price_change_percentage_24h} %
 				</PriceChange>
-			</div>
+			</CardInfo>
 			<IconWrapper>
 				<Icon src={image} />
 			</IconWrapper>
