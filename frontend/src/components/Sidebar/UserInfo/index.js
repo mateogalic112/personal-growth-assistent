@@ -1,15 +1,20 @@
-import React from 'react';
+import { useSelector } from 'react-redux';
 
-import user from '../../../assets/images/user.png';
+import UserMale from '../../../assets/images/user_male.png';
+import UserFemale from '../../../assets/images/user_female.png';
 
 import { UserContainer, UserAvatar, UserName, UserOccupation } from './style';
 
 const UserInfo = () => {
+	const { userInfo } = useSelector((state) => state.userLogin);
+
 	return (
 		<UserContainer>
-			<UserAvatar src={user} />
-			<UserName>Matko</UserName>
-			<UserOccupation>Product designer</UserOccupation>
+			<UserAvatar
+				src={userInfo?.gender === 'male' ? UserMale : UserFemale}
+			/>
+			<UserName>{userInfo?.username}</UserName>
+			<UserOccupation>{userInfo?.occupation}</UserOccupation>
 		</UserContainer>
 	);
 };

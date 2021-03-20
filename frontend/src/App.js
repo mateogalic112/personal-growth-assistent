@@ -6,7 +6,7 @@ import Glass from './layout/Glass';
 import Circles from './components/Circles';
 
 import Login from './screens/Login';
-import SignUp from './screens/SignUp';
+import Register from './screens/Register';
 import News from './screens/News';
 import Crypto from './screens/Crypto';
 import Home from './screens/Home';
@@ -20,12 +20,12 @@ const App = () => {
 				<Glass>
 					<Switch>
 						<Route
-							path='/api/users/login'
+							path='/login'
 							component={(props) => <Login {...props} />}
 						/>
 						<Route
-							path='/api/users/register'
-							component={(props) => <SignUp {...props} />}
+							path='/register'
+							component={(props) => <Register {...props} />}
 						/>
 						<Route
 							exact

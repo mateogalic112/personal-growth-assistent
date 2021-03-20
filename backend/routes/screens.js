@@ -1,19 +1,19 @@
 const router = require('express').Router();
 const verify = require('../middlewares/verifyToken');
 const User = require('../models/User');
+const { HttpError } = require('../utils/utils');
 
-router.get('', verify, async (req, res) => {
-	const user = await User.findById(req.user._id)
+router.get('/', verify, async (req, res) => {
+	const user = await User.findById(req.user._id);
 
-	if(user) {
+	if (user) {
 		res.json({
 			_id: user._id,
 			username: user.username,
 			email: user.email,
 		});
 	} else {
-		res.status(404)
-		throw new Error('No user found.')
+		return next(new HttpError(404, 'No user found'));
 	}
 });
 

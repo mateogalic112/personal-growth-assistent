@@ -1,14 +1,17 @@
-const notFound = (req, res, next) => {
-	const error = new Error(`Not Found - ${req.originalUrl}`)
-	res.status(404)
-	next(error)
-}
+const { HttpError } = require('../utils/utils');
 
 const errorHandler = (err, req, res, next) => {
-	const statusCode = res.statusCode === 200 ? 500 : res.statusCode
-	res.status(statusCode).json({
-		message: err.message
-	})
-}
+	if (err instanceof HttpError) {
+		res.status(err.statusCode).json({
+			error: true,
+			message: err.errorMessage,
+		});
+	} else {
+		res.status(500).json({
+			error: true,
+			message: 'Internal server error',
+		});
+	}
+};
 
-module.exports = { notFound, errorHandler }
+module.exports = errorHandler;

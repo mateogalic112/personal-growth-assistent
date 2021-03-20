@@ -26,6 +26,21 @@ export const LoadMoreBtn = styled(Button)`
 	padding: 0.35rem 1rem;
 `;
 
+export const AuthBtn = styled(LoadMoreBtn)`
+	padding: 0.5rem 1.5rem;
+	width: 25rem;
+
+	&:disabled:hover {
+		background-color: transparent;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		cursor: not-allowed;
+	}
+
+	&:not(:disabled) {
+		background-color: rgba(255, 255, 255, 0.8);
+	}
+`;
+
 /**
  * Variations -- Outlined
  */

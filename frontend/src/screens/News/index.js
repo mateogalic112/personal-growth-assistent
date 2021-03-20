@@ -20,7 +20,7 @@ import { LoadMoreBtn } from '../../theme/Button';
 
 const News = () => {
 	const [articles, setArticles] = useState([]);
-	const [articleLimit, setArticleLimit] = useState(3);
+	const [articleLimit, setArticleLimit] = useState(5);
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
 	const [queryString, setQueryString] = useState('popular');
 
@@ -32,7 +32,7 @@ const News = () => {
 	useEffect(() => {
 		if (!isLoading) {
 			setArticles(data.articles);
-			setArticleLimit(3);
+			setArticleLimit(5);
 		}
 	}, [data, isLoading]);
 
@@ -41,7 +41,7 @@ const News = () => {
 	};
 
 	const loadMore = () => {
-		setArticleLimit((prevLimit) => prevLimit + 4);
+		setArticleLimit((prevLimit) => prevLimit + 5);
 	};
 
 	if (isLoading) return <Loader />;
