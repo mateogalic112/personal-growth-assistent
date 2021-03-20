@@ -29,6 +29,7 @@ export const LoadMoreBtn = styled(Button)`
 export const AuthBtn = styled(LoadMoreBtn)`
 	padding: 0.5rem 1.5rem;
 	width: 25rem;
+	font-size: 1rem;
 
 	&:disabled:hover {
 		background-color: transparent;

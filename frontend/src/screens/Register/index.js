@@ -15,27 +15,34 @@ import InputField from '../../components/InputField';
 import Loader from '../../components/Loader';
 import TitleBar from '../../components/TitleBar';
 import Title from '../../components/TitleBar/Title';
-import SelectField from '../../components/SelectField';
 
 import RegisterImage from '../../assets/svg/register.svg';
 
-import { StyledForm, LoginIllustration, selectStyles } from './style';
+import {
+	StyledForm,
+	LoginIllustration,
+	selectStyles,
+	RadioWrapper,
+	RadioField,
+} from './style';
 import Message from '../../components/Message';
 
 const Register = () => {
 	const [state, setState] = useState({
 		username: '',
 		email: '',
+		gender: 'male',
 		password: '',
 		occupation: '',
-		interests: [],
-		gender: '',
 	});
+	const [interests, setInterests] = useState([]);
 
 	const options = [
-		{ value: 'chocolate', label: 'Chocolate' },
-		{ value: 'strawberry', label: 'Strawberry' },
-		{ value: 'vanilla', label: 'Vanilla' },
+		{ value: 'crypto', label: 'Crypto' },
+		{ value: 'finance', label: 'Finance' },
+		{ value: 'health', label: 'Health' },
+		{ value: 'lifestyle', label: 'Lifestyle' },
+		{ value: 'sport', label: 'Sport' },
 	];
 
 	const history = useHistory();
@@ -52,23 +59,20 @@ const Register = () => {
 	}, [userInfo, history]);
 
 	const validateForm = () => {
-		return (
-			state.email.length > 2 &&
-			state.password.length > 2 &&
-			state.gender.length > 0
-		);
+		return state.email.length > 2 && state.password.length > 2;
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const submitInterests = interests.map((i) => i.value);
 		dispatch(
 			userRegister(
 				state.username,
 				state.email,
 				state.password,
-				state.interests,
+				submitInterests,
 				state.occupation,
-				state.email.gender
+				state.gender
 			)
 		);
 	};
@@ -79,6 +83,8 @@ const Register = () => {
 			[e.target.name]: e.target.value,
 		});
 	};
+
+	console.log(interests);
 
 	return (
 		<div>
@@ -148,8 +154,35 @@ const Register = () => {
 						/>
 					}
 				/>
+				<RadioWrapper>
+					<RadioField isSelected={state.gender === 'male'}>
+						<input
+							type='radio'
+							id='male'
+							name='gender'
+							value='male'
+							checked={state.gender === 'male'}
+							onChange={handleChange}
+						/>
+						<label htmlFor='male'>Male</label>
+					</RadioField>
+					<RadioField isSelected={state.gender === 'female'}>
+						<input
+							type='radio'
+							id='female'
+							name='gender'
+							value='female'
+							checked={state.gender === 'female'}
+							onChange={handleChange}
+						/>
+						<label htmlFor='female'>Female</label>
+					</RadioField>
+				</RadioWrapper>
+
 				<Select
 					name='interests'
+					placeholder='Interests'
+					onChange={setInterests}
 					styles={selectStyles}
 					options={options}
 					isMulti
