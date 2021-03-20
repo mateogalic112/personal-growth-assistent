@@ -29,7 +29,7 @@ const Crypto = () => {
 
 	//TODO This data will come from DB
 	const portfolio = {
-		'2021-03-08': {
+		'2021-03-14': {
 			bitcoin: {
 				amount: 0.08,
 			},
@@ -40,7 +40,7 @@ const Crypto = () => {
 				amount: 20,
 			},
 		},
-		'2021-03-09': {
+		'2021-03-15': {
 			bitcoin: {
 				amount: 0.085,
 			},
@@ -51,7 +51,7 @@ const Crypto = () => {
 				amount: 20,
 			},
 		},
-		'2021-03-10': {
+		'2021-03-16': {
 			bitcoin: {
 				amount: 0.085,
 			},
@@ -62,7 +62,7 @@ const Crypto = () => {
 				amount: 20,
 			},
 		},
-		'2021-03-11': {
+		'2021-03-17': {
 			bitcoin: {
 				amount: 0.05,
 			},
@@ -73,7 +73,7 @@ const Crypto = () => {
 				amount: 100,
 			},
 		},
-		'2021-03-12': {
+		'2021-03-18': {
 			bitcoin: {
 				amount: 0.08,
 			},
@@ -84,7 +84,7 @@ const Crypto = () => {
 				amount: 0,
 			},
 		},
-		'2021-03-13': {
+		'2021-03-19': {
 			bitcoin: {
 				amount: 0.085,
 			},
@@ -95,7 +95,7 @@ const Crypto = () => {
 				amount: 0,
 			},
 		},
-		'2021-03-14': {
+		'2021-03-20': {
 			bitcoin: {
 				amount: 0.08014,
 			},
