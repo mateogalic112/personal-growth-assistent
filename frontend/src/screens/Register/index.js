@@ -70,8 +70,8 @@ const Register = () => {
 				state.username,
 				state.email,
 				state.password,
-				submitInterests,
 				state.occupation,
+				submitInterests,
 				state.gender
 			)
 		);
@@ -84,7 +84,7 @@ const Register = () => {
 		});
 	};
 
-	console.log(interests);
+	console.log(state);
 
 	return (
 		<div>

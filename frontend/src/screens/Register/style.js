@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Button } from '../../theme/Button';
 
 export const StyledForm = styled.form`
 	position: absolute;

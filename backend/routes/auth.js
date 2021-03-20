@@ -35,7 +35,7 @@ router.post('/register', async (req, res, next) => {
 			token,
 		});
 	} else {
-		next(e);
+		return next(new HttpError(400, 'Bad request'));
 	}
 });
 
