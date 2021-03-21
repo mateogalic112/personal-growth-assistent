@@ -11,6 +11,7 @@ import News from './screens/News';
 import Crypto from './screens/Crypto';
 import Home from './screens/Home';
 import ScreenWrapper from './screens/ScreenWrapper';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 const App = () => {
 	return (
@@ -27,20 +28,22 @@ const App = () => {
 							path='/register'
 							component={(props) => <Register {...props} />}
 						/>
-						<Route
+						<ProtectedRoute
 							exact
 							path='/'
 							component={(props) => (
 								<ScreenWrapper component={Home} {...props} />
 							)}
 						/>
-						<Route
+
+						<ProtectedRoute
 							path='/news'
 							component={(props) => (
 								<ScreenWrapper component={News} {...props} />
 							)}
 						/>
-						<Route
+
+						<ProtectedRoute
 							path='/crypto'
 							component={(props) => (
 								<ScreenWrapper component={Crypto} {...props} />
