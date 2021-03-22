@@ -74,3 +74,17 @@ export const RadioField = styled.div`
 		background-color: red;
 	}
 `;
+
+export const FormRedirect = styled.div`
+	margin-top: 1.25rem;
+	color: #8c95a6;
+
+	span {
+		display: inline-block;
+		margin-right: .5rem;
+	}
+
+	a {
+		color: black;
+	}
+`

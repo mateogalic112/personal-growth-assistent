@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../../actions/userActions';
@@ -14,6 +14,8 @@ import TitleBar from '../../components/TitleBar';
 import Title from '../../components/TitleBar/Title';
 
 import LoginImage from '../../assets/svg/login.svg';
+
+import { FormRedirect } from '../Register/style'
 
 import { StyledForm, LoginIllustration } from './style';
 import Message from '../../components/Message';
@@ -96,6 +98,9 @@ const Login = () => {
 				<AuthBtn type='submit' disabled={!validateForm()}>
 					Login
 				</AuthBtn>
+				<FormRedirect>
+					<span>Don't have an account?</span><Link to="/register">Register</Link>
+				</FormRedirect>
 			</StyledForm>
 		</div>
 	);

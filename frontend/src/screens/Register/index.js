@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Select from 'react-select';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +24,7 @@ import {
 	selectStyles,
 	RadioWrapper,
 	RadioField,
+	FormRedirect
 } from './style';
 import Message from '../../components/Message';
 
@@ -195,6 +196,10 @@ const Register = () => {
 				>
 					Register
 				</AuthBtn>
+			
+				<FormRedirect>
+					<span>Already have an account?</span><Link to="/login">Login</Link>
+				</FormRedirect>
 			</StyledForm>
 		</div>
 	);
