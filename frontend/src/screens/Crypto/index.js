@@ -8,7 +8,7 @@ import Container from '../../layout/Container';
 
 import Title from '../../components/TitleBar/Title';
 import TitleBar from '../../components/TitleBar';
-import Filter from '../../widgets/Filter';
+import Add from '../../widgets/Add';
 import Card from './components/Card';
 import Graph from './components/Graph';
 import Table from './components/Table';
@@ -150,7 +150,7 @@ const Crypto = () => {
 		<Container>
 			<TitleBar>
 				<Title>Cryptocurrency</Title>
-				<Filter openFilter={() => {}} />
+				<Add onClick={() => {}} />
 			</TitleBar>
 			<Subtitle>Portfolio</Subtitle>
 			<CryptoGrid>

@@ -7,7 +7,7 @@ export const Filter = styled.div`
 	justify-content: space-between;
 	border-radius: 9999px;
 	padding: 0.25rem 2rem;
-	max-height: ${(props) => (props.active ? '10rem' : '0')};
+	max-height: ${(props) => (props.active ? '20rem' : '0')};
 	opacity: ${(props) => (props.active ? '1' : '0')};
 	margin-bottom: 1rem;
 	background-color: rgba(255, 255, 255, 0.25);

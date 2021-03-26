@@ -1,9 +1,10 @@
 import { GiAbstract013 } from 'react-icons/gi';
 import { FaMoneyBillAlt } from 'react-icons/fa';
-import { GoCalendar } from 'react-icons/go';
+import { RiMentalHealthFill } from 'react-icons/ri';
 import { BsNewspaper } from 'react-icons/bs';
 import { ImBooks } from 'react-icons/im';
 import { GrBitcoin } from 'react-icons/gr';
+import { GiLightningTrio } from 'react-icons/gi';
 
 export const navData = [
 	{
@@ -17,9 +18,14 @@ export const navData = [
 		icon: <FaMoneyBillAlt />,
 	},
 	{
-		title: 'Calendar',
-		path: '/calendar',
-		icon: <GoCalendar />,
+		title: 'Health',
+		path: '/health',
+		icon: <RiMentalHealthFill />,
+	},
+	{
+		title: 'Motivation',
+		path: '/motivation',
+		icon: <GiLightningTrio />,
 	},
 	{
 		title: 'News',
