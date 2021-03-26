@@ -8,6 +8,7 @@ export const GlassContainer = styled.section`
 	width: 100%;
 	border-radius: 2rem;
 	padding-right: 1rem;
+	padding-left: 1rem;
 	padding-bottom: 1rem;
 	position: relative;
 	z-index: 2;
@@ -18,6 +19,7 @@ export const GlassContainer = styled.section`
 		display: grid;
 		grid-template-columns: 225px auto;
 		grid-template-rows: 100px auto;
+		padding-left: 0;
 		margin: 4rem 2rem;
 	}
 `;

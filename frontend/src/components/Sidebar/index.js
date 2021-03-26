@@ -7,9 +7,12 @@ import Nav from './Nav';
 
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(false)
+	const { innerWidth } = window;
 
 	const handleClick = () => {
-		setIsOpen(isOpen => !isOpen);
+		if (innerWidth < 768) {
+			setIsOpen(isOpen => !isOpen);
+		}
 	}
 	return (
 		<SidebarContainer>

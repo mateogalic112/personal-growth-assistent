@@ -11,6 +11,9 @@ export const Navigation = styled.nav`
 
 	@media (min-width: 768px) {
 		transform: scaleY(1);
+		opacity: 1;
+		visibility: visible;
+		max-height: 100%;
 		flex-grow: 1;
 	}
 `;
