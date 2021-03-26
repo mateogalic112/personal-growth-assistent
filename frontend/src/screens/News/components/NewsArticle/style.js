@@ -26,7 +26,7 @@ export const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	padding: 2rem 1rem;
+	padding: 1.25rem 1rem 2rem 1rem;
 	color: 'black';
 `;
 

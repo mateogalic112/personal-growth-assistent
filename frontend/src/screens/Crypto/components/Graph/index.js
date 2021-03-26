@@ -12,6 +12,7 @@ const currencyFormatter = require('currency-formatter');
 
 const Graph = ({ portfolio }) => {
 	const [displayData, isLoading, error, isError] = useCryptoData(portfolio);
+	const { innerWidth: width } = window;
 
 	const options = {
 		legend: {
@@ -34,11 +35,18 @@ const Graph = ({ portfolio }) => {
 					gridLines: {
 						display: false,
 					},
+					ticks : {
+						display: width > 768,
+					}
 				},
 			],
 			yAxes: [
 				{
+					gridLines: {
+						display: width > 768,
+					},
 					ticks: {
+							display: width > 768,
 						// Include a dollar sign in the ticks
 						callback: function (value, index, values) {
 							return currencyFormatter.format(value, {

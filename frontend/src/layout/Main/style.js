@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.main`
+	position: relative;
+	overflow-x: hidden;
 	min-height: 100vh;
 	width: 100%;
 	display: flex;

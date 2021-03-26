@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	grid-column: 1 / 2;
-	grid-row: 1 / 2;
 	height: 360px;
 	position: relative;
 	display: flex;
@@ -24,6 +22,7 @@ export const Container = styled.div`
 
 	@media (min-width: 768px) {
 		grid-column: 1 / span 2;
+		grid-row: 1 / 2;
 	}
 `;
 

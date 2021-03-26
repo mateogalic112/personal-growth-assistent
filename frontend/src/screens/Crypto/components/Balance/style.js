@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
 export const BalanceModal = styled.div`
-	grid-column: 1 / 2;
 	display: flex;
 	justify-content: space-beetwen;
 	align-items: center;
 	background-color: rgba(255, 255, 255, 0.25);
-	padding: 1rem 2rem;
+	padding: 1rem 1.5rem;
 	border-radius: 2.5rem;
 	border-bottom: 1px solid;
 	border-bottom-color: ${(props) =>
 		props.profit > 0 ? 'rgba(0, 255, 0, 0.8)' : 'rgba(255, 0, 0, 0.8)'};
 
 	@media (min-width: 768px) {
+		padding: 1rem 2rem;
 		grid-column: 1 / 3;
 	}
 `;

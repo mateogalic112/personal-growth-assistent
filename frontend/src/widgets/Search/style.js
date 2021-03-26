@@ -8,6 +8,7 @@ export const SearchBar = styled.div`
 	transition: box-shadow 0.2s, opacity 0.2s;
 	border-radius: 5rem;
 	opacity: 0.7;
+	margin-top: .5rem;
 
 	&:hover {
 		box-shadow: 0px 0px 5px 3px rgba(68, 68, 68, 0.2);

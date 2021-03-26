@@ -2,9 +2,9 @@ import { Navigation, NavList, NavItem, NavIcon, NavTitle } from './style';
 
 import { navData } from './data';
 
-const Nav = () => {
+const Nav = ({ isOpen }) => {
 	return (
-		<Navigation>
+		<Navigation isOpen={isOpen} >
 			<NavList>
 				{navData.map((item) => {
 					return (

@@ -5,4 +5,5 @@ export const SectionTitle = styled.h1`
 	font-size: 1.75rem;
 	position: relative;
 	display: inline-block;
+	margin-top: .5rem;
 `;

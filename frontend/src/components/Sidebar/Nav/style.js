@@ -2,8 +2,17 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 export const Navigation = styled.nav`
-	flex-grow: 1;
 	width: 100%;
+	opacity: ${(props) => (props.isOpen ? '1' : '0')};
+	transform: ${(props) => (props.isOpen ? 'scaleY(1)' : 'scaleY(0)')};
+	visibility: ${(props) => (props.isOpen ? 'visible' : 'hidden')};
+	max-height: ${(props) => (props.isOpen ? '20rem' : '0')};
+	transition: max-height .2s, opacity .3s, visibility .3s, transform .3s;
+
+	@media (min-width: 768px) {
+		transform: scaleY(1);
+		flex-grow: 1;
+	}
 `;
 
 export const NavList = styled.ul`
@@ -11,7 +20,11 @@ export const NavList = styled.ul`
 	flex-direction: column;
 	align-items: center;
 	height: 100%;
-	margin-top: 15%;
+	margin-top: 1rem;
+
+	@media (min-width: 768px) {
+		margin-top: 15%;
+	}
 `;
 
 export const NavItem = styled(NavLink)`

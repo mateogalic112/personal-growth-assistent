@@ -9,6 +9,7 @@ export const FilterContainer = styled.button`
 	cursor: pointer;
 	background-color: transparent;
 	transition: background-color 0.2s, border 0.2s;
+	margin-top: .5rem;
 
 	&:hover {
 		background-color: rgba(255, 255, 255, 0.8);

@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-	grid-column: 1 / -1;
 	padding: 1rem 2rem;
 	background-color: rgba(255, 255, 255, 0.35);
 	border-radius: 2.5rem;
+
+	@media (min-width: 768px) {
+		grid-column: 1 / -1;
+	}
 `;
 
 export const TableRow = styled.div`
@@ -43,8 +46,7 @@ export const Title = styled.p`
 `;
 
 export const Allocation = styled(Title)`
-	display: flex;
-	align-items: center;
+	display: none;
 	flex-basis: 30%;
 	flex-shrink: 0;
 
@@ -55,8 +57,20 @@ export const Allocation = styled(Title)`
 	progress {
 		width: 60%;
 	}
+
+	@media (min-width: 1024px) {
+		display: flex;
+		align-items: center;
+	}
 `;
-export const Amount = styled(Title)``;
+export const Amount = styled(Title)`
+	display: none;
+
+	@media (min-width: 768px) {
+		display: block;
+	}
+`;
+
 export const Value = styled(Title)`
 	flex-basis: 10%;
 `;
