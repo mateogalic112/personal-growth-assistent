@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers';
+import { transactionListReducer } from './reducers/transactionReducers';
 
 const reducer = combineReducers({
 	userLogin: userLoginReducer,
 	userRegister: userRegisterReducer,
+	transactionList: transactionListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -15,6 +17,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 
 const initialState = {
 	userLogin: { userInfo: userInfoFromStorage },
+	transactionList: { transactions: [] },
 };
 
 const store = createStore(

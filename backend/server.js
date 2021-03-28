@@ -4,7 +4,6 @@ const connectDB = require('./config/db');
 const colors = require('colors');
 const cors = require('cors');
 const authRoute = require('./routes/auth');
-const screens = require('./routes/screens');
 const transactionsRoute = require('./routes/transactions');
 const errorHandler = require('./middlewares/errorMiddleware');
 
@@ -18,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-app.use('', screens);
 app.use('/api/users', authRoute);
 app.use('/api/transactions', transactionsRoute);
 
