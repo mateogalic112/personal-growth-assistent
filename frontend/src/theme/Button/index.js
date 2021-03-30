@@ -27,8 +27,8 @@ export const LoadMoreBtn = styled(Button)`
 `;
 
 export const AuthBtn = styled(LoadMoreBtn)`
-	padding: 0.5rem 1.5rem;
-	width: 25rem;
+	width: ${(props) => (props.medium ? '20rem' : '25rem')};
+	padding: ${(props) => (props.medium ? '0.35rem 1.5rem' : '0.5rem 1.5rem;')};
 	font-size: 1rem;
 
 	&:disabled:hover {

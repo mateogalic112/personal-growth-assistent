@@ -1,8 +1,8 @@
 import { StyledInput } from './style';
 
-const InputField = ({ big, icon, input }) => {
+const InputField = ({ big, medium, icon, input }) => {
 	return (
-		<StyledInput big={big} autoComplete='off'>
+		<StyledInput big={big} medium={medium} autoComplete='off'>
 			{icon}
 			{input}
 		</StyledInput>

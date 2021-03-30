@@ -7,10 +7,19 @@ export const FormWrapper = styled.div`
 `;
 
 export const StyledForm = styled.form`
-	width: 100%;
 	margin: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	> * {
+		margin: 0.5rem 0;
+	}
+
+	@media (min-width: 768px) {
+		> * {
+			margin-right: auto;
+		}
+	}
 `;

@@ -10,11 +10,11 @@ import Loader from '../../../../components/Loader';
 import Message from '../../../../components/Message';
 
 import { RiFilePaper2Line } from 'react-icons/ri';
-import { HiAtSymbol } from 'react-icons/hi';
 import { BiMoney } from 'react-icons/bi';
 
 import { FormWrapper, StyledForm } from './style';
 import Subtitle from '../../../../components/Subtitle';
+import { RadioField, RadioWrapper } from '../../../Register/style';
 
 const Form = ({ isOpen }) => {
 	const dispatch = useDispatch();
@@ -36,6 +36,11 @@ const Form = ({ isOpen }) => {
 				userInfo.token
 			)
 		);
+		setState({
+			name: '',
+			type: '',
+			amount: '',
+		});
 	};
 
 	const { loading, error, success } = useSelector(
@@ -64,7 +69,7 @@ const Form = ({ isOpen }) => {
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
 				<InputField
-					big
+					medium
 					icon={<RiFilePaper2Line />}
 					input={
 						<input
@@ -77,22 +82,32 @@ const Form = ({ isOpen }) => {
 						/>
 					}
 				/>
-				<InputField
-					big
-					icon={<HiAtSymbol />}
-					input={
+				<RadioWrapper>
+					<RadioField isSelected={state.type === 'income'}>
 						<input
-							type='type'
-							required
+							type='radio'
+							id='income'
 							name='type'
-							value={state.type}
+							value='income'
+							checked={state.type === 'income'}
 							onChange={handleChange}
-							placeholder='Type'
 						/>
-					}
-				/>
+						<label htmlFor='income'>Income</label>
+					</RadioField>
+					<RadioField isSelected={state.type === 'expense'}>
+						<input
+							type='radio'
+							id='expense'
+							name='type'
+							value='expense'
+							checked={state.type === 'expense'}
+							onChange={handleChange}
+						/>
+						<label htmlFor='expense'>Expense</label>
+					</RadioField>
+				</RadioWrapper>
 				<InputField
-					big
+					medium
 					icon={<BiMoney />}
 					input={
 						<input
@@ -105,7 +120,7 @@ const Form = ({ isOpen }) => {
 						/>
 					}
 				/>
-				<AuthBtn type='submit' disabled={!validateForm()}>
+				<AuthBtn medium type='submit' disabled={!validateForm()}>
 					Add
 				</AuthBtn>
 			</StyledForm>

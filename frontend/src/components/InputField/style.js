@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const StyledInput = styled.div`
+	height: ${(props) => (props.medium ? '2.5rem' : '2rem')};
 	height: ${(props) => (props.big ? '3rem' : '2rem')};
+	width: ${(props) => (props.medium ? '20rem' : '16rem')};
 	width: ${(props) => (props.big ? '25rem' : '16rem')};
 	position: relative;
 	transition: box-shadow 0.2s, opacity 0.2s;
@@ -19,7 +21,9 @@ export const StyledInput = styled.div`
 	}
 
 	input {
+		height: ${(props) => (props.medium ? '2.5rem' : '2rem')};
 		height: ${(props) => (props.big ? '3rem' : '2rem')};
+		width: ${(props) => (props.medium ? '20rem' : '16rem')};
 		width: ${(props) => (props.big ? '25rem' : '16rem')};
 		padding: ${(props) => (props.big ? '1rem 3rem' : '0 2rem')};
 		font-size: ${(props) => (props.big ? '1rem' : '0.8rem')};
