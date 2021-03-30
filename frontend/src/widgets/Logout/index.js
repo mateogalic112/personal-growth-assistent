@@ -3,7 +3,7 @@ import { NotifierContainer } from '../Notifier/style';
 
 import { FiLogOut } from 'react-icons/fi';
 
-import { logout } from '../../actions/userActions';
+import { logout } from '../../redux/actions/userActions';
 
 const Logout = () => {
 	const dispatch = useDispatch();

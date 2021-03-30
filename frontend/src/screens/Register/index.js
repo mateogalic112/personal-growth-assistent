@@ -3,7 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import Select from 'react-select';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { userRegister } from '../../actions/userActions';
+import { userRegister } from '../../redux/actions/userActions';
 
 import { AiOutlineMail } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
@@ -24,7 +24,7 @@ import {
 	selectStyles,
 	RadioWrapper,
 	RadioField,
-	FormRedirect
+	FormRedirect,
 } from './style';
 import Message from '../../components/Message';
 
@@ -196,9 +196,10 @@ const Register = () => {
 				>
 					Register
 				</AuthBtn>
-			
+
 				<FormRedirect>
-					<span>Already have an account?</span><Link to="/login">Login</Link>
+					<span>Already have an account?</span>
+					<Link to='/login'>Login</Link>
 				</FormRedirect>
 			</StyledForm>
 		</div>

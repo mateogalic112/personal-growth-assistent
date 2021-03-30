@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import GlobalStyle from './theme/global';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
-import store from './store'
+import store from './redux/store';
 
 const queryClient = new QueryClient();
 

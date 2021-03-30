@@ -5,5 +5,4 @@ export const SectionSubtitle = styled.h1`
 	position: relative;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
-	width: 100%;
 `;

@@ -10,8 +10,9 @@ import {
 
 const currencyFormatter = require('currency-formatter');
 
-const Balance = ({ expenses, income }) => {
+const Balance = ({ income, expenses }) => {
 	const difference = income - expenses;
+	console.log(expenses);
 	return (
 		<BalanceModal profit={difference}>
 			<BalanceOverview>

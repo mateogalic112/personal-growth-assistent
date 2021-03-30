@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogin } from '../../actions/userActions';
+import { userLogin } from '../../redux/actions/userActions';
 
 import { AiOutlineMail } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
@@ -15,7 +15,7 @@ import Title from '../../components/TitleBar/Title';
 
 import LoginImage from '../../assets/svg/login.svg';
 
-import { FormRedirect } from '../Register/style'
+import { FormRedirect } from '../Register/style';
 
 import { StyledForm, LoginIllustration } from './style';
 import Message from '../../components/Message';
@@ -99,7 +99,8 @@ const Login = () => {
 					Login
 				</AuthBtn>
 				<FormRedirect>
-					<span>Don't have an account?</span><Link to="/register">Register</Link>
+					<span>Don't have an account?</span>
+					<Link to='/register'>Register</Link>
 				</FormRedirect>
 			</StyledForm>
 		</div>
