@@ -85,8 +85,6 @@ const Register = () => {
 		});
 	};
 
-	console.log(state);
-
 	return (
 		<div>
 			<StyledForm onSubmit={handleSubmit}>

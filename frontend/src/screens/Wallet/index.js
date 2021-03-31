@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -34,18 +34,6 @@ const Wallet = () => {
 		(state) => state.transactionList
 	);
 
-	const transactionTypeValues = useMemo(
-		() =>
-			transactions.reduce(
-				(acc, item) => {
-					acc[item.type] = (acc[item.type] || 0) + item.amount;
-					return acc;
-				},
-				{ income: 0, expense: 0 }
-			),
-		[transactions]
-	);
-
 	if (loading) return <Loader />;
 
 	if (error) return <Message error={error} />;
@@ -59,10 +47,7 @@ const Wallet = () => {
 			<Form isOpen={isFormOpen} />
 			<Subtitle>This Month</Subtitle>
 			<WalletGrid>
-				<Balance
-					income={transactionTypeValues.income ?? 0}
-					expenses={transactionTypeValues.expense ?? 0}
-				/>
+				<Balance transactions={transactions} />
 				<TransactionList transactions={transactions} />
 			</WalletGrid>
 		</Container>

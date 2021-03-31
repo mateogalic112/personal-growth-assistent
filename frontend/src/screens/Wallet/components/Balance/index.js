@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import {
 	BalanceModal,
 	BalanceOverview,
@@ -10,9 +12,20 @@ import {
 
 const currencyFormatter = require('currency-formatter');
 
-const Balance = ({ income, expenses }) => {
-	const difference = income - expenses;
-	console.log(expenses);
+const Balance = ({ transactions }) => {
+	const { income, expense } = useMemo(
+		() =>
+			transactions.reduce(
+				(acc, item) => {
+					acc[item.type] = (acc[item.type] || 0) + item.amount;
+					return acc;
+				},
+				{ income: 0, expense: 0 }
+			),
+		[transactions]
+	);
+	const difference = income - expense;
+
 	return (
 		<BalanceModal profit={difference}>
 			<BalanceOverview>
@@ -32,7 +45,7 @@ const Balance = ({ income, expenses }) => {
 				</BalanceValue>
 				<BalanceLabel>Expenses</BalanceLabel>
 				<BalanceValue>
-					{currencyFormatter.format(expenses, {
+					{currencyFormatter.format(expense, {
 						code: 'USD',
 					})}
 				</BalanceValue>

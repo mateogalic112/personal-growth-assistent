@@ -22,7 +22,7 @@ const Form = ({ isOpen }) => {
 
 	const [state, setState] = useState({
 		name: '',
-		type: '',
+		type: 'income',
 		amount: '',
 	});
 
@@ -38,7 +38,7 @@ const Form = ({ isOpen }) => {
 		);
 		setState({
 			name: '',
-			type: '',
+			type: 'income',
 			amount: '',
 		});
 	};
@@ -55,11 +55,7 @@ const Form = ({ isOpen }) => {
 	};
 
 	const validateForm = () => {
-		return (
-			state.name.length > 2 &&
-			state.type.length > 2 &&
-			state.amount.length > 0
-		);
+		return state.name.length > 2 && parseFloat(state.amount) > 0;
 	};
 
 	return (
@@ -69,7 +65,6 @@ const Form = ({ isOpen }) => {
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
 				<InputField
-					medium
 					icon={<RiFilePaper2Line />}
 					input={
 						<input
@@ -107,7 +102,6 @@ const Form = ({ isOpen }) => {
 					</RadioField>
 				</RadioWrapper>
 				<InputField
-					medium
 					icon={<BiMoney />}
 					input={
 						<input

@@ -37,7 +37,7 @@ const Card = ({ transaction }) => {
 				<CardTitle>{capitalize(transaction.name)}</CardTitle>
 				<CardType>{dateStringFormatter(transaction.date)}</CardType>
 			</Main>
-			<Amount>${transaction.amount}</Amount>
+			<Amount>${parseFloat(transaction.amount).toFixed(2)}</Amount>
 			<Actions>
 				<CrudButton
 					handleClick={deleteItem}

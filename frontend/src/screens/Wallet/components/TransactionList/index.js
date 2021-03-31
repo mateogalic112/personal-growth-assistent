@@ -14,7 +14,7 @@ const TransactionList = ({ transactions }) => {
 				<h3>Month placeholder</h3>
 			</TitleBar>
 			{Array.isArray(transactions) &&
-				transactions.length &&
+				transactions.length > 0 &&
 				transactions
 					.reverse()
 					.map((transaction) => (
