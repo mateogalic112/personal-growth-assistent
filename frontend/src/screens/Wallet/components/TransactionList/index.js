@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import { dateFormatter } from '../../../../helper/date';
+
 import { months } from '../../../../constants';
 
 import Subtitle from '../../../../components/Subtitle';
@@ -11,6 +13,7 @@ import Card from './Card';
 import Pagination from '../Pagiantion';
 
 import { TransactionListContainer } from './style';
+import Balance from '../Balance';
 
 const LIMIT_DISPLAYED_TRANSACTIONS = 5;
 
@@ -63,6 +66,11 @@ const TransactionList = ({ transactions }) => {
 						/>
 					</div>
 				</TitleBar>
+
+				<Balance
+					transactions={filteredTransactions}
+					title={`Budget for ${dateFormatter(startDate)}`}
+				/>
 			</div>
 			{pages > 0 && (
 				<Pagination

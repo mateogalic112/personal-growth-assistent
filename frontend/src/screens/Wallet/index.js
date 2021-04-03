@@ -8,7 +8,6 @@ import Container from '../../layout/Container';
 import Title from '../../components/TitleBar/Title';
 import TitleBar from '../../components/TitleBar';
 import Balance from './components/Balance';
-import Subtitle from '../../components/Subtitle';
 import Add from '../../widgets/Add';
 import WalletGrid from '../../layout/Grid/WalletGrid';
 import TransactionList from './components/TransactionList';
@@ -46,7 +45,6 @@ const Wallet = () => {
 				<Add handleClick={openForm} />
 			</TitleBar>
 			<Form isOpen={isFormOpen} />
-			<Subtitle>This Month</Subtitle>
 			<WalletGrid>
 				<Balance transactions={transactions} />
 				<TransactionList transactions={transactions} />

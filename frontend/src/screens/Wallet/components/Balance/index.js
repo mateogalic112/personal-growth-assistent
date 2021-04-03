@@ -12,7 +12,7 @@ import {
 
 const currencyFormatter = require('currency-formatter');
 
-const Balance = ({ transactions }) => {
+const Balance = ({ transactions, title }) => {
 	const { income, expense } = useMemo(
 		() =>
 			transactions.reduce(
@@ -29,7 +29,9 @@ const Balance = ({ transactions }) => {
 	return (
 		<BalanceModal profit={difference}>
 			<BalanceOverview>
-				<AccountLabel>Available Budget</AccountLabel>
+				<AccountLabel>
+					{title ? title : 'Available Budget'}
+				</AccountLabel>
 				<AccountValue>
 					{currencyFormatter.format(difference, {
 						code: 'USD',

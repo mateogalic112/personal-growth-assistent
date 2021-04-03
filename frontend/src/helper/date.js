@@ -32,7 +32,7 @@ export const getDayNumberInWeek = (date) => {
  * Format date with nice strings
  *
  * @param {string} date
- * @return {number} Monday => 0
+ * @return {date} Saturday, April 3, 2021
  */
 export const dateStringFormatter = (date) => {
 	const options = {
@@ -40,6 +40,20 @@ export const dateStringFormatter = (date) => {
 		year: 'numeric',
 		month: 'long',
 		day: 'numeric',
+	};
+	return new Date(date).toLocaleDateString('en-US', options);
+};
+
+/**
+ * Format date with nice strings
+ *
+ * @param {string} date
+ * @return {date} April, 2021
+ */
+export const dateFormatter = (date) => {
+	const options = {
+		year: 'numeric',
+		month: 'long',
 	};
 	return new Date(date).toLocaleDateString('en-US', options);
 };

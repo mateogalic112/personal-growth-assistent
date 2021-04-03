@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { Line } from 'react-chartjs-2';
 import { months } from '../../../../constants';
@@ -16,8 +16,9 @@ const currencyFormatter = require('currency-formatter');
 const Graph = ({ transactions }) => {
 	const { innerWidth: width } = window;
 
-	const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-	console.log(selectedYear);
+	const [selectedYear, setSelectedYear] = useState({
+		value: new Date().getFullYear(),
+	});
 
 	const selectOptions = [
 		{ value: new Date().getFullYear(), label: new Date().getFullYear() },
@@ -109,7 +110,7 @@ const Graph = ({ transactions }) => {
 				<Subtitle>Yearly Chart</Subtitle>
 				<div style={{ width: '200px' }}>
 					<Select
-						value={selectedYear}
+						value={selectedYear.value}
 						placeholder='Select Year'
 						onChange={setSelectedYear}
 						styles={selectStyles}
