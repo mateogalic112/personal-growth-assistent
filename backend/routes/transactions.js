@@ -26,7 +26,9 @@ router.post('/', verify, async (req, res, next) => {
  * Get all transactions
  */
 router.get('/', verify, async (req, res, next) => {
-	const transactions = await Transaction.find({ user: req.user._id }).exec();
+	const transactions = await Transaction.find({ user: req.user._id })
+		.sort({ _id: -1 })
+		.exec();
 
 	if (transactions) {
 		res.status(200).json(transactions);
