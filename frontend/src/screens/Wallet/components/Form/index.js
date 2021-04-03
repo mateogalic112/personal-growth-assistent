@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createTransaction } from '../../../../redux/actions/transactionActions';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import InputField from '../../../../components/InputField';
 import { AuthBtn } from '../../../../theme/Button';
 import Loader from '../../../../components/Loader';
@@ -26,6 +29,12 @@ const Form = ({ isOpen }) => {
 		amount: '',
 	});
 
+	const [startDate, setStartDate] = useState(new Date());
+
+	const handleDateChange = (date) => {
+		setStartDate(date);
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(
@@ -33,6 +42,7 @@ const Form = ({ isOpen }) => {
 				state.name,
 				state.type,
 				state.amount,
+				startDate,
 				userInfo.token
 			)
 		);
@@ -41,6 +51,7 @@ const Form = ({ isOpen }) => {
 			type: 'income',
 			amount: '',
 		});
+		setStartDate(new Date());
 	};
 
 	const { loading, error, success } = useSelector(
@@ -64,6 +75,14 @@ const Form = ({ isOpen }) => {
 			<StyledForm onSubmit={handleSubmit}>
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
+				<div style={{ width: '320px' }}>
+					<DatePicker
+						selected={startDate}
+						showMonthYearPicker
+						onChange={handleDateChange}
+						dateFormat='MMMM, y'
+					/>
+				</div>
 				<InputField
 					icon={<RiFilePaper2Line />}
 					input={

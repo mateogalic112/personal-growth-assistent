@@ -15,6 +15,7 @@ import TransactionList from './components/TransactionList';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import Form from './components/Form';
+import Graph from './components/Graph';
 
 const Wallet = () => {
 	const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const Wallet = () => {
 			<WalletGrid>
 				<Balance transactions={transactions} />
 				<TransactionList transactions={transactions} />
+				<Graph transactions={transactions} />
 			</WalletGrid>
 		</Container>
 	);

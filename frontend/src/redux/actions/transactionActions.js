@@ -80,7 +80,7 @@ export const deleteTransaction = (token, transactionId) => async (
 	}
 };
 
-export const createTransaction = (name, type, amount, token) => async (
+export const createTransaction = (name, type, amount, date, token) => async (
 	dispatch,
 	getState
 ) => {
@@ -93,6 +93,7 @@ export const createTransaction = (name, type, amount, token) => async (
 			name,
 			type,
 			amount,
+			date,
 		};
 
 		const config = {
