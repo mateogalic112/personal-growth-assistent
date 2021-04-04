@@ -30,11 +30,10 @@ export const deleteTransactionReducer = (
 ) => {
 	switch (action.type) {
 		case DELETE_TRANSACTION_REQUEST:
-			return { loading: true, itemId: action.payload.itemId };
+			return { loading: true };
 		case DELETE_TRANSACTION_SUCCESS:
 			return {
 				loading: false,
-				success: action.payload.success,
 			};
 		case GET_TRANSACTIONS_FAIL:
 			return { loading: false, error: action.payload };
@@ -50,7 +49,6 @@ export const createTransactionReducer = (state = { success: null }, action) => {
 		case CREATE_TRANSACTION_SUCCESS:
 			return {
 				loading: false,
-				success: action.payload.success,
 			};
 		case GET_TRANSACTIONS_FAIL:
 			return { loading: false, error: action.payload };

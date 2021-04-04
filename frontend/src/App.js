@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Main from './layout/Main';
@@ -13,6 +12,7 @@ import Home from './screens/Home';
 import Wallet from './screens/Wallet';
 import ScreenWrapper from './screens/ScreenWrapper';
 import ProtectedRoute from './utils/ProtectedRoute';
+import AlertWrapper from './components/AlertWrapper';
 
 const App = () => {
 	return (
@@ -58,6 +58,7 @@ const App = () => {
 							)}
 						/>
 					</Switch>
+					<AlertWrapper />
 				</Glass>
 			</Main>
 		</Router>

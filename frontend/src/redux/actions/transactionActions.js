@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { ADD_NOTIFICATION } from '../../constants/alertConstants';
+import { v4 } from 'uuid';
 import {
 	GET_TRANSACTIONS_REQUEST,
 	GET_TRANSACTIONS_SUCCESS,
@@ -46,7 +47,6 @@ export const deleteTransaction = (token, transactionId) => async (
 	try {
 		dispatch({
 			type: DELETE_TRANSACTION_REQUEST,
-			payload: { itemId: transactionId },
 		});
 
 		const config = {
@@ -63,7 +63,15 @@ export const deleteTransaction = (token, transactionId) => async (
 
 		dispatch({
 			type: DELETE_TRANSACTION_SUCCESS,
-			payload: { success: !!data },
+		});
+
+		dispatch({
+			type: ADD_NOTIFICATION,
+			payload: {
+				id: v4(),
+				message: 'Transaction Deleted!',
+				success: true,
+			},
 		});
 
 		dispatch({
@@ -107,7 +115,15 @@ export const createTransaction = (name, type, amount, date, token) => async (
 
 		dispatch({
 			type: CREATE_TRANSACTION_SUCCESS,
-			payload: { success: !!data },
+		});
+
+		dispatch({
+			type: ADD_NOTIFICATION,
+			payload: {
+				id: v4(),
+				message: 'Transaction Created!',
+				success: true,
+			},
 		});
 
 		dispatch({

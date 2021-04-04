@@ -90,7 +90,7 @@ const TransactionList = ({ transactions }) => {
 						<Card transaction={transaction} key={transaction._id} />
 					))
 			) : (
-				<h2>
+				<h2 style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
 					No transactions for{' '}
 					{months[new Date(startDate).getUTCMonth()]},{' '}
 					{new Date(startDate).getFullYear()}

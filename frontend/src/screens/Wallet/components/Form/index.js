@@ -54,9 +54,7 @@ const Form = ({ isOpen }) => {
 		setStartDate(new Date());
 	};
 
-	const { loading, error, success } = useSelector(
-		(state) => state.createTransaction
-	);
+	const { loading, error } = useSelector((state) => state.createTransaction);
 
 	const handleChange = (e) => {
 		setState({

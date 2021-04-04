@@ -6,11 +6,14 @@ import {
 	userLoginReducer,
 	userRegisterReducer,
 } from '../redux/reducers/userReducers';
+
 import {
 	transactionListReducer,
 	deleteTransactionReducer,
 	createTransactionReducer,
 } from '../redux/reducers/transactionReducers';
+
+import { notificationListReducer } from '../redux/reducers/alertReducers';
 
 const reducer = combineReducers({
 	userLogin: userLoginReducer,
@@ -18,6 +21,7 @@ const reducer = combineReducers({
 	transactionList: transactionListReducer,
 	deleteTransaction: deleteTransactionReducer,
 	createTransaction: createTransactionReducer,
+	notificationList: notificationListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -27,6 +31,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 const initialState = {
 	userLogin: { userInfo: userInfoFromStorage },
 	transactionList: { transactions: [] },
+	notificationList: { notifications: [] },
 };
 
 const store = createStore(
