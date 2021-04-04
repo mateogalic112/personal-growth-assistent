@@ -56,10 +56,7 @@ export const deleteTransaction = (token, transactionId) => async (
 			},
 		};
 
-		const { data } = await axios.delete(
-			`/api/transactions/${transactionId}`,
-			config
-		);
+		await axios.delete(`/api/transactions/${transactionId}`, config);
 
 		dispatch({
 			type: DELETE_TRANSACTION_SUCCESS,
