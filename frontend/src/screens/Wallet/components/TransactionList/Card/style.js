@@ -9,8 +9,8 @@ export const TransactionCard = styled.div`
 	margin: 1rem 0;
 	background-color: rgba(255, 255, 255, 0.35);
 	border-radius: 2.5rem;
-	border-bottom: 1px solid;
-	border-bottom-color: ${(props) =>
+	border-right: 1px solid;
+	border-right-color: ${(props) =>
 		props.type === 'income'
 			? 'rgba(0, 255, 0, 0.8)'
 			: 'rgba(255, 0, 0, 0.8)'};

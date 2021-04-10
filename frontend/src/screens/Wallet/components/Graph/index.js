@@ -81,9 +81,7 @@ const Graph = ({ transactions }) => {
 		gradient.addColorStop(1, 'rgba(198, 232, 255, 0.75)');
 
 		return {
-			labels: [...Array(months.length).keys()]
-				.splice(0, new Date().getMonth() + 1)
-				.map((idx) => months[idx]),
+			labels: [...Array(months.length).keys()].map((idx) => months[idx]),
 			datasets: [
 				{
 					data: [...Array(months.length).keys()].map((idx) => {
@@ -110,8 +108,8 @@ const Graph = ({ transactions }) => {
 				<Subtitle>Yearly Chart</Subtitle>
 				<div style={{ width: '200px' }}>
 					<Select
+						placeholder={selectedYear.value}
 						value={selectedYear.value}
-						placeholder='Select Year'
 						onChange={setSelectedYear}
 						styles={selectStyles}
 						options={selectOptions}
