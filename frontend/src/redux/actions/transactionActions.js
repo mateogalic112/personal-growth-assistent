@@ -85,10 +85,16 @@ export const deleteTransaction = (token, transactionId) => async (
 	}
 };
 
-export const createTransaction = (name, type, amount, date, token) => async (
-	dispatch,
-	getState
-) => {
+export const createTransaction = (
+	name,
+	type,
+	amount,
+	date,
+	isCrypto,
+	cryptoQty,
+	cryptoCoinPrice,
+	token
+) => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: CREATE_TRANSACTION_REQUEST,
@@ -99,6 +105,9 @@ export const createTransaction = (name, type, amount, date, token) => async (
 			type,
 			amount,
 			date,
+			isCrypto,
+			cryptoQty,
+			cryptoCoinPrice,
 		};
 
 		const config = {

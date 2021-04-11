@@ -12,6 +12,9 @@ router.post('/', verify, async (req, res, next) => {
 		type: req.body.type,
 		amount: req.body.amount,
 		date: req.body.date,
+		isCrypto: req.body.isCrypto,
+		cryptoQty: req.body.cryptoQty,
+		cryptoCoinPrice: req.body.cryptoCoinPrice,
 		user: req.user._id,
 	});
 

@@ -1,8 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listTransactions } from '../../redux/actions/transactionActions';
 
 import { useQuery } from 'react-query';
 
 import { cryptoQuery } from '../../api/crypto';
+
+import { cryptoPortfolio } from './helpers/cryptoPortfolio';
 
 import Container from '../../layout/Container';
 
@@ -10,127 +14,82 @@ import Title from '../../components/TitleBar/Title';
 import TitleBar from '../../components/TitleBar';
 import Add from '../../widgets/Add';
 import Card from './components/Card';
-import Graph from './components/Graph';
 import Table from './components/Table';
 import Loader from '../../components/Loader';
+import Message from '../../components/Message';
 
 import CryptoGrid from '../../layout/Grid/CryptoGrid';
 import Subtitle from '../../components/Subtitle';
 import Balance from './components/Balance';
 
+import Form from './components/Form';
+
 const Crypto = () => {
+	const dispatch = useDispatch();
+	const { userInfo } = useSelector((state) => state.userLogin);
+
+	// Getting list of transactions
+	const {
+		loading: loadingTransaction,
+		error: errorTransactions,
+		transactions,
+	} = useSelector((state) => state.transactionList);
+
+	useEffect(() => {
+		dispatch(listTransactions(userInfo.token));
+	}, [dispatch, userInfo.token]);
+
+	// Current portfolio state ( Coin amount )
+	const currentPortfolioState = useMemo(() => cryptoPortfolio(transactions), [
+		transactions,
+	]);
+	console.log(currentPortfolioState);
+
+	// Total Invested
+	const invested = useMemo(
+		() =>
+			transactions
+				.filter(
+					(transaction) =>
+						transaction.isCrypto && transaction.type === 'expense'
+				)
+				.reduce((acc, transaction) => acc + transaction.amount, 0),
+		[transactions]
+	);
+
+	// Getting Cryptocurrencies for trading
 	const { data, error, isLoading, isError } = useQuery(
 		['crypto', 'usd'],
 		() => cryptoQuery('usd')
 	);
 
-	const [balance, setBalance] = useState(null);
+	// Coin object for display on card
 	const [portfolioCoins, setPortfolioCoins] = useState([]);
 
-	//TODO This data will come from DB
-	const portfolio = {
-		'2021-03-25': {
-			bitcoin: {
-				amount: 0.08,
-			},
-			ethereum: {
-				amount: 1,
-			},
-			polkadot: {
-				amount: 20,
-			},
-		},
-		'2021-03-26': {
-			bitcoin: {
-				amount: 0.085,
-			},
-			ethereum: {
-				amount: 1.2,
+	// Current balace
+	const [balance, setBalance] = useState(0);
 
-				
-			},
-			polkadot: {
-				amount: 20,
-			},
-		},
-		'2021-03-27': {
-			bitcoin: {
-				amount: 0.085,
-			},
-			ethereum: {
-				amount: 1.2,
-			},
-			polkadot: {
-				amount: 20,
-			},
-		},
-		'2021-03-28': {
-			bitcoin: {
-				amount: 0.05,
-			},
-			ethereum: {
-				amount: 0.5,
-			},
-			polkadot: {
-				amount: 100,
-			},
-		},
-		'2021-03-29': {
-			bitcoin: {
-				amount: 0.08,
-			},
-			ethereum: {
-				amount: 1,
-			},
-			polkadot: {
-				amount: 0,
-			},
-		},
-		'2021-03-30': {
-			bitcoin: {
-				amount: 0.085,
-			},
-			ethereum: {
-				amount: 1,
-			},
-			polkadot: {
-				amount: 0,
-			},
-		},
-		'2021-03-31': {
-			bitcoin: {
-				amount: 0.08014,
-			},
-			ethereum: {
-				amount: 1.0086,
-			},
-			polkadot: {
-				amount: 0,
-			},
-		},
+	// Open and close form
+	const [isFormOpen, setIsFormOpen] = useState(false);
+
+	const openForm = () => {
+		setIsFormOpen((isFormOpen) => !isFormOpen);
 	};
 
 	useEffect(() => {
-		const latestPortfolioBalanceDate =
-			portfolio[
-				Object.keys(portfolio)[Object.keys(portfolio).length - 1]
-			];
-
-		const portfolioCoinNames = portfolio[Object.keys(portfolio).slice(-1)];
-
 		if (!isLoading && !isError && data.length) {
 			setPortfolioCoins(
 				data
-					.filter((coin) => coin.id in portfolioCoinNames)
+					.filter((coin) => coin.id in currentPortfolioState)
 					.map((object) => ({
 						...object,
 						portfolioAmount:
-							latestPortfolioBalanceDate[object.id].amount,
+							currentPortfolioState[object.id].cryptoQty,
 					}))
 			);
 		}
 		//eslint-disable-next-line
-	}, [isLoading, isError, data]);
+	}, [isLoading, isError, data, currentPortfolioState]);
 
 	useEffect(() => {
 		setBalance(
@@ -141,9 +100,6 @@ const Crypto = () => {
 		);
 	}, [portfolioCoins]);
 
-	// TODO This will come from DB
-	const invested = 3000;
-
 	if (isLoading) return <Loader />;
 
 	if (isError) return <h1>{error}</h1>;
@@ -152,16 +108,24 @@ const Crypto = () => {
 		<Container>
 			<TitleBar>
 				<Title>Cryptocurrency</Title>
-				<Add onClick={() => {}} />
+				<Add handleClick={openForm} />
 			</TitleBar>
+			<Form isOpen={isFormOpen} coins={data} />
 			<Subtitle>Portfolio</Subtitle>
 			<CryptoGrid>
-				<Balance invested={invested} balance={balance} />
+				{loadingTransaction ? (
+					<Loader />
+				) : errorTransactions ? (
+					<Message error>{error}</Message>
+				) : (
+					<Balance invested={invested} balance={balance} />
+				)}
+
 				{Array.isArray(portfolioCoins) &&
 					portfolioCoins.map((coin) => (
 						<Card key={coin.id} {...coin} />
 					))}
-				<Graph portfolio={portfolio} />
+				{/* <Graph portfolio={portfolio} /> */}
 				<Table portfolioCoins={portfolioCoins} balance={balance} />
 			</CryptoGrid>
 		</Container>

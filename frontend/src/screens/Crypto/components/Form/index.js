@@ -4,60 +4,67 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createTransaction } from '../../../../redux/actions/transactionActions';
 
-import DatePicker from 'react-datepicker';
+import Select from 'react-select';
+
 import 'react-datepicker/dist/react-datepicker.css';
+import { selectStyles } from '../../../Register/style';
 
 import InputField from '../../../../components/InputField';
 import { AuthBtn } from '../../../../theme/Button';
 import Loader from '../../../../components/Loader';
 import Message from '../../../../components/Message';
 
-import { RiFilePaper2Line } from 'react-icons/ri';
-import { BiMoney } from 'react-icons/bi';
+import { BiDollar } from 'react-icons/bi';
 
 import { FormWrapper, StyledForm } from './style';
 import Subtitle from '../../../../components/Subtitle';
 import { RadioField, RadioWrapper } from '../../../Register/style';
 
-const Form = ({ isOpen }) => {
+const Form = ({ isOpen, coins }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
+	const [selectedCoin, setSelectedCoin] = useState(null);
+
+	const selectedCoinAmount = () => {
+		if (selectedCoin && parseFloat(state.amount) > 0) {
+			return parseFloat(
+				state.amount / selectedCoin.value.current_price
+			).toFixed(8);
+		}
+		return 0;
+	};
+
 	const [state, setState] = useState({
-		name: '',
-		type: 'income',
+		type: 'expense',
 		amount: '',
 	});
 
-	const [startDate, setStartDate] = useState(new Date());
-
-	const handleDateChange = (date) => {
-		setStartDate(date);
-	};
+	const selectCoinsOptions = coins.map((coin) => ({
+		value: coin,
+		label: coin.name,
+	}));
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(
 			createTransaction(
-				state.name,
+				selectedCoin?.value?.id,
 				state.type,
 				state.amount,
-				startDate,
-				false,
-				0,
-				0,
+				new Date(),
+				true,
+				selectedCoinAmount(),
+				selectedCoin?.value?.current_price,
 				userInfo.token
 			)
 		);
 		setState({
-			name: '',
-			type: 'income',
+			selectedCoin: null,
+			type: 'expense',
 			amount: '',
 		});
-		setStartDate(new Date());
 	};
-
-	const { loading, error } = useSelector((state) => state.createTransaction);
 
 	const handleChange = (e) => {
 		setState({
@@ -67,8 +74,10 @@ const Form = ({ isOpen }) => {
 	};
 
 	const validateForm = () => {
-		return state.name.length > 2 && parseFloat(state.amount) > 0;
+		return selectedCoin && parseFloat(state.amount) > 0;
 	};
+
+	const { loading, error } = useSelector((state) => state.createTransaction);
 
 	return (
 		<FormWrapper isOpen={isOpen}>
@@ -77,38 +86,17 @@ const Form = ({ isOpen }) => {
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
 				<div style={{ width: '320px' }}>
-					<DatePicker
-						selected={startDate}
-						showMonthYearPicker
-						onChange={handleDateChange}
-						dateFormat='MMMM, y'
+					<Select
+						menuPortalTarget={document.body}
+						menuPosition={'fixed'}
+						placeholder='Select Coin'
+						value={selectedCoin}
+						onChange={setSelectedCoin}
+						styles={selectStyles}
+						options={selectCoinsOptions}
 					/>
 				</div>
-				<InputField
-					icon={<RiFilePaper2Line />}
-					input={
-						<input
-							type='name'
-							required
-							name='name'
-							value={state.name}
-							onChange={handleChange}
-							placeholder='Name'
-						/>
-					}
-				/>
 				<RadioWrapper>
-					<RadioField isSelected={state.type === 'income'}>
-						<input
-							type='radio'
-							id='income'
-							name='type'
-							value='income'
-							checked={state.type === 'income'}
-							onChange={handleChange}
-						/>
-						<label htmlFor='income'>Income</label>
-					</RadioField>
 					<RadioField isSelected={state.type === 'expense'}>
 						<input
 							type='radio'
@@ -118,11 +106,22 @@ const Form = ({ isOpen }) => {
 							checked={state.type === 'expense'}
 							onChange={handleChange}
 						/>
-						<label htmlFor='expense'>Expense</label>
+						<label htmlFor='expense'>Buy</label>
+					</RadioField>
+					<RadioField isSelected={state.type === 'income'}>
+						<input
+							type='radio'
+							id='income'
+							name='type'
+							value='income'
+							checked={state.type === 'income'}
+							onChange={handleChange}
+						/>
+						<label htmlFor='income'>Sell</label>
 					</RadioField>
 				</RadioWrapper>
 				<InputField
-					icon={<BiMoney />}
+					icon={<BiDollar />}
 					input={
 						<input
 							type='amount'
@@ -131,9 +130,19 @@ const Form = ({ isOpen }) => {
 							value={state.amount}
 							onChange={handleChange}
 							placeholder='Amount'
+							autoComplete='off'
 						/>
 					}
 				/>
+
+				{selectedCoinAmount() > 0 && (
+					<h3>
+						<span>Total: </span>
+						{selectedCoinAmount()}{' '}
+						{selectedCoin?.value?.symbol.toUpperCase()}
+					</h3>
+				)}
+
 				<AuthBtn medium type='submit' disabled={!validateForm()}>
 					Add
 				</AuthBtn>

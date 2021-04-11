@@ -17,6 +17,18 @@ const transactionSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now(),
 	},
+	isCrypto: {
+		type: Boolean,
+		default: false,
+	},
+	cryptoQty: {
+		type: Number,
+		default: 0,
+	},
+	cryptoCoinPrice: {
+		type: Number,
+		default: 0,
+	},
 	user: {
 		type: mongoose.ObjectId,
 		required: true,

@@ -11,19 +11,3 @@ export const cryptoQuery = async (currency, per_page = 10) => {
 
 	return response.json();
 };
-
-const getWeeklyCoinPrices = async (coin) => {
-	const url = `${BASE}/coins/${coin}/market_chart?vs_currency=usd&days=7&interval=daily`;
-
-	const response = await fetch(url);
-
-	if (!response.ok) {
-		return [];
-	}
-
-	return { [coin]: await response.json() };
-};
-
-export const getWeeklyPortfolioPrices = async (coins) => {
-	return await Promise.all(coins.map((coin) => getWeeklyCoinPrices(coin)));
-};

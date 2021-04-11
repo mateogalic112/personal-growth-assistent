@@ -17,7 +17,10 @@ const currencyFormatter = require('currency-formatter');
 
 const Balance = ({ invested, balance }) => {
 	const profit = balance - invested;
-	const profitPercentage = (balance / invested) * 100;
+	const profitPercentage =
+		profit > 0
+			? parseFloat(balance / invested).toFixed(2)
+			: parseFloat(invested / balance);
 	return (
 		<BalanceModal profit={profit}>
 			<BalanceOverview>
@@ -27,7 +30,7 @@ const Balance = ({ invested, balance }) => {
 						code: 'USD',
 					})}{' '}
 					<Percentage profit={profit}>
-						{parseFloat(profitPercentage).toFixed(2)}%
+						{parseFloat(profitPercentage || 0).toFixed(2)}%
 					</Percentage>
 					<BalanceIcon green={profit > 0}>
 						{profit > 0 ? <BsArrowUpRight /> : <BsArrowDownRight />}

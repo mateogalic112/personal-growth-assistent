@@ -13,7 +13,7 @@ export const LoginIllustration = styled.img`
 `;
 
 export const selectStyles = {
-	container: (provided, state) => ({
+	container: (provided) => ({
 		...provided,
 		fontSize: '.85rem',
 		borderRadius: '5rem',
@@ -28,13 +28,15 @@ export const selectStyles = {
 		},
 		transition: 'box-shadow 0.2s, opacity 0.2s',
 	}),
-	control: (provided, state) => ({
+	control: (provided) => ({
 		...provided,
 		padding: '.25rem 1rem',
 		boxShadow: 'none',
 		borderRadius: '5rem',
 		border: 'none',
 	}),
+	menuPortal: (provided) => ({ ...provided, zIndex: 9999 }),
+	menu: (provided) => ({ ...provided, zIndex: 9999 }),
 };
 
 export const RadioWrapper = styled.div`
@@ -81,10 +83,10 @@ export const FormRedirect = styled.div`
 
 	span {
 		display: inline-block;
-		margin-right: .5rem;
+		margin-right: 0.5rem;
 	}
 
 	a {
 		color: black;
 	}
-`
+`;

@@ -18,6 +18,7 @@ const Graph = ({ transactions }) => {
 
 	const [selectedYear, setSelectedYear] = useState({
 		value: new Date().getFullYear(),
+		label: new Date().getFullYear(),
 	});
 
 	const selectOptions = [
@@ -90,7 +91,9 @@ const Graph = ({ transactions }) => {
 								new Date(item.date).getMonth() === idx &&
 								new Date(item.date).getFullYear() ===
 									selectedYear.value
-									? acc + item.amount
+									? item.type === 'income'
+										? acc + item.amount
+										: acc - item.amount
 									: acc,
 							0
 						);
