@@ -52,11 +52,11 @@ const Form = ({ isOpen, coins }) => {
 				selectedCoin?.value?.id,
 				state.type,
 				state.amount,
+				userInfo.token,
 				new Date(),
 				true,
 				selectedCoinAmount(),
 				selectedCoin?.value?.current_price,
-				userInfo.token
 			)
 		);
 		setState({

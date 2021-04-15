@@ -42,11 +42,8 @@ const Form = ({ isOpen }) => {
 				state.name,
 				state.type,
 				state.amount,
+				userInfo.token,
 				startDate,
-				false,
-				0,
-				0,
-				userInfo.token
 			)
 		);
 		setState({
@@ -67,7 +64,7 @@ const Form = ({ isOpen }) => {
 	};
 
 	const validateForm = () => {
-		return state.name.length > 2 && parseFloat(state.amount) > 0;
+		return state.name.length > 1 && parseFloat(state.amount) > 0;
 	};
 
 	return (

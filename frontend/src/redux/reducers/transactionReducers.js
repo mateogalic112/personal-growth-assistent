@@ -25,7 +25,7 @@ export const transactionListReducer = (
 };
 
 export const deleteTransactionReducer = (
-	state = { success: null, item: {} },
+	state = {},
 	action
 ) => {
 	switch (action.type) {
@@ -42,7 +42,7 @@ export const deleteTransactionReducer = (
 	}
 };
 
-export const createTransactionReducer = (state = { success: null }, action) => {
+export const createTransactionReducer = (state = {}, action) => {
 	switch (action.type) {
 		case CREATE_TRANSACTION_REQUEST:
 			return { loading: true };

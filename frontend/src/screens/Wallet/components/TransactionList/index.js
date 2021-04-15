@@ -10,7 +10,7 @@ import { months } from '../../../../constants';
 import Subtitle from '../../../../components/Subtitle';
 import TitleBar from '../../../../components/TitleBar';
 import Card from './Card';
-import Pagination from '../Pagiantion';
+import Pagination from '../Pagination';
 
 import { TransactionListContainer } from './style';
 import Balance from '../Balance';
@@ -20,7 +20,7 @@ const LIMIT_DISPLAYED_TRANSACTIONS = 5;
 const TransactionList = ({ transactions }) => {
 	const [startDate, setStartDate] = useState(new Date());
 	const [filteredTransactions, setFilteredTransactions] = useState(
-		transactions.reverse()
+		transactions
 	);
 
 	// Pagination

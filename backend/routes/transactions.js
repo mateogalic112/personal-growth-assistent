@@ -11,11 +11,11 @@ router.post('/', verify, async (req, res, next) => {
 		name: req.body.name,
 		type: req.body.type,
 		amount: req.body.amount,
+		user: req.user._id,
 		date: req.body.date,
 		isCrypto: req.body.isCrypto,
 		cryptoQty: req.body.cryptoQty,
 		cryptoCoinPrice: req.body.cryptoCoinPrice,
-		user: req.user._id,
 	});
 
 	if (transaction) {

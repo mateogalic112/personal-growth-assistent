@@ -89,11 +89,11 @@ export const createTransaction = (
 	name,
 	type,
 	amount,
+	token,
 	date,
 	isCrypto,
 	cryptoQty,
 	cryptoCoinPrice,
-	token
 ) => async (dispatch, getState) => {
 	try {
 		dispatch({

@@ -9,17 +9,13 @@ import {
 	Icon,
 } from './style';
 
+import { validCoins, coinsAllocation } from '../../helpers/cryptoCalculations'
+
 const currencyFormatter = require('currency-formatter');
 
 const Table = ({ portfolioCoins, balance }) => {
-	const displayValidCoins = portfolioCoins
-		.filter((coin) => coin.portfolioAmount > 0)
-		.map((coin) => ({
-			...coin,
-			allocation: parseFloat(
-				((coin.portfolioAmount * coin.current_price) / balance) * 100
-			).toFixed(2),
-		}));
+	const coins = coinsAllocation(validCoins(portfolioCoins), balance);
+
 	return (
 		<TableContainer>
 			<TableRow>
@@ -28,7 +24,7 @@ const Table = ({ portfolioCoins, balance }) => {
 				<Amount>Amount</Amount>
 				<Value>Value</Value>
 			</TableRow>
-			{displayValidCoins.map((coin) => (
+			{coins.map((coin) => (
 				<TableCoinRow key={coin.id}>
 					<Title>
 						<Icon src={coin.image} />
@@ -39,7 +35,7 @@ const Table = ({ portfolioCoins, balance }) => {
 						<progress id='coin' value={coin.allocation} max='100' />
 					</Allocation>
 					<Amount>
-						{coin.portfolioAmount} {coin.symbol.toUpperCase()}
+						{parseFloat(coin.portfolioAmount).toFixed(5)} {coin.symbol.toUpperCase()}
 					</Amount>
 					<Value>
 						{currencyFormatter.format(
