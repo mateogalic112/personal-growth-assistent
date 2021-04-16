@@ -9,12 +9,12 @@ import {
 	Icon,
 } from './style';
 
-import { validCoins, coinsAllocation } from '../../helpers/cryptoCalculations'
+import { currentPortfolioCoins, coinsAllocation } from '../../helpers/cryptoCalculations'
 
 const currencyFormatter = require('currency-formatter');
 
 const Table = ({ portfolioCoins, balance }) => {
-	const coins = coinsAllocation(validCoins(portfolioCoins), balance);
+	const coins = coinsAllocation(currentPortfolioCoins(portfolioCoins), balance);
 
 	return (
 		<TableContainer>

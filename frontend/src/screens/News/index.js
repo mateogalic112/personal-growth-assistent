@@ -46,7 +46,7 @@ const News = () => {
 
 	if (isLoading) return <Loader />;
 
-	if (isError) return <h1>{error}</h1>;
+	if (isError) return <h1>{error.message}</h1>;
 
 	return (
 		<Container>

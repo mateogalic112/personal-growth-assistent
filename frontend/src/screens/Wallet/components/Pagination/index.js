@@ -3,6 +3,9 @@ import React from 'react';
 import { PaginationContainer, Page } from './style';
 
 const Pagination = ({ pages, currPage, setCurrentPage }) => {
+
+	if (pages < 2) return null;
+
 	return (
 		<PaginationContainer>
 			{pages.map((page) => (
