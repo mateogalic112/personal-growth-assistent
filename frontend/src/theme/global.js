@@ -51,6 +51,17 @@ const GlobalStyle = createGlobalStyle`
     .react-datepicker__month .react-datepicker__month-text {
         padding: 0.5rem;
     }
+
+    .swiper-container {
+        max-width: 780px;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .swiper-slide {
+        width: 300px;
+        height: auto;
+    }
 `;
 
 export default GlobalStyle;

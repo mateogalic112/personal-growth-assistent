@@ -8,7 +8,7 @@ export const RecipeCardContainer = styled.a`
 	border-radius: 2rem;
 	padding: 1rem 1.25rem;
 	background-color: rgba(255, 255, 255, 0.5);
-	margin: 2rem 1.5rem;
+	margin: 3rem 0rem 2rem 0rem;
 	transition: background-color 0.2s;
 	cursor: pointer;
 	display: flex;

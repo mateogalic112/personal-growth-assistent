@@ -69,7 +69,7 @@ const RecipeCard = ({
 					totalNutrients.PROCNT.quantity
 				)}g`}</RecipeCardLabel>
 
-				<DietLabel>{dietLabels[0]}</DietLabel>
+				<DietLabel>{dietLabels.length > 0 && dietLabels[0]}</DietLabel>
 			</RecipeCardLabels>
 		</RecipeCardContainer>
 	);
