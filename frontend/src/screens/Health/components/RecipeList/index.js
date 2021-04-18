@@ -5,22 +5,17 @@ import RecipeCard from '../RecipeCard';
 const RecipeList = ({ recipeQueryResponse }) => {
 
 	return (<>
-			<h1>{`Recipes for ${recipeQueryResponse.q}`}</h1>
+			<h1>{`Recipes for "${recipeQueryResponse.q}"`}</h1>
 			<Swiper
 				breakpoints={{
 					320: {
 						slidesPerView: 1,
 					},
-					540: {
+					500: {
+						spaceBetween: 25,
 						slidesPerView: 2,
-					},
-					768: {
-						slidesPerView: 1,
 					},
 					878: {
-						slidesPerView: 2,
-					},
-					1140: {
 						slidesPerView: 3,
 					},
 				  }}

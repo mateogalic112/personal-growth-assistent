@@ -9,7 +9,7 @@ import TitleBar from '../../components/TitleBar';
 import Title from '../../components/TitleBar/Title';
 import Container from '../../layout/Container';
 import Filter from '../../widgets/Filter';
-import NewsFilter from '../News/components/NewsFilter';
+import Form from './components/Form'
 
 
 import RecipeList from './components/RecipeList';
@@ -38,7 +38,7 @@ const Health = () => {
 				<Title>Health</Title>
 				<Filter openFilter={toggleFilter} />
 			</TitleBar>
-			<NewsFilter active={isFilterOpen} setQueryString={setQueryString} />
+			<Form isOpen={isFilterOpen} />
 			<RecipeList recipeQueryResponse={data} />
 		</Container>
 	);
