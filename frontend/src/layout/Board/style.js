@@ -8,6 +8,7 @@ export const BoardContainer = styled.section`
 	padding-bottom: 1rem;
 	border-radius: 1rem;
 	position: relative;
+	overflow: hidden;
 
 	@media (min-width: 768px) {
 		grid-column: 2 / 3;
