@@ -2,10 +2,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import RecipeCard from '../RecipeCard';
 
-const RecipeList = ({ recipeQueryResponse }) => {
+const RecipeList = ({ recipes }) => {
 
 	return (<>
-			<h1>{`Recipes for "${recipeQueryResponse.q}"`}</h1>
 			<Swiper
 				breakpoints={{
 					320: {
@@ -20,8 +19,8 @@ const RecipeList = ({ recipeQueryResponse }) => {
 					},
 				  }}
 			>
-				{recipeQueryResponse.hits.map((hit, i) => (
-					<SwiperSlide key={i}><RecipeCard recipe={hit.recipe} /></SwiperSlide>
+				{recipes.map(hit => (
+					<SwiperSlide key={hit.uri}><RecipeCard recipe={hit.recipe} /></SwiperSlide>
 				))}
 			</Swiper>
 			</>

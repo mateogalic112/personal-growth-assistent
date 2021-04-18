@@ -54,6 +54,7 @@ const GlobalStyle = createGlobalStyle`
 
     .swiper-container {
         max-width: 780px;
+        max-height: 440px;
         height: 100%;
         overflow: hidden;
     }
