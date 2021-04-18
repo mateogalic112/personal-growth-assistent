@@ -14,6 +14,7 @@ import Wallet from './screens/Wallet';
 import ScreenWrapper from './screens/ScreenWrapper';
 import ProtectedRoute from './utils/ProtectedRoute';
 import AlertWrapper from './components/AlertWrapper';
+import Books from './screens/Books';
 
 const App = () => {
 	return (
@@ -63,6 +64,13 @@ const App = () => {
 							path='/health'
 							component={(props) => (
 								<ScreenWrapper component={Health} {...props} />
+							)}
+						/>
+
+						<ProtectedRoute
+							path='/books'
+							component={(props) => (
+								<ScreenWrapper component={Books} {...props} />
 							)}
 						/>
 					</Switch>
