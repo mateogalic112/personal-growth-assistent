@@ -55,7 +55,7 @@ const Health = () => {
 				<Title>Health</Title>
 				<Filter openFilter={toggleFilter} />
 			</TitleBar>
-			<Form isOpen={isFilterOpen} />
+			<Form isOpen={isFilterOpen} queryString={queryString} setQueryString={setQueryString} />
 			{data?.q.length > 0 && <h1>{`Recipes for "${data?.q}"`}</h1>}
 			<RecipeList recipes={recipes.slice(0,5)} />
 			<FoodGrid>
@@ -73,6 +73,7 @@ const Health = () => {
 			{recipeLimit < recipes.length && (
 				<LoadMoreBtn onClick={loadMore}>Load More</LoadMoreBtn>
 			)}
+			<div style={{marginBottom: '2rem'}}></div>
 		</Container>
 	);
 };

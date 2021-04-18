@@ -20,6 +20,7 @@ export const StyledForm = styled.form`
 
 	button {
 		margin-bottom: 1rem;
+		margin-top: .5rem;
 	}
 
 	@media (min-width: 768px) {
