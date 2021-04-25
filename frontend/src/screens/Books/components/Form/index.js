@@ -2,10 +2,7 @@ import { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createTransaction } from '../../../../redux/actions/transactionActions';
-
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { updateBook } from '../../../../redux/actions/bookActions';
 
 import InputField from '../../../../components/InputField';
 import { AuthBtn } from '../../../../theme/Button';
@@ -16,52 +13,32 @@ import { RiFilePaper2Line } from 'react-icons/ri';
 
 import { FormWrapper, StyledForm } from './style';
 
-const Form = ({ isOpen }) => {
+const Form = ({ isOpen, book }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
-	const [state, setState] = useState({
-		name: '',
-		type: 'income',
-		amount: '',
-	});
-
-	const [startDate, setStartDate] = useState(new Date());
-
-	const handleDateChange = (date) => {
-		setStartDate(date);
-	};
+	const [note, setNote] = useState('');
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(
-			createTransaction(
-				state.name,
-				state.type,
-				state.amount,
+			updateBook(
 				userInfo.token,
-				startDate,
+				book._id,
+				{notes: [...book.notes, note]}
 			)
 		);
-		setState({
-			name: '',
-			type: 'income',
-			amount: '',
-		});
-		setStartDate(new Date());
+		setNote('');
 	};
 
-	const { loading, error } = useSelector((state) => state.createTransaction);
+	const { loading, success, error } = useSelector((state) => state.updateBook);
 
 	const handleChange = (e) => {
-		setState({
-			...state,
-			[e.target.name]: e.target.value,
-		});
+		setNote(e.target.value);
 	};
 
 	const validateForm = () => {
-		return state.name.length > 1 && parseFloat(state.amount) > 0;
+		return note.length > 0;
 	};
 
 	return (
@@ -69,22 +46,14 @@ const Form = ({ isOpen }) => {
 			<StyledForm onSubmit={handleSubmit}>
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
-				<div style={{ width: '320px' }}>
-					<DatePicker
-						selected={startDate}
-						showMonthYearPicker
-						onChange={handleDateChange}
-						dateFormat='dd MMMM, y'
-					/>
-				</div>
 				<InputField
 					icon={<RiFilePaper2Line />}
 					input={
 						<input
-							type='name'
+							type='text'
 							required
-							name='name'
-							value={state.name}
+							name='note'
+							value={note}
 							onChange={handleChange}
 							placeholder='Note'
 						/>

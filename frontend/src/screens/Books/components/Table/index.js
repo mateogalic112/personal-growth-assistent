@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Fragment } from 'react'
 import {BsEye} from 'react-icons/bs'
 import {AiFillEyeInvisible} from 'react-icons/ai'
 import Add from '../../../../widgets/Add'
@@ -35,8 +35,8 @@ const Table = ({ books }) => {
 					}
 				}
 
-				return <>
-					<TableNoteRow key={book.title}>
+				return <Fragment key={book.title}>
+					<TableNoteRow>
 						<Title>
 							{book.title}
 						</Title>
@@ -50,11 +50,11 @@ const Table = ({ books }) => {
 					{
 						isIncluded && book.notes.map(note => (
 							<TableNoteRow note>
-								{note.date}, {note.text}
+								{note}
 							</TableNoteRow>
 						))
 					}
-				</>
+				</Fragment>
 			})}
 		</TableContainer>
 	);

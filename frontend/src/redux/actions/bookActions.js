@@ -107,7 +107,7 @@ export const updateBook = (token, bookId, book) => async (
 			},
 		};
 
-		await axios.patch(`/api/transactions/${bookId}`, book, config);
+		await axios.patch(`/api/books/${bookId}`, book, config);
 
 		dispatch({
 			type: UPDATE_BOOK_SUCCESS,
@@ -117,7 +117,7 @@ export const updateBook = (token, bookId, book) => async (
 			type: ADD_NOTIFICATION,
 			payload: {
 				id: v4(),
-				message: 'Book Updates!',
+				message: 'Book Updated!',
 				success: true,
 			},
 		});

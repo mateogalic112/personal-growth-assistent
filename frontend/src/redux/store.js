@@ -17,7 +17,7 @@ import {
 	bookListReducer,
 	createBookReducer,
 	updateBookReducer,
-} from '../redux/reducers/transactionReducers';
+} from '../redux/reducers/bookReducer';
 
 import { notificationListReducer } from '../redux/reducers/alertReducers';
 

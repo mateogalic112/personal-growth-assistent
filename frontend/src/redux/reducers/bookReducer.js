@@ -56,7 +56,7 @@ export const updateBookReducer = (
                 success: true,
 			};
 		case UPDATE_BOOK_FAIL:
-			return { loading: false, error: action.payload };
+			return { loading: false, success: false,  error: action.payload };
 		default:
 			return state;
 	}
