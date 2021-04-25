@@ -93,7 +93,7 @@ export const createBook = (
 };
 
 export const updateBook = (token, bookId, book) => async (
-	dispatch
+	dispatch, getState
 ) => {
 	try {
 		dispatch({
@@ -107,13 +107,13 @@ export const updateBook = (token, bookId, book) => async (
 			},
 		};
 
-		await axios.patch(`/api/books/${bookId}`, book, config);
+		const updatedBook = await axios.patch(`/api/books/${bookId}`, book, config);
 
 		dispatch({
 			type: UPDATE_BOOK_SUCCESS,
 		});
 
-		const notificationMessage = book.isCurrent ? "Great work! Keep up!" : 'Book Updated!';
+		const notificationMessage = !book.isCurrent ? "Great work! Keep up!" : 'Book Updated!';
 
 		dispatch({
 			type: ADD_NOTIFICATION,
@@ -123,6 +123,16 @@ export const updateBook = (token, bookId, book) => async (
 				success: true,
 			},
 		});
+
+		const found = getState().bookList.books.findIndex(el => el._id === updatedBook._id);
+		getState().bookList.books.splice(found, 1, updatedBook)
+
+		dispatch({
+			type: GET_BOOKS_SUCCESS,
+			payload: getState().bookList.books,
+		});
+
+		
 	} catch (error) {
 		dispatch({
 			type: UPDATE_BOOK_FAIL,

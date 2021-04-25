@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo} from 'react'
+import {useState, useEffect} from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -38,9 +38,9 @@ const Books = () => {
 		(state) => state.bookList
 	);
 
-	const finishedBooks = useMemo(() => books.filter(book => !book.isCurrent), [books])
+	const finishedBooks = books.filter(book => !book.isCurrent);
 
-	const currentBook = useMemo(() => books.find(book => book.isCurrent), [books])
+	const currentBook = books.find(book => book.isCurrent)
 
 	return (
 		<Container>

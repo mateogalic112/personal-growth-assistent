@@ -17,9 +17,9 @@ const PageForm = ({book}) => {
 	const [page, setPage] = useState(0);
 
 	const handleChange = (e) => {
-		setPage(e.target.value)
-		console.log(e.target.value);
+		setPage(parseInt(e.target.value))
 	}
+
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -28,7 +28,7 @@ const PageForm = ({book}) => {
 			updateBook(
 				userInfo.token,
 				book._id,
-				{currentPage: book.currentPage + page , isCurrent: book.currentPage + page === book.pages}
+				{currentPage: book.currentPage + page , isCurrent: book.currentPage + page !== book.pages}
 			)
 		);
 
@@ -36,7 +36,7 @@ const PageForm = ({book}) => {
 	}
 
 	const validateForm = () => {
-		return parseInt(page) > 0 && parseInt(page) + book.currentPage <= book.pages;
+		return page > 0 && page + book.currentPage <= book.pages;
 	};
 
 	return (
