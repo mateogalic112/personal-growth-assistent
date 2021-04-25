@@ -12,6 +12,12 @@ import Form from './components/Form'
 import BookSlider from './components/BookSlider'
 import Subtitle from '../../components/Subtitle';
 import Table from './components/Table';
+import InputField from '../../components/InputField';
+
+import { RiFilePaper2Line } from 'react-icons/ri'
+
+import { AuthBtn } from '../../theme/Button';
+import { FlexCenter } from './components/BookCard/style';
 
 const Books = () => {
 	const [isFormOpen, setIsFormOpen] = useState(false);
@@ -28,9 +34,9 @@ const Books = () => {
 	}
 
 	const readBooks = [
-		{ title: "aa", author: "aa", notes: ["Nice", "Good"], },
-		{ title: "aa", author: "aa", notes: ["Nice", "Good"], },
-		{ title: "aa", author: "aa", notes: ["Nice", "Good"], }
+		{ title: "aabb", author: "aa", notes: [ {date: "aa", text: "good"}, {date: "aa", text: "good"} ], },
+		{ title: "aa3", author: "aa", notes: [ {date: "aa", text: "good"}, {date: "aa", text: "good"} ], },
+		{ title: "aa", author: "aa", notes: [ {date: "aa", text: "good"}, {date: "aa", text: "good"} ], }
 	]
 
 	return (
@@ -45,17 +51,42 @@ const Books = () => {
 				<Add handleClick={openForm} />
 			</TitleBar>
 			<Form isOpen={isFormOpen} />
-			<div style={{ height: 250 }}>
-				<ReactSpeedometer 
-					currentValueText={currentBook.title}
-					minValue={0} 
-					maxValue={currentBook.pages} 
-					value={100}
-					startColor="rgba(220, 248, 255, 1)"
-					endColor="rgba(198, 232, 255, 0.99)" 
+			<div>
+				<div style={{ height: 200 }}>
+					<ReactSpeedometer 
+						forceRender={true}
+						currentValueText={currentBook.title}
+						minValue={0} 
+						maxValue={currentBook.pages} 
+						value={100}
+						startColor="rgba(220, 248, 255, 1)"
+						endColor="rgba(198, 232, 255, 0.99)" 
+						/>
+				</div>
+				<FlexCenter style={{marginBottom: '3rem'}}>
+					<InputField
+						icon={<RiFilePaper2Line />}
+						input={
+							<input
+								type='name'
+								required
+								name='name'
+								value=''
+								onChange={() => {}}
+								placeholder='Add Pages'
+							/>
+						}
 					/>
+					<div style={{width: 20}}></div>
+					<AuthBtn medium type='submit'>
+						Submit
+					</AuthBtn>
+				</FlexCenter>
 			</div>
-			<Table books={readBooks} />
+			<div>
+				<Subtitle>Finished Books</Subtitle>
+				<Table books={readBooks} />
+			</div>
 		</Container>
 	)
 }

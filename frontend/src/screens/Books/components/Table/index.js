@@ -14,7 +14,7 @@ import {
 
 const Table = ({ books }) => {
 
-	const [openNoteId, setOpenNoteId] = useState([])
+	const [openedNotes, setOpenedNotes] = useState(["aabb"])
 
 	return (
 		<TableContainer>
@@ -23,24 +23,39 @@ const Table = ({ books }) => {
 				<Author>Author</Author>
 				<Notes>Notes</Notes>
 			</TableRow>
-			{books.map((book) => (
-				<>
-				<TableNoteRow key={book.title}>
-					<Title>
-						{book.title}
-					</Title>
-					<Author>
-						{book.author}
-					</Author>
-					<Notes>
-						<Add icon={books.includes(book.title) ? <AiFillEyeInvisible /> :  <BsEye />} />
-					</Notes>
-				</TableNoteRow>
-				<TableNoteRow note>
-					aaa
-				</TableNoteRow>
+			{books.map((book) => {
+				const isIncluded = openedNotes.includes(book.title);
+
+				const handleClick = () => {
+					if (isIncluded) {
+						const newNotes = openedNotes.filter(note => note !== book.title)
+						setOpenedNotes(newNotes);
+					} else {
+						setOpenedNotes([...openedNotes, book.title])
+					}
+				}
+
+				return <>
+					<TableNoteRow key={book.title}>
+						<Title>
+							{book.title}
+						</Title>
+						<Author>
+							{book.author}
+						</Author>
+						<Notes>
+							<Add handleClick={handleClick} icon={isIncluded ? <AiFillEyeInvisible /> :  <BsEye />} />
+						</Notes>
+					</TableNoteRow>
+					{
+						isIncluded && book.notes.map(note => (
+							<TableNoteRow note>
+								{note.date}, {note.text}
+							</TableNoteRow>
+						))
+					}
 				</>
-			))}
+			})}
 		</TableContainer>
 	);
 };
