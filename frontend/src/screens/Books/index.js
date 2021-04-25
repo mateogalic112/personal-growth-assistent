@@ -16,14 +16,9 @@ import Form from './components/Form'
 import BookSlider from './components/BookSlider'
 import Subtitle from '../../components/Subtitle';
 import Table from './components/Table';
-import InputField from '../../components/InputField';
-
-import { RiFilePaper2Line } from 'react-icons/ri'
-
-import { AuthBtn } from '../../theme/Button';
-import { FlexCenter } from './components/BookCard/style';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import PageForm from './components/PageForm';
 
 const Books = () => {
 	const dispatch = useDispatch();
@@ -66,7 +61,7 @@ const Books = () => {
 							currentValueText={currentBook.title}
 							minValue={0} 
 							maxValue={currentBook.pages} 
-							value={100}
+							value={currentBook.currentPage}
 							startColor="rgba(220, 248, 255, 1)"
 							endColor="rgba(198, 232, 255, 0.99)" 
 							/>
@@ -78,25 +73,7 @@ const Books = () => {
 							))
 						}
 					</ul>
-					<FlexCenter style={{marginBottom: '3rem'}}>
-						<InputField
-							icon={<RiFilePaper2Line />}
-							input={
-								<input
-									type='name'
-									required
-									name='name'
-									value=''
-									onChange={() => {}}
-									placeholder='Add Pages'
-								/>
-							}
-						/>
-						<div style={{width: 20}}></div>
-						<AuthBtn medium type='submit'>
-							Submit
-						</AuthBtn>
-					</FlexCenter>
+					<PageForm book={currentBook} />
 				</div>
 			}
 			<div>

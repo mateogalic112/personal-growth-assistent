@@ -113,11 +113,13 @@ export const updateBook = (token, bookId, book) => async (
 			type: UPDATE_BOOK_SUCCESS,
 		});
 
+		const notificationMessage = book.isCurrent ? "Great work! Keep up!" : 'Book Updated!';
+
 		dispatch({
 			type: ADD_NOTIFICATION,
 			payload: {
 				id: v4(),
-				message: 'Book Updated!',
+				message: notificationMessage,
 				success: true,
 			},
 		});
