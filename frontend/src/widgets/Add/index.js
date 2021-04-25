@@ -2,10 +2,12 @@ import { NotifierContainer } from '../Notifier/style';
 
 import { GrAdd } from 'react-icons/gr';
 
-const Add = ({ handleClick }) => {
+const Add = ({ handleClick, icon = undefined }) => {
 	return (
 		<NotifierContainer onClick={handleClick}>
-			<GrAdd />
+			{
+				icon ? icon : <GrAdd />
+			}
 		</NotifierContainer>
 	);
 };

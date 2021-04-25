@@ -13,11 +13,8 @@ import Loader from '../../../../components/Loader';
 import Message from '../../../../components/Message';
 
 import { RiFilePaper2Line } from 'react-icons/ri';
-import { BiMoney } from 'react-icons/bi';
 
 import { FormWrapper, StyledForm } from './style';
-import Subtitle from '../../../../components/Subtitle';
-import { RadioField, RadioWrapper } from '../../../Register/style';
 
 const Form = ({ isOpen }) => {
 	const dispatch = useDispatch();
@@ -69,7 +66,6 @@ const Form = ({ isOpen }) => {
 
 	return (
 		<FormWrapper isOpen={isOpen}>
-			<Subtitle>New Transaction</Subtitle>
 			<StyledForm onSubmit={handleSubmit}>
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
@@ -78,7 +74,7 @@ const Form = ({ isOpen }) => {
 						selected={startDate}
 						showMonthYearPicker
 						onChange={handleDateChange}
-						dateFormat='MMMM, y'
+						dateFormat='dd MMMM, y'
 					/>
 				</div>
 				<InputField
@@ -90,50 +86,14 @@ const Form = ({ isOpen }) => {
 							name='name'
 							value={state.name}
 							onChange={handleChange}
-							placeholder='Name'
-						/>
-					}
-				/>
-				<RadioWrapper>
-					<RadioField isSelected={state.type === 'income'}>
-						<input
-							type='radio'
-							id='income'
-							name='type'
-							value='income'
-							checked={state.type === 'income'}
-							onChange={handleChange}
-						/>
-						<label htmlFor='income'>Income</label>
-					</RadioField>
-					<RadioField isSelected={state.type === 'expense'}>
-						<input
-							type='radio'
-							id='expense'
-							name='type'
-							value='expense'
-							checked={state.type === 'expense'}
-							onChange={handleChange}
-						/>
-						<label htmlFor='expense'>Expense</label>
-					</RadioField>
-				</RadioWrapper>
-				<InputField
-					icon={<BiMoney />}
-					input={
-						<input
-							type='amount'
-							required
-							name='amount'
-							value={state.amount}
-							onChange={handleChange}
-							placeholder='Amount'
+							placeholder='Note'
 						/>
 					}
 				/>
 				<AuthBtn medium type='submit' disabled={!validateForm()}>
-					Add
+					Add Note
 				</AuthBtn>
+				<div style={{marginBottom: '1rem'}}></div>
 			</StyledForm>
 		</FormWrapper>
 	);

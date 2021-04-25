@@ -1,10 +1,17 @@
 import {useState} from 'react'
 
+import ReactSpeedometer from "react-d3-speedometer"
+
+import { featuredBooks } from '../../data/books'
+
 import Container from '../../layout/Container';
 import TitleBar from '../../components/TitleBar';
 import Title from '../../components/TitleBar/Title';
 import Add from '../../widgets/Add';
 import Form from './components/Form'
+import BookSlider from './components/BookSlider'
+import Subtitle from '../../components/Subtitle';
+import Table from './components/Table';
 
 const Books = () => {
 	const [isFormOpen, setIsFormOpen] = useState(false);
@@ -13,13 +20,42 @@ const Books = () => {
 		setIsFormOpen((isFormOpen) => !isFormOpen);
 	};
 
+	const currentBook = {
+		title: "Najbolja verzija sebe",
+		author: "Mateo Galić",
+		pages: 400,
+		currentPage: 100,
+	}
+
+	const readBooks = [
+		{ title: "aa", author: "aa", notes: ["Nice", "Good"], },
+		{ title: "aa", author: "aa", notes: ["Nice", "Good"], },
+		{ title: "aa", author: "aa", notes: ["Nice", "Good"], }
+	]
+
 	return (
 		<Container>
 			<TitleBar>
 				<Title>Books</Title>
+			</TitleBar>
+			<Subtitle>Featured books</Subtitle>
+			<BookSlider books={featuredBooks} />
+			<TitleBar>
+				<Subtitle>Currently reading</Subtitle>
 				<Add handleClick={openForm} />
 			</TitleBar>
 			<Form isOpen={isFormOpen} />
+			<div style={{ height: 250 }}>
+				<ReactSpeedometer 
+					currentValueText={currentBook.title}
+					minValue={0} 
+					maxValue={currentBook.pages} 
+					value={100}
+					startColor="rgba(220, 248, 255, 1)"
+					endColor="rgba(198, 232, 255, 0.99)" 
+					/>
+			</div>
+			<Table books={readBooks} />
 		</Container>
 	)
 }

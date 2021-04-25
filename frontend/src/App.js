@@ -9,7 +9,6 @@ import Register from './screens/Register';
 import News from './screens/News';
 import Crypto from './screens/Crypto';
 import Home from './screens/Home';
-import Health from './screens/Health';
 import Wallet from './screens/Wallet';
 import ScreenWrapper from './screens/ScreenWrapper';
 import ProtectedRoute from './utils/ProtectedRoute';
@@ -57,13 +56,6 @@ const App = () => {
 							path='/crypto'
 							component={(props) => (
 								<ScreenWrapper component={Crypto} {...props} />
-							)}
-						/>
-
-						<ProtectedRoute
-							path='/health'
-							component={(props) => (
-								<ScreenWrapper component={Health} {...props} />
 							)}
 						/>
 
