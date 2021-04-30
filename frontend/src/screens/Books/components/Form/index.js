@@ -31,7 +31,7 @@ const Form = ({ isOpen, book }) => {
 		setNote('');
 	};
 
-	const { loading, success, error } = useSelector((state) => state.updateBook);
+	const { error } = useSelector((state) => state.updateBook);
 
 	const handleChange = (e) => {
 		setNote(e.target.value);
@@ -44,7 +44,6 @@ const Form = ({ isOpen, book }) => {
 	return (
 		<FormWrapper isOpen={isOpen}>
 			<StyledForm onSubmit={handleSubmit}>
-				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
 				<InputField
 					icon={<RiFilePaper2Line />}

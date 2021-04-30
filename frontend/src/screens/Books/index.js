@@ -2,8 +2,6 @@ import {useState, useEffect} from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import ReactSpeedometer from "react-d3-speedometer"
-
 import { featuredBooks } from '../../data/books'
 
 import { listBooks } from '../../redux/actions/bookActions';
@@ -18,7 +16,7 @@ import Subtitle from '../../components/Subtitle';
 import Table from './components/Table';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import PageForm from './components/PageForm';
+import CurrentBook from './components/CurrentBook';
 
 const Books = () => {
 	const dispatch = useDispatch();
@@ -54,27 +52,7 @@ const Books = () => {
 				<Add handleClick={openForm} />
 			</TitleBar>
 			<Form book={currentBook} isOpen={isFormOpen} />
-			{ currentBook && <div>
-					<div style={{ height: 200 }}>
-						<ReactSpeedometer 
-							forceRender={true}
-							currentValueText={currentBook.title}
-							minValue={0} 
-							maxValue={currentBook.pages} 
-							value={currentBook.currentPage}
-							startColor="rgba(220, 248, 255, 1)"
-							endColor="rgba(198, 232, 255, 0.99)" 
-							/>
-					</div>
-					<ul>
-						{
-							currentBook.notes.map(note => (
-								<li key={note}>{note}</li>
-							))
-						}
-					</ul>
-					<PageForm book={currentBook} />
-				</div>
+			{ currentBook && <CurrentBook currentBook={currentBook} />
 			}
 			<div>
 				<Subtitle>Finished Books</Subtitle>

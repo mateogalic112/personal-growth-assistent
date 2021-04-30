@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,11 +14,17 @@ const PageForm = ({book}) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
-	const [page, setPage] = useState(0);
+	const { success: successUpdate } = useSelector((state) => state.updateBook)
+
+	const [page, setPage] = useState(null);
 
 	const handleChange = (e) => {
 		setPage(parseInt(e.target.value))
 	}
+
+	useEffect(() => {
+		
+	}, [successUpdate])
 
 
 	const handleSubmit = (e) => {

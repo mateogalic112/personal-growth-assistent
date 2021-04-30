@@ -107,7 +107,7 @@ export const updateBook = (token, bookId, book) => async (
 			},
 		};
 
-		const updatedBook = await axios.patch(`/api/books/${bookId}`, book, config);
+		const { data } = await axios.patch(`/api/books/${bookId}`, book, config);
 
 		dispatch({
 			type: UPDATE_BOOK_SUCCESS,
@@ -124,8 +124,8 @@ export const updateBook = (token, bookId, book) => async (
 			},
 		});
 
-		const found = getState().bookList.books.findIndex(el => el._id === updatedBook._id);
-		getState().bookList.books.splice(found, 1, updatedBook)
+		const found = getState().bookList.books.findIndex(el => el._id === data._id);
+		getState().bookList.books.splice(found, 1, data)
 
 		dispatch({
 			type: GET_BOOKS_SUCCESS,
