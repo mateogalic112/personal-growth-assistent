@@ -45,7 +45,7 @@ router.patch('/:id', verify, async (req, res, next) => {
 
 	if (book) {
         book.notes = req.body.notes || book.notes;
-		book.isCurrent = req.body.isCurrent || book.isCurrent;
+		book.isCurrent = req.body.isCurrent ?? book.isCurrent;
 		book.currentPage =  req.body.currentPage || book.currentPage;
 
 		const updatedBook = await book.save();
