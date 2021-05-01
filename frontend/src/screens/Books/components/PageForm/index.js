@@ -16,7 +16,7 @@ const PageForm = ({book}) => {
 
 	const { success: successUpdate } = useSelector((state) => state.updateBook)
 
-	const [page, setPage] = useState(null);
+	const [page, setPage] = useState('');
 
 	const handleChange = (e) => {
 		setPage(parseInt(e.target.value))
@@ -38,7 +38,7 @@ const PageForm = ({book}) => {
 			)
 		);
 
-		setPage(0);
+		setPage('');
 	}
 
 	const validateForm = () => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import { v4 } from 'uuid';
 import { useSelector } from 'react-redux'
 import ReactSpeedometer from "react-d3-speedometer"
 import Subtitle from '../../../../components/Subtitle';
@@ -6,7 +7,7 @@ import PageForm from '../PageForm';
 import Loader from '../../../../components/Loader';
 import Message from '../../../../components/Message';
 
-const CurrentBook = ({ currentBook}) => {
+const CurrentBook = ({ currentBook }) => {
 	const { loading:loadingUpdate, error: errorUpdate} = useSelector((state) => state.updateBook)
 
     return (
@@ -30,8 +31,8 @@ const CurrentBook = ({ currentBook}) => {
                     <Subtitle>Notes</Subtitle>
                     <ul style={{marginBottom: '1rem'}}>
                         {
-                            currentBook.notes.map(note => (
-                                <li key={note}>{note}</li>
+                            currentBook.notes.map((note, index) => (
+                                <li key={v4()}>{note}</li>
                             ))
                         }
                     </ul>
