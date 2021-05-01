@@ -11,10 +11,7 @@ router.post('/', verify, async (req, res, next) => {
 		title: req.body.title,
 		author: req.body.author,
 		pages: req.body.pages,
-		notes: req.body.notes,
 		user: req.user._id,
-		isCurrent: req.body.isCurrent,
-		currentPage: req.body.currentPage,
 	});
 
 	if (book) {

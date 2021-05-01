@@ -6,14 +6,13 @@ import { updateBook } from '../../../../redux/actions/bookActions';
 
 import InputField from '../../../../components/InputField';
 import { AuthBtn } from '../../../../theme/Button';
-import Loader from '../../../../components/Loader';
 import Message from '../../../../components/Message';
 
 import { RiFilePaper2Line } from 'react-icons/ri';
 
 import { FormWrapper, StyledForm } from './style';
 
-const Form = ({ isOpen, book }) => {
+const NotesForm = ({ isOpen, book }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
@@ -67,4 +66,4 @@ const Form = ({ isOpen, book }) => {
 	);
 };
 
-export default Form;
+export default NotesForm;

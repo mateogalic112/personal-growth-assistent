@@ -41,27 +41,13 @@ export const listBooks = (token) => async (dispatch) => {
 };
 
 export const createBook = (
-	title,
-	author,
-	pages,
-	notes,
+	book,
     token,
-	isCurrent,
-	currentPage,
-) => async (dispatch) => {
+) => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: CREATE_BOOK_REQUEST,
 		});
-
-		const body = {
-			title,
-            author,
-            pages,
-            notes,
-            isCurrent,
-            currentPage,
-		};
 
 		const config = {
 			headers: {
@@ -70,10 +56,10 @@ export const createBook = (
 			},
 		};
 
-		await axios.post(`/api/books`, body, config);
+		const {data } = await axios.post(`/api/books`, book, config);
 
 		dispatch({
-			type: CREATE_BOOK_SUCCESS,
+			type: CREATE_BOOK_SUCCESS
 		});
 
 		dispatch({
@@ -84,6 +70,12 @@ export const createBook = (
 				success: true,
 			},
 		});
+
+		dispatch({
+			type: GET_BOOKS_SUCCESS,
+			payload: [...getState().bookList.books, data],
+		});
+
 	} catch (error) {
 		dispatch({
 			type: CREATE_BOOK_FAIL,

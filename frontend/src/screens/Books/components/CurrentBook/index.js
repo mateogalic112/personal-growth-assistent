@@ -31,7 +31,7 @@ const CurrentBook = ({ currentBook }) => {
                     <Subtitle>Notes</Subtitle>
                     <ul style={{marginBottom: '1rem'}}>
                         {
-                            currentBook.notes.map((note, index) => (
+                            currentBook.notes.map(note => (
                                 <li key={v4()}>{note}</li>
                             ))
                         }

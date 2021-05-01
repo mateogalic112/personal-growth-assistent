@@ -14,7 +14,7 @@ import {
 
 const Table = ({ books }) => {
 
-	const [openedNotes, setOpenedNotes] = useState(["aabb"])
+	const [openedNotes, setOpenedNotes] = useState([])
 
 	return (
 		<TableContainer>

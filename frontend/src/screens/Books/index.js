@@ -10,7 +10,8 @@ import Container from '../../layout/Container';
 import TitleBar from '../../components/TitleBar';
 import Title from '../../components/TitleBar/Title';
 import Add from '../../widgets/Add';
-import Form from './components/Form'
+import AddBook from './components/AddBook'
+import NotesForm from './components/NotesForm'
 import BookSlider from './components/BookSlider'
 import Subtitle from '../../components/Subtitle';
 import Table from './components/Table';
@@ -22,6 +23,10 @@ const Books = () => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
+	const { loading, error, books } = useSelector(
+		(state) => state.bookList
+	);
+
 	const [isFormOpen, setIsFormOpen] = useState(false);
 
 	const openForm = () => {
@@ -31,10 +36,6 @@ const Books = () => {
 	useEffect(() => {
 		dispatch(listBooks(userInfo.token));
 	}, [dispatch, userInfo.token]);
-
-	const { loading, error, books } = useSelector(
-		(state) => state.bookList
-	);
 
 	const finishedBooks = books.filter(book => !book.isCurrent);
 
@@ -51,7 +52,9 @@ const Books = () => {
 				<Subtitle>Currently reading</Subtitle>
 				<Add handleClick={openForm} />
 			</TitleBar>
-			<Form book={currentBook} isOpen={isFormOpen} />
+			{
+				currentBook ? <NotesForm book={currentBook} isOpen={isFormOpen} /> : <AddBook isOpen={isFormOpen} />
+			}
 			{ currentBook && <CurrentBook currentBook={currentBook} />
 			}
 			<div>

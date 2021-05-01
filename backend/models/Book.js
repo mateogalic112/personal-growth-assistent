@@ -16,7 +16,7 @@ const bookSchema = new mongoose.Schema({
     notes: [String],
     isCurrent: {
         type: Boolean,
-        default: false,
+        default: true,
     },
     currentPage: {
         type: Number,
@@ -27,6 +27,6 @@ const bookSchema = new mongoose.Schema({
 		required: true,
 		ref: 'User',
 	},
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Books', bookSchema);
