@@ -5,4 +5,5 @@ export const AlertContainer = styled.div`
 	top: 10%;
 	right: 2.5rem;
 	width: 240px;
+	z-index: 1000;
 `;

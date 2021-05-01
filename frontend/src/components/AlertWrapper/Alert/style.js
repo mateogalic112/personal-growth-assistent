@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
 	width: 240px;
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: rgba(255, 255, 255, 0.95);
 	border-width: 1px;
 	border-style: solid;
 	border-color: ${(props) =>
