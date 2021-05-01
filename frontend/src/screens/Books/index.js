@@ -18,6 +18,7 @@ import Table from './components/Table';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import CurrentBook from './components/CurrentBook';
+import Graph from './components/Graph'
 
 const Books = () => {
 	const dispatch = useDispatch();
@@ -57,13 +58,14 @@ const Books = () => {
 			}
 			{ currentBook && <CurrentBook currentBook={currentBook} />
 			}
-			<div>
+			<div style={{marginBottom: '2rem'}}>
 				<Subtitle>Finished Books</Subtitle>
 				{
 					loading ? <Loader /> : error ? <Message error={error}></Message> : 
 					<Table books={finishedBooks} />
 				}
 			</div>
+			<Graph books={finishedBooks} />
 		</Container>
 	)
 }
