@@ -20,7 +20,7 @@ import { FormWrapper, StyledForm } from './style';
 import Subtitle from '../../../../components/Subtitle';
 import { RadioField, RadioWrapper } from '../../../Register/style';
 
-const Form = ({ isOpen, coins }) => {
+const Form = ({ isOpen, coins, portfolioCoins }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
@@ -73,8 +73,13 @@ const Form = ({ isOpen, coins }) => {
 		});
 	};
 
+	const validateTransactionAmount = () => {
+		const portfolioCoin = portfolioCoins.find(coin => coin.name === selectedCoin.label)
+		return portfolioCoin.current_price * portfolioCoin.portfolioAmount > state.amount;
+	}
+
 	const validateForm = () => {
-		return selectedCoin && parseFloat(state.amount) > 0;
+		return selectedCoin && parseFloat(state.amount) > 0 && validateTransactionAmount();
 	};
 
 	const { loading, error } = useSelector((state) => state.createTransaction);

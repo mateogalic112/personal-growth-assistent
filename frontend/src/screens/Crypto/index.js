@@ -84,7 +84,7 @@ const Crypto = () => {
 				<Title>Cryptocurrency</Title>
 				<Add handleClick={openForm} />
 			</TitleBar>
-			<Form isOpen={isFormOpen} coins={data} />
+			<Form isOpen={isFormOpen} coins={data} portfolioCoins={portfolioCoins} />
 			<Subtitle>Portfolio</Subtitle>
 			<CryptoGrid>
 				{loadingTransaction ? (
