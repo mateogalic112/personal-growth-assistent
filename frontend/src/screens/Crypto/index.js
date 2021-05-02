@@ -18,6 +18,7 @@ import Message from '../../components/Message';
 import CryptoGrid from '../../layout/Grid/CryptoGrid';
 import Subtitle from '../../components/Subtitle';
 import Balance from './components/Balance';
+import News from './components/News';
 
 import Form from './components/Form';
 
@@ -101,6 +102,7 @@ const Crypto = () => {
 					))}
 				<Table portfolioCoins={portfolioCoins} balance={balance} />
 			</CryptoGrid>
+			<News />
 		</Container>
 	);
 };
