@@ -13,7 +13,7 @@ import {
 
 import { BtnOutlined } from '../../../../theme/Button';
 
-import { displayHour } from '../../../../helper/date';
+import { displayHour } from '../../../../helpers/date';
 
 const FeaturedArticle = ({
 	article: {

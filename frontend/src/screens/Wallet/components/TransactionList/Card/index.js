@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 } from 'uuid';
 import { deleteTransaction } from '../../../../../redux/actions/transactionActions';
 
-import { dateStringFormatter } from '../../../../../helper/date';
-import { capitalize } from '../../../../../helper/string';
+import { dateStringFormatter } from '../../../../../helpers/date';
+import { capitalize } from '../../../../../helpers/string';
 
 import CrudButton from '../../../../../widgets/CrudButton';
 

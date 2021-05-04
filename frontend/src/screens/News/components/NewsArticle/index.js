@@ -11,7 +11,7 @@ import {
 
 import { BtnOutlined } from '../../../../theme/Button';
 
-import { displayHour } from '../../../../helper/date';
+import { displayHour } from '../../../../helpers/date';
 
 const NewsArticle = ({
 	article: { urlToImage, title, source, author, publishedAt, url },
