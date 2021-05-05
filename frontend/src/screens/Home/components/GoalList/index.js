@@ -57,7 +57,7 @@ export default function GoalList({ goals, children, date }) {
 						currentPage * PER_PAGE
 					)
 					.map((goal) => (
-						<Card goal={goal} />
+						<Card key={goal._id} goal={goal} />
 					))
 			) : (
 				<h2 style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>

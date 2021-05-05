@@ -40,7 +40,7 @@ router.patch('/:id', verify, async (req, res, next) => {
 	const goal = await Goal.findById(req.params.id);
 
 	if (goal) {
-        goal.isCompleted = req.body.isCompleted ?? goal.isCompleted;
+        goal.isCompleted = req.body.isCompleted;
 
 		const updatedGoal = await goal.save();
 		res.status(200).json(updatedGoal);

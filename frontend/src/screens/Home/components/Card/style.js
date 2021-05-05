@@ -13,7 +13,7 @@ export const CardContainer = styled.div`
 	border-right-color: ${(props) =>
 		props.completed
 			? 'rgba(0, 255, 0, 0.8)'
-			: 'rgba(255, 0, 0, 0.8)'};
+			: 'rgba(205, 205, 205, 0.8)'};
 	transition: background-color 0.2s, border-bottom-color 0.2s;
 
 	&:hover {

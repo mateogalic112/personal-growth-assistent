@@ -108,7 +108,7 @@ export const updateGoal = (token, goalId, goal) => async (
 			type: UPDATE_GOAL_SUCCESS,
 		});
 
-		const notificationMessage = goal.isCompleted ? "Great work! Keep up!" : 'Try harder!!';
+		const notificationMessage = data.isCompleted ? "Great work! Keep up!" : 'Try harder!!';
 
 		dispatch({
 			type: ADD_NOTIFICATION,
@@ -120,11 +120,10 @@ export const updateGoal = (token, goalId, goal) => async (
 		});
 
 		const found = getState().goalList.goals.findIndex(el => el._id === data._id);
-		getState().goalList.goals.splice(found, 1, data)
 
 		dispatch({
 			type: GET_GOALS_SUCCESS,
-			payload: getState().goalList.goals,
+			payload: [...getState().goalList.goals.slice(0, found), data, ...getState().goalList.goals.slice(found + 1)],
 		});
 
 		
