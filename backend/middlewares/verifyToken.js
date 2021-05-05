@@ -7,7 +7,7 @@ module.exports = async function (req, _, next) {
 	if (!token) return next(new HttpError(401, 'Access denied!'));
 
 	try {
-		const verified = jwt.verify(token, 'shhhh');
+		const verified = jwt.verify(token, process.env.TOKEN_SECRET);
 		req.user = await User.findById(verified._id).select('-password');
 		next();
 	} catch (err) {

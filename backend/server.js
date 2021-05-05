@@ -1,5 +1,5 @@
 const express = require('express');
-const dotenv = require('dotenv');
+require('dotenv').config();
 const connectDB = require('./config/db');
 const colors = require('colors');
 const cors = require('cors');
@@ -8,8 +8,6 @@ const transactionsRoute = require('./routes/transactions');
 const booksRoute = require('./routes/books');
 const goalsRoute = require('./routes/goals');
 const errorHandler = require('./middlewares/errorMiddleware');
-
-dotenv.config();
 
 const app = express();
 
