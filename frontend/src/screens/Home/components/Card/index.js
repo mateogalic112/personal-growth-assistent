@@ -11,11 +11,11 @@ import {
 	Actions,
 } from './style';
 
-const Card = () => {
+const Card = ({ goal }) => {
 	return (
 		<CardContainer completed>
 			<Main>
-				<CardTitle>Read a book</CardTitle>
+				<CardTitle>hello</CardTitle>
 				<CardType>Tuesday, May 5, 2021</CardType>
 			</Main>
 			<Amount></Amount>

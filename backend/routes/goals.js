@@ -7,7 +7,7 @@ const { HttpError } = require('../utils/utils');
  * Creating new Goal
  */
 router.post('/', verify, async (req, res, next) => {
-	const goal = await  Goal.create({
+	const goal = await Goal.create({
 		title: req.body.title,
 		date: req.body.date,
 		user: req.user._id,
@@ -24,7 +24,7 @@ router.post('/', verify, async (req, res, next) => {
  * Get all Goals
  */
 router.get('/', verify, async (req, res, next) => {
-	const goals = await Goals.find({ user: req.user._id });
+	const goals = await Goal.find({ user: req.user._id });
 
 	if (goals) {
 		res.status(200).json(goals);

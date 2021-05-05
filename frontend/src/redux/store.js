@@ -17,7 +17,14 @@ import {
 	bookListReducer,
 	createBookReducer,
 	updateBookReducer,
-} from '../redux/reducers/bookReducer';
+} from '../redux/reducers/bookReducers';
+
+import {
+	goalListReducer,
+	createGoalReducer,
+	updateGoalReducer,
+	deleteGoalReducer
+} from '../redux/reducers/goalReducers'
 
 import { notificationListReducer } from '../redux/reducers/alertReducers';
 
@@ -30,7 +37,11 @@ const reducer = combineReducers({
 	notificationList: notificationListReducer,
 	bookList: bookListReducer,
 	createBook: createBookReducer,
-	updateBook: updateBookReducer
+	updateBook: updateBookReducer,
+	goalList: goalListReducer,
+	createGoal: createGoalReducer,
+	updateGoal: updateGoalReducer,
+	deleteGoal: deleteGoalReducer
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -42,6 +53,7 @@ const initialState = {
 	transactionList: { transactions: [] },
 	notificationList: { notifications: [] },
 	bookList: { books: [] },
+	goalList: { goals: [] }
 };
 
 const store = createStore(

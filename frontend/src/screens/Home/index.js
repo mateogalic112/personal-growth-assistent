@@ -1,4 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { listGoals } from '../../redux/actions/goalActions';
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,7 +13,8 @@ import Subtitle from '../../components/Subtitle';
 import Title from '../../components/TitleBar/Title'
 import Add from '../../widgets/Add';
 import Banner from '../../components/Banner'
-import Pagination from '../../components/Pagination'
+import Loader from '../../components/Loader'
+import Message from '../../components/Message'
 
 import GoalList from './components/GoalList'
 import Stats from './components/Stats'
@@ -21,10 +26,20 @@ import {Content, Illustration} from './style'
 import ProgressSvg from '../../assets/svg/progress.svg';
 
 import { dateStringFormatter } from '../../helpers/date'
-import Card from './components/Card';
 
 
 const Home = () => {
+	const dispatch = useDispatch();
+	const { userInfo } = useSelector((state) => state.userLogin);
+
+	useEffect(() => {
+		dispatch(listGoals(userInfo.token));
+	}, [dispatch, userInfo.token]);
+
+	const { loading, error, goals } = useSelector(
+		(state) => state.goalList
+	);
+
 	const [isFormOpen, setIsFormOpen] = useState(false);
 
 	const [startDate, setStartDate] = useState(new Date());
@@ -37,17 +52,9 @@ const Home = () => {
 		setIsFormOpen((isFormOpen) => !isFormOpen);
 	};
 
-	const goals = [
-		{
-			id: '1', date: new Date(), isCompleted: false, title: 'Goal1',
-		},
-		{
-			id: '2', date: new Date(), isCompleted: false, title: 'Goal2',
-		},
-		{
-			id: '3', date: new Date(), isCompleted: false, title: 'Goal3',
-		},
-	]
+	if (loading) return <Loader />;
+
+	if (error) return <Message error={error} />;
 
 	return <div>
 		<Container>
@@ -63,7 +70,7 @@ const Home = () => {
 				</Content>
 				<Illustration src={ProgressSvg} alt='Progress' />
 			</Banner>
-			<GoalList>
+			<GoalList goals={goals} date={startDate}>
 				<TitleBar>
 					<Subtitle>Choose Day:</Subtitle>
 					<div style={{ width: '240px' }}>
@@ -75,14 +82,7 @@ const Home = () => {
 					</div>
 				</TitleBar>
 				<Stats title={`Goals - ${dateStringFormatter(startDate)}`} />
-				<Pagination
-					pages={[...Array(10).keys()]}
-					currPage={2}
-					setCurrentPage={() => {}}
-				/>
-				<Card />
 			</GoalList>
-			<h1>Chart</h1>
 		</Container>
 	</div>;
 };
