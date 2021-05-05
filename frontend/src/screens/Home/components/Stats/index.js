@@ -15,9 +15,18 @@ const Stats = ({ title, completedGoalsCount, leftGoalsCount }) => {
 				<StatsLabel>
 					{title}
 				</StatsLabel>
-				<StatsValue>
-					{completedGoalsCount} Completed - <span>{leftGoalsCount} more left!</span>
-				</StatsValue>
+                {
+                    leftGoalsCount > 0 ? (
+                        <StatsValue>
+                            {completedGoalsCount} Completed - <span>{leftGoalsCount} more left!</span>
+                        </StatsValue>
+                    ) : (
+                        <StatsValue>
+                            Congrats all {completedGoalsCount + leftGoalsCount} tasks completed!
+				        </StatsValue>
+                    )
+                    
+                }
 			</StatsOverview>
 			<StatsMeter>
                 <ReactSpeedometer 
