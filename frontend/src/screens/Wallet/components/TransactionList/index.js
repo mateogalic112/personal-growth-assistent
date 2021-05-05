@@ -10,7 +10,7 @@ import { months } from '../../../../constants';
 import Subtitle from '../../../../components/Subtitle';
 import TitleBar from '../../../../components/TitleBar';
 import Card from './Card';
-import Pagination from '../Pagination';
+import Pagination from '../../../../components/Pagination';
 
 import { TransactionListContainer } from './style';
 import Balance from '../Balance';

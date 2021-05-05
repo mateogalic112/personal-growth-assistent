@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../../../theme/Button';
+import { Button } from '../../theme/Button';
 
 export const PaginationContainer = styled.div`
 	display: flex;
