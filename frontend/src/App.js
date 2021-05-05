@@ -14,6 +14,7 @@ import ScreenWrapper from './screens/ScreenWrapper';
 import ProtectedRoute from './utils/ProtectedRoute';
 import AlertWrapper from './components/AlertWrapper';
 import Books from './screens/Books';
+import Search from './screens/Search';
 
 const App = () => {
 	return (
@@ -63,6 +64,13 @@ const App = () => {
 							path='/books'
 							component={(props) => (
 								<ScreenWrapper component={Books} {...props} />
+							)}
+						/>
+
+						<ProtectedRoute
+							path='/search/:keyword'
+							component={(props) => (
+								<ScreenWrapper component={Search} {...props} />
 							)}
 						/>
 					</Switch>
