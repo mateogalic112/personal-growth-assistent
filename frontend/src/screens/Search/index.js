@@ -49,11 +49,12 @@ const Search = () => {
 				<Title><span style={{fontWeight: 400}}>News for</span> {keyword}</Title>
 			</TitleBar>
 			<NewsGrid>
-				{Array.isArray(articles) && articles.length && (
+                {!Array.isArray(articles) || !articles.length ? <h1>No results for {keyword}</h1> : null}
+				{Array.isArray(articles) && articles.length ? (
 					<FeaturedArticle article={articles[0]} />
-				)}
+				) : null}
 				{Array.isArray(articles) &&
-					articles.length &&
+					articles.length ?
 					articles
 						.slice(1, articleLimit)
 						.map((article) => (
@@ -61,7 +62,7 @@ const Search = () => {
 								key={article.title}
 								article={article}
 							/>
-						))}
+						)) : null}
 			</NewsGrid>
 			{articleLimit < articles.length && (
 				<LoadMoreBtn onClick={loadMore}>Load More</LoadMoreBtn>
