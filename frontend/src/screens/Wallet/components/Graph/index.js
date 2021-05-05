@@ -54,9 +54,6 @@ const Graph = ({ transactions }) => {
 					gridLines: {
 						display: false,
 					},
-					ticks: {
-						display: false,
-					},
 				},
 			],
 			yAxes: [

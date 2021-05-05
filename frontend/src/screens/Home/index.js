@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,8 +18,8 @@ import Message from '../../components/Message'
 
 import GoalList from './components/GoalList'
 import Stats from './components/Stats'
-
 import Form from './components/Form'
+import Graph from './components/Graph'
 
 import {Content, Illustration} from './style'
 
@@ -67,7 +67,7 @@ const Home = () => {
 			<Form isOpen={isFormOpen} />
 			<Banner>
 				<Content>
-					<h2 style={{marginBottom: '1rem'}}>Hello, James Anderson</h2>
+					<h2 style={{marginBottom: '1rem'}}>Hello, {userInfo.username}</h2>
 					<p>You achieved <b>{parseFloat(completedGoals?.length / goals?.length * 100).toFixed(2)}%</b> of your goals today!</p>
 				</Content>
 				<Illustration src={ProgressSvg} alt='Progress' />
@@ -89,6 +89,7 @@ const Home = () => {
 					title={`Goals - ${dateStringFormatter(startDate)}`} 
 				/>
 			</GoalList>
+			<Graph goals={goals} />
 		</Container>
 	</div>;
 };
