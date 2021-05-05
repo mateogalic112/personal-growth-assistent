@@ -73,7 +73,7 @@ export const createBook = (
 
 		dispatch({
 			type: GET_BOOKS_SUCCESS,
-			payload: [...getState().bookList.books, data],
+			payload: [data, ...getState().bookList.books],
 		});
 
 	} catch (error) {

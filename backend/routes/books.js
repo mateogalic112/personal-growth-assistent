@@ -25,7 +25,7 @@ router.post('/', verify, async (req, res, next) => {
  * Get all Books
  */
 router.get('/', verify, async (req, res, next) => {
-	const books = await Book.find({ user: req.user._id });
+	const books = await Book.find({ user: req.user._id }).sort({ '_id': -1 });
 
 	if (books) {
 		res.status(200).json(books);

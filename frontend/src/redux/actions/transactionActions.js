@@ -134,7 +134,7 @@ export const createTransaction = (
 
 		dispatch({
 			type: GET_TRANSACTIONS_SUCCESS,
-			payload: [...getState().transactionList.transactions, data],
+			payload: [data, ...getState().transactionList.transactions],
 		});
 	} catch (error) {
 		dispatch({

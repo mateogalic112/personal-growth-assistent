@@ -24,7 +24,7 @@ router.post('/', verify, async (req, res, next) => {
  * Get all Goals
  */
 router.get('/', verify, async (req, res, next) => {
-	const goals = await Goal.find({ user: req.user._id });
+	const goals = await Goal.find({ user: req.user._id }).sort({ '_id': -1 });
 
 	if (goals) {
 		res.status(200).json(goals);

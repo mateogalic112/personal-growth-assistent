@@ -76,7 +76,7 @@ export const createGoal = (
 
 		dispatch({
 			type: GET_GOALS_SUCCESS,
-			payload: [...getState().goalList.goals, data],
+			payload: [data, ...getState().goalList.goals],
 		});
 
 	} catch (error) {
