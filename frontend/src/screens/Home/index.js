@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,6 +40,8 @@ const Home = () => {
 		(state) => state.goalList
 	);
 
+	const completedGoals = goals ? goals.filter(goal => goal.isCompleted) : [];
+
 	const [isFormOpen, setIsFormOpen] = useState(false);
 
 	const [startDate, setStartDate] = useState(new Date());
@@ -66,7 +68,7 @@ const Home = () => {
 			<Banner>
 				<Content>
 					<h2 style={{marginBottom: '1rem'}}>Hello, James Anderson</h2>
-					<p>You achieved <b>90%</b> of your goals today!</p>
+					<p>You achieved <b>{parseFloat(completedGoals?.length / goals?.length * 100).toFixed(2)}%</b> of your goals today!</p>
 				</Content>
 				<Illustration src={ProgressSvg} alt='Progress' />
 			</Banner>
@@ -81,7 +83,11 @@ const Home = () => {
 						/>
 					</div>
 				</TitleBar>
-				<Stats title={`Goals - ${dateStringFormatter(startDate)}`} />
+				<Stats
+					completedGoalsCount={completedGoals?.length}
+					leftGoalsCount={goals?.length - completedGoals?.length}
+					title={`Goals - ${dateStringFormatter(startDate)}`} 
+				/>
 			</GoalList>
 		</Container>
 	</div>;

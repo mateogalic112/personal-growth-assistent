@@ -54,7 +54,7 @@ const Card = ({ goal }) => {
 			<Amount></Amount>
 			<Actions>
 			<CrudButton handleClick={updateItem} loading={loadingDelete || loadingUpdate}>
-					<AiOutlineCheckCircle />
+					{goal.isCompleted ? <AiFillCheckCircle /> : <AiOutlineCheckCircle />}
 				</CrudButton>
 				<CrudButton handleClick={deleteItem} loading={loadingDelete || loadingUpdate}>
 					<AiOutlineDelete />

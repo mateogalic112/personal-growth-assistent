@@ -8,7 +8,7 @@ import {
 
 import ReactSpeedometer from "react-d3-speedometer"
 
-const Stats = ({ title }) => {
+const Stats = ({ title, completedGoalsCount, leftGoalsCount }) => {
 	return (
 		<StatsModal>
 			<StatsOverview>
@@ -16,7 +16,7 @@ const Stats = ({ title }) => {
 					{title}
 				</StatsLabel>
 				<StatsValue>
-					5 Completed - <span>2 more left!</span>
+					{completedGoalsCount} Completed - <span>{leftGoalsCount} more left!</span>
 				</StatsValue>
 			</StatsOverview>
 			<StatsMeter>
@@ -24,12 +24,13 @@ const Stats = ({ title }) => {
                     forceRender={true}
                     currentValueText='Goals'
                     minValue={0} 
-                    maxValue={10} 
-                    value={5}
+                    maxValue={completedGoalsCount + leftGoalsCount} 
+                    value={completedGoalsCount}
                     startColor="rgba(220, 248, 255, 1)"
                     endColor="rgba(198, 232, 255, 0.99)" 
                     width={180}
                     height={160}
+                    segments={completedGoalsCount + leftGoalsCount}
                 />
 			</StatsMeter>
 		</StatsModal>
