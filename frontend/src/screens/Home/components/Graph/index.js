@@ -73,7 +73,6 @@ const Graph = ({ goals }) => {
                             },
                         {total: 0, completed: 0}
 						);
-                        console.log(total, completed);
                         return parseInt(completed / total * 100) 
 					}),
                     backgroundColor: [

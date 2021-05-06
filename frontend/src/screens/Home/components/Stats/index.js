@@ -16,6 +16,12 @@ const Stats = ({ title, completedGoalsCount, leftGoalsCount }) => {
 					{title}
 				</StatsLabel>
                 {
+                    completedGoalsCount === 0 ? (
+                        <StatsValue>
+                            No goals set.
+                        </StatsValue>
+                    )
+                    :
                     leftGoalsCount > 0 ? (
                         <StatsValue>
                             {completedGoalsCount} Completed - <span>{leftGoalsCount} more left!</span>

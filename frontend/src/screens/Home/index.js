@@ -32,6 +32,8 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
+	const [startDate, setStartDate] = useState(new Date());
+
 	useEffect(() => {
 		dispatch(listGoals(userInfo.token));
 	}, [dispatch, userInfo.token]);
@@ -40,11 +42,13 @@ const Home = () => {
 		(state) => state.goalList
 	);
 
-	const completedGoals = goals ? goals.filter(goal => goal.isCompleted) : [];
-
+	
+	const todayGoals = goals ? goals.filter(goal => goal.date.split('T')[0] === startDate.toISOString().split('T')[0]) : []
+	
+	const completedGoals = todayGoals ? todayGoals.filter(goal => goal.isCompleted) : [];
+	
 	const [isFormOpen, setIsFormOpen] = useState(false);
-
-	const [startDate, setStartDate] = useState(new Date());
+	
 
 	const handleDateChange = (date) => {
 		setStartDate(date);
@@ -72,7 +76,7 @@ const Home = () => {
 				</Content>
 				<Illustration src={ProgressSvg} alt='Progress' />
 			</Banner>
-			<GoalList goals={goals} date={startDate}>
+			<GoalList goals={todayGoals} date={startDate}>
 				<TitleBar>
 					<Subtitle>Choose Day:</Subtitle>
 					<div style={{ width: '240px' }}>
@@ -85,7 +89,7 @@ const Home = () => {
 				</TitleBar>
 				<Stats
 					completedGoalsCount={completedGoals?.length}
-					leftGoalsCount={goals?.length - completedGoals?.length}
+					leftGoalsCount={todayGoals?.length - completedGoals?.length}
 					title={`Goals - ${dateStringFormatter(startDate)}`} 
 				/>
 			</GoalList>
