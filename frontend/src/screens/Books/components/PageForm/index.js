@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { updateBook } from '../../../../redux/actions/bookActions';
 
-import { FlexCenter } from '../../components/BookCard/style';
 import InputField from '../../../../components/InputField';
 import { AuthBtn } from '../../../../theme/Button';
+
+import { PageFormWrapper } from './style'
+import { StyledForm } from '../NotesForm/style'
 
 import { RiFilePaper2Line } from 'react-icons/ri'
 
@@ -46,8 +48,8 @@ const PageForm = ({book}) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<FlexCenter style={{marginBottom: '3rem'}}>
+		<StyledForm onSubmit={handleSubmit}>
+			<PageFormWrapper>
 				<InputField
 					icon={<RiFilePaper2Line />}
 					input={
@@ -61,12 +63,12 @@ const PageForm = ({book}) => {
 						/>
 					}
 				/>
-				<div style={{width: 20}}></div>
+				<div style={{marginRight: '1rem'}}></div>
 				<AuthBtn medium type='submit' disabled={!validateForm()}>
 					Submit
 				</AuthBtn>
-			</FlexCenter>
-		</form>
+			</PageFormWrapper>
+		</StyledForm>
 	)
 }
 
