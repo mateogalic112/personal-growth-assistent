@@ -57,3 +57,16 @@ export const dateFormatter = (date) => {
 	};
 	return new Date(date).toLocaleDateString('en-US', options);
 };
+
+/**
+ * Format date with nice strings
+ *
+ * @param {date} date
+ * @return {date | string} Saturday, April 3, 2021 | today
+ */
+export const dateOrStringToday = (date) => {
+	if (new Date(date).toISOString().split('T')[0] !== new Date().toISOString().split('T')[0]) {
+		return dateStringFormatter(date);
+	}
+	return 'today' 
+}
