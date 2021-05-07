@@ -73,7 +73,7 @@ const Form = ({ isOpen }) => {
 			<StyledForm onSubmit={handleSubmit}>
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
-				<div style={{ width: '320px' }}>
+				<div style={{ width: '15rem' }}>
 					<DatePicker
 						selected={startDate}
 						showMonthYearPicker

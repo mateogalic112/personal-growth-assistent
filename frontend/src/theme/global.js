@@ -21,12 +21,12 @@ const GlobalStyle = createGlobalStyle`
      * React Date picker
     */
     .react-datepicker-wrapper {
-        width: 100%;
+        width: 15rem;
     }
 
     .react-datepicker__input-container input {
         height: 2rem;
-		width: 100%;
+		width: 15rem;
 		padding: 0.35rem 1rem;
 		font-size: 0.8rem;
 		border-radius: 2.5rem;

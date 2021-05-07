@@ -27,7 +27,7 @@ export const LoadMoreBtn = styled(Button)`
 `;
 
 export const AuthBtn = styled(LoadMoreBtn)`
-	width: ${(props) => (props.medium ? '20rem' : '25rem')};
+	width: ${(props) => (props.medium ? '15rem' : '10rem')};
 	padding: ${(props) => (props.medium ? '0.35rem 1.5rem' : '0.5rem 1.5rem;')};
 	font-size: 1rem;
 

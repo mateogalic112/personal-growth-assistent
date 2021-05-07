@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const BalanceModal = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-beetwen;
 	align-items: center;
 	background-color: rgba(255, 255, 255, 0.25);

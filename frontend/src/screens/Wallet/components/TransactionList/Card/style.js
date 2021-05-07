@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const TransactionCard = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	min-width: 200px;
 	max-width: 500px;

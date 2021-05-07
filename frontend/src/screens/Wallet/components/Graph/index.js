@@ -54,13 +54,14 @@ const Graph = ({ transactions }) => {
 					gridLines: {
 						display: false,
 					},
+					ticks: {
+						display: width > 768,
+					}
 				},
 			],
 			yAxes: [
 				{
 					ticks: {
-						display: width > 768,
-						maxTicksLimit: 7,
 						// Include a dollar sign in the ticks
 						callback: function (value, index, values) {
 							return currencyFormatter.format(value, {
