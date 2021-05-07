@@ -8,6 +8,7 @@ import { listBooks } from '../../redux/actions/bookActions';
 
 import Container from '../../layout/Container';
 import TitleBar from '../../components/TitleBar';
+import Pagination from '../../components/Pagination';
 import Title from '../../components/TitleBar/Title';
 import Add from '../../widgets/Add';
 import AddBook from './components/AddBook'
@@ -20,6 +21,8 @@ import Message from '../../components/Message';
 import CurrentBook from './components/CurrentBook';
 import Graph from './components/Graph'
 
+const LIMIT_FINISHED_BOOKS = 5;
+
 const Books = () => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
@@ -28,19 +31,23 @@ const Books = () => {
 		(state) => state.bookList
 	);
 
+	useEffect(() => {
+		dispatch(listBooks(userInfo.token));
+	}, [dispatch, userInfo.token]);
+
 	const [isFormOpen, setIsFormOpen] = useState(false);
 
 	const openForm = () => {
 		setIsFormOpen((isFormOpen) => !isFormOpen);
 	};
 
-	useEffect(() => {
-		dispatch(listBooks(userInfo.token));
-	}, [dispatch, userInfo.token]);
-
 	const finishedBooks = books.filter(book => !book.isCurrent);
-
 	const currentBook = books.find(book => book.isCurrent)
+
+	// Pagination
+	const pages = Math.ceil(finishedBooks.length / LIMIT_FINISHED_BOOKS);
+	const [currentPage, setCurrentPage] = useState(1);
+
 
 	return (
 		<Container>
@@ -61,8 +68,19 @@ const Books = () => {
 			<div style={{marginBottom: '2rem'}}>
 				<Subtitle>Finished Books</Subtitle>
 				{
-					loading ? <Loader /> : error ? <Message error={error}></Message> : 
-					<Table books={finishedBooks} />
+					loading ? <Loader /> : error ? <Message error={error}></Message> : (
+						<>
+							<Pagination
+								pages={[...Array(pages).keys()]}
+								currPage={currentPage}
+								setCurrentPage={setCurrentPage}
+							/>
+							<Table books={finishedBooks.slice(
+								(currentPage - 1) * LIMIT_FINISHED_BOOKS,
+								currentPage * LIMIT_FINISHED_BOOKS
+							)} />
+						</>
+					)
 				}
 			</div>
 			<Graph books={finishedBooks} />
