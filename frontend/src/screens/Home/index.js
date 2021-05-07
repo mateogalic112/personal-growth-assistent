@@ -25,7 +25,7 @@ import {Content, Illustration} from './style'
 
 import ProgressSvg from '../../assets/svg/progress.svg';
 
-import { dateStringFormatter } from '../../helpers/date'
+import { dateStringFormatter, dateOrStringToday } from '../../helpers/date'
 
 
 const Home = () => {
@@ -42,10 +42,9 @@ const Home = () => {
 		(state) => state.goalList
 	);
 
+	const goalsByDate = goals ? goals.filter(goal => goal.date.split('T')[0] === startDate.toISOString().split('T')[0]) : []
 	
-	const todayGoals = goals ? goals.filter(goal => goal.date.split('T')[0] === startDate.toISOString().split('T')[0]) : []
-	
-	const completedGoals = todayGoals ? todayGoals.filter(goal => goal.isCompleted) : [];
+	const completedGoals = goalsByDate ? goalsByDate.filter(goal => goal.isCompleted) : [];
 	
 	const [isFormOpen, setIsFormOpen] = useState(false);
 	
@@ -72,11 +71,11 @@ const Home = () => {
 			<Banner>
 				<Content>
 					<h2 style={{marginBottom: '1rem'}}>Hello, {userInfo.username}</h2>
-					<p>You achieved <b>{parseFloat(completedGoals?.length / goals?.length * 100).toFixed(2)}%</b> of your goals today!</p>
+					<p>You achieved <b>{parseFloat(((completedGoals?.length / goalsByDate?.length) || 0) * 100).toFixed(2)}%</b> of your goals {dateOrStringToday(startDate)}!</p>
 				</Content>
 				<Illustration src={ProgressSvg} alt='Progress' />
 			</Banner>
-			<GoalList goals={todayGoals} date={startDate}>
+			<GoalList goals={goalsByDate} date={startDate}>
 				<TitleBar>
 					<Subtitle>Choose Day:</Subtitle>
 					<div style={{ width: '240px' }}>
@@ -89,7 +88,7 @@ const Home = () => {
 				</TitleBar>
 				<Stats
 					completedGoalsCount={completedGoals?.length}
-					leftGoalsCount={todayGoals?.length - completedGoals?.length}
+					leftGoalsCount={goalsByDate?.length - completedGoals?.length}
 					title={`Goals - ${dateStringFormatter(startDate)}`} 
 				/>
 			</GoalList>

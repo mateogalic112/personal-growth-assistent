@@ -27,14 +27,15 @@ const Graph = ({ goals }) => {
 					gridLines: {
 						display: false,
 					},
+					ticks: {
+						display: width > 768,
+					}
 				},
 			],
 			yAxes: [
 				{
 					ticks: {
                         beginAtZero: true,
-						display: width > 768,
-						maxTicksLimit: 7,
 					},
 				},
 			],
