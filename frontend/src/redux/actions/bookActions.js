@@ -105,7 +105,7 @@ export const updateBook = (token, bookId, book) => async (
 			type: UPDATE_BOOK_SUCCESS,
 		});
 
-		const notificationMessage = !book.isCurrent ? "Great work! Keep up!" : 'Book Updated!';
+		const notificationMessage = typeof book.notes === 'undefined' && !book.isCurrent ? "Great work! Keep up!" : 'Book Updated!';
 
 		dispatch({
 			type: ADD_NOTIFICATION,

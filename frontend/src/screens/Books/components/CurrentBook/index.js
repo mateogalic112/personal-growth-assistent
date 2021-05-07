@@ -1,14 +1,30 @@
-import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { v4 } from 'uuid';
-import { useSelector } from 'react-redux'
 import ReactSpeedometer from "react-d3-speedometer"
 import Subtitle from '../../../../components/Subtitle';
 import PageForm from '../PageForm';
 import Loader from '../../../../components/Loader';
 import Message from '../../../../components/Message';
+import CrudButton from '../../../../widgets/CrudButton';
+
+import { updateBook } from '../../../../redux/actions/bookActions';
+
+import { Note } from './style'
+
+import { AiOutlineDelete } from 'react-icons/ai';
 
 const CurrentBook = ({ currentBook }) => {
+    const dispatch = useDispatch();
+	const { userInfo } = useSelector((state) => state.userLogin);
+
 	const { loading:loadingUpdate, error: errorUpdate} = useSelector((state) => state.updateBook)
+
+	const updateItem = (note) => {
+		dispatch(updateBook(userInfo.token, currentBook._id, {
+            notes: currentBook.notes.filter(item => item !== note)
+        }));
+	};
 
     return (
         <div>
@@ -29,13 +45,18 @@ const CurrentBook = ({ currentBook }) => {
                 </div>
                 <div>
                     <Subtitle>Notes</Subtitle>
-                    <ul style={{marginBottom: '1rem'}}>
+                    <ol style={{marginBottom: '1rem'}}>
                         {
-                            currentBook.notes.map(note => (
-                                <li key={v4()}>{note}</li>
+                            Array.isArray(currentBook.notes) && currentBook.notes.length > 0 && currentBook.notes.map(note => (
+                                <li key={v4()} style={{display: 'flex', alignItems: 'center'}}>
+                                    <Note>{note}</Note>
+                                    <CrudButton handleClick={() => updateItem(note)} loading={loadingUpdate}>
+                                        <AiOutlineDelete />
+                                    </CrudButton>
+                                </li>
                             ))
                         }
-                    </ul>
+                    </ol>
                 </div>
             </div>
             <PageForm book={currentBook} />
