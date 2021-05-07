@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-	height: 360px;
+	min-height: 360px;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -37,9 +37,14 @@ export const CoverImage = styled.img`
 export const Content = styled.div`
 	display: flex;
 	flex-direction: column;
-	padding: 0.5rem 2rem;
+	padding: 0.25rem 1rem;
 	z-index: 1;
 	color: white;
+	max-width: 100%;
+
+	@media (min-width: 768px) {
+		padding: 0.5rem 2rem;
+	}
 `;
 
 export const Title = styled.h1`

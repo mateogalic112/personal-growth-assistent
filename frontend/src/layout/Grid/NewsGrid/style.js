@@ -5,7 +5,7 @@ export const Grid = styled.div`
 	gap: 1rem;
 	margin-bottom: 3rem;
 
-	@media (min-width: 768px) {
-		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	@media (min-width: 500px) {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	}
 `;

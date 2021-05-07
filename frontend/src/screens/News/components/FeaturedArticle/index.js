@@ -40,7 +40,7 @@ const FeaturedArticle = ({
 				>
 					<Source>{source.name}</Source>
 					<div style={{ display: 'flex', alignItems: 'center' }}>
-						<Author>{author}, </Author>
+						<Author>{author.length > 15 ? '' : `${author}, `}</Author>
 						<Published>{displayHour(publishedAt)}</Published>
 					</div>
 				</div>

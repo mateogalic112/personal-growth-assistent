@@ -9,7 +9,7 @@ export const Container = styled.div`
 	overflow: hidden;
 	transition: box-shadow 0.2s;
 	height: fit-content;
-	min-width: 240px;
+	min-width: 200px;
 
 	&:hover {
 		box-shadow: 0px 0px 15px 10px rgba(68, 68, 68, 0.4);

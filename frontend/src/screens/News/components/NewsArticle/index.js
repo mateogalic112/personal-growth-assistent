@@ -28,7 +28,7 @@ const NewsArticle = ({
 						marginBottom: '.5rem',
 					}}
 				>
-					{!!author && <Author>{author},</Author>}
+					{!!author && <Author>{author.length > 25 ? '' : `${author}, `}</Author>}
 					<Published>{displayHour(publishedAt)}</Published>
 				</div>
 				<BtnOutlined as='a' href={url} target='_blank' black>
