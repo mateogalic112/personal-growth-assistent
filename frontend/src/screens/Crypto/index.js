@@ -107,7 +107,7 @@ const Crypto = () => {
 						.map((coin) => (
 							<Card key={coin.id} {...coin} />
 					))}
-				<Table portfolioCoins={portfolioCoins.filter(coin => coin.portfolioAmount > 0.0000005)} balance={balance} />
+				{Array.isArray(portfolioCoins) && portfolioCoins.length > 0 && <Table portfolioCoins={portfolioCoins.filter(coin => coin.portfolioAmount > 0.0000005)} balance={balance} />}
 			</CryptoGrid>
 			<News />
 		</Container>

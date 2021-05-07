@@ -30,12 +30,18 @@ const Balance = ({ invested, balance, sold }) => {
 					{currencyFormatter.format(balance, {
 						code: 'USD',
 					})}{' '}
-					<Percentage profit={profit}>
-						{parseFloat(profitPercentage || 0).toFixed(5)}%
-					</Percentage>
-					<BalanceIcon green={profit > 0}>
-						{profit > 0 ? <BsArrowUpRight /> : <BsArrowDownRight />}
-					</BalanceIcon>
+					{
+						balance !== 0 && (
+							<>
+								<Percentage profit={profit}>
+									{parseFloat(profitPercentage || 0).toFixed(5)}%
+								</Percentage>
+								<BalanceIcon green={profit > 0}>
+									{profit > 0 ? <BsArrowUpRight /> : <BsArrowDownRight />}
+								</BalanceIcon>
+							</>
+						)
+					}
 				</AccountValue>
 			</BalanceOverview>
 			<BalanceSheet>
