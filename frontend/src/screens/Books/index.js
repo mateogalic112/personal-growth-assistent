@@ -75,6 +75,7 @@ const Books = () => {
 								currPage={currentPage}
 								setCurrentPage={setCurrentPage}
 							/>
+							<div style={{marginBottom: '1rem'}}></div>
 							<Table books={finishedBooks.slice(
 								(currentPage - 1) * LIMIT_FINISHED_BOOKS,
 								currentPage * LIMIT_FINISHED_BOOKS
