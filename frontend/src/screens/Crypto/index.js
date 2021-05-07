@@ -44,6 +44,7 @@ const Crypto = () => {
 		dispatch(listTransactions(userInfo.token));
 	}, [dispatch, userInfo.token]);
 
+
 	// Current portfolio state ( Coin amount )
 	const portfolioCoinsAmount = useMemo(() => cryptoPortfolio(transactions), [transactions]);
 
@@ -66,18 +67,22 @@ const Crypto = () => {
 	const [balance, setBalance] = useState(0);
 
 	useEffect(() => {
-		if (!isLoading && !isError && data.length) {
+		if (!isLoading && !isError && data) {
 			setPortfolioCoins(setPortfolioCoinObjects(data, portfolioCoinsAmount));
 		}
 	}, [isLoading, isError, data, portfolioCoinsAmount]);
 
 	useEffect(() => {
-		setBalance(currentBalance(portfolioCoins));
+		if(portfolioCoins.length) {
+			setBalance(currentBalance(portfolioCoins));
+		}
 	}, [portfolioCoins]);
 
 	if (isLoading) return <Loader />;
 
 	if (isError) return <h1>{error}</h1>;
+
+	console.log(portfolioCoins);
 
 	return (
 		<Container>
@@ -97,10 +102,12 @@ const Crypto = () => {
 				)}
 
 				{Array.isArray(portfolioCoins) &&
-					portfolioCoins.map((coin) => (
-						<Card key={coin.id} {...coin} />
+					portfolioCoins
+						.filter(coin => coin.portfolioAmount > 0.0000005)
+						.map((coin) => (
+							<Card key={coin.id} {...coin} />
 					))}
-				<Table portfolioCoins={portfolioCoins} balance={balance} />
+				<Table portfolioCoins={portfolioCoins.filter(coin => coin.portfolioAmount > 0.0000005)} balance={balance} />
 			</CryptoGrid>
 			<News />
 		</Container>

@@ -12,14 +12,14 @@ export const cryptoPortfolio = (transactions) => {
 		.forEach((transaction) => {
 			if (portfolioCoins[transaction.name] === undefined) {
 				portfolioCoins[transaction.name] = {
-					cryptoQty: transaction.cryptoQty,
+					cryptoQty: transaction.type === 'income' ? (-transaction.cryptoQty) : transaction.cryptoQty,
 				};
 			} else {
-				if (transaction.type === 'expense') {
-					portfolioCoins[transaction.name].cryptoQty +=
+				if (transaction.type === 'income') {
+					portfolioCoins[transaction.name].cryptoQty -=
 						transaction.cryptoQty;
 				} else {
-					portfolioCoins[transaction.name].cryptoQty -=
+					portfolioCoins[transaction.name].cryptoQty +=
 						transaction.cryptoQty;
 				}
 			}

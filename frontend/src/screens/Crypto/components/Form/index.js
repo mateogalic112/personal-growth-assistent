@@ -75,10 +75,13 @@ const Form = ({ isOpen, coins, portfolioCoins }) => {
 
 	const validateTransactionAmount = () => {
 		const portfolioCoin = portfolioCoins.find(coin => coin.name === selectedCoin.label)
-		return portfolioCoin.current_price * portfolioCoin.portfolioAmount > state.amount;
+		if(!portfolioCoin && state.type === 'income') return false;
+		if(portfolioCoin && state.type === 'income') return portfolioCoin.current_price * portfolioCoin.portfolioAmount >= state.amount;
+		return true
 	}
 
 	const validateForm = () => {
+
 		return selectedCoin && parseFloat(state.amount) > 0 && validateTransactionAmount();
 	};
 
@@ -90,7 +93,7 @@ const Form = ({ isOpen, coins, portfolioCoins }) => {
 			<StyledForm onSubmit={handleSubmit}>
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
-				<div style={{ width: '320px' }}>
+				<div style={{ width: '15rem' }}>
 					<Select
 						menuPortalTarget={document.body}
 						menuPosition={'fixed'}
