@@ -1,17 +1,36 @@
 import { AiOutlineStar } from 'react-icons/ai';
-import { BiBitcoin } from 'react-icons/bi';
-import { GrTechnology } from 'react-icons/gr';
+import { BiBitcoin, BiBall } from 'react-icons/bi';
+import { GrTechnology, GrAccessibility } from 'react-icons/gr';
 import { MdBusiness } from 'react-icons/md';
-import { RiMoneyEuroCircleLine } from 'react-icons/ri';
+import { RiMoneyEuroCircleLine, RiMentalHealthLine } from 'react-icons/ri';
 
 export const newsFilterTags = [
 	{
-		title: 'Popular',
-		icon: <AiOutlineStar />,
+		title: 'Crypto',
+		icon: <BiBitcoin />,
 	},
 	{
-		title: 'Bitcoin',
-		icon: <BiBitcoin />,
+		title: 'Finance',
+		icon: <RiMoneyEuroCircleLine />,
+	},
+	{
+		title: 'Health',
+		icon: <RiMentalHealthLine />,
+	},
+	{
+		title: 'Lifestyle',
+		icon: <GrAccessibility />,
+	},
+	{
+		title: 'Sport',
+		icon: <BiBall />,
+	},
+];
+
+export const mustHaveTags = [
+	{
+		title: 'Popular',
+		icon: <AiOutlineStar />,
 	},
 	{
 		title: 'Technology',
@@ -21,8 +40,4 @@ export const newsFilterTags = [
 		title: 'Business',
 		icon: <MdBusiness />,
 	},
-	{
-		title: 'Finance',
-		icon: <RiMoneyEuroCircleLine />,
-	},
-];
+]
