@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux'
+
+import { useSpeechContext } from '@speechly/react-client'
 
 import InputField from '../../../../components/InputField';
 import Loader from '../../../../components/Loader';
@@ -17,7 +19,29 @@ const Form = ({ isOpen }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
+	const { segment } = useSpeechContext()
+
 	const [goal, setGoal] = useState('');
+
+	useEffect(() => {
+		if(segment) {
+			if(segment.intent.intent === 'add_goal' && segment.isFinal) {
+				const goal = segment.words.map(w => w.value).join(' ').split('GOAL IS')[1]?.trim()
+				if(!goal) {
+					return;
+				}
+				setGoal(`${goal.charAt(0)}${goal.slice(1).toLowerCase()}`);
+				dispatch(
+					createGoal(
+						{
+							title: goal,
+						},
+						userInfo.token
+					)
+				);
+			}
+		}
+	}, [segment, dispatch, userInfo])
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -43,7 +67,10 @@ const Form = ({ isOpen }) => {
 	const { loading, error } = useSelector((state) => state.createGoal);
 
 	return (
-		<FormWrapper isOpen={isOpen}>
+		<FormWrapper isOpen={isOpen || segment?.words?.length > 0}>
+			<p>
+				{segment && segment.words.map(word => word.value).join(' ')}
+			</p>
 			<StyledForm onSubmit={handleSubmit}>
 			{loading && <Loader />}
 				{error && <Message error>{error}</Message>}

@@ -63,6 +63,13 @@ const GlobalStyle = createGlobalStyle`
         width: 300px;
         height: auto;
     }
+
+    .cbddlN {
+        width: 5rem;
+        height: 5rem;
+        right: 5%;
+        bottom: 2%;
+    }
 `;
 
 export default GlobalStyle;

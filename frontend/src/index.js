@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { SpeechProvider } from '@speechly/react-client'
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
@@ -12,12 +13,14 @@ import store from './redux/store';
 const queryClient = new QueryClient();
 
 ReactDOM.render(
-	<Provider store={store}>
-		<QueryClientProvider client={queryClient}>
-			<GlobalStyle />
-			<App />
-		</QueryClientProvider>
-	</Provider>,
+	<SpeechProvider appId='7e19a1e3-0e2f-4c70-9143-78af69372f3c' language="en-US">
+		<Provider store={store}>
+			<QueryClientProvider client={queryClient}>
+				<GlobalStyle />
+				<App />
+			</QueryClientProvider>
+		</Provider>
+	</SpeechProvider>,
 	document.getElementById('root')
 );
 
