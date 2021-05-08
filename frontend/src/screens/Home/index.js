@@ -23,7 +23,7 @@ import Stats from './components/Stats'
 import Form from './components/Form'
 import Graph from './components/Graph'
 
-import {Content, Illustration} from './style'
+import {Content, Illustration, SpeechlyWrapper} from './style'
 
 import ProgressSvg from '../../assets/svg/progress.svg';
 
@@ -70,10 +70,12 @@ const Home = () => {
 				<Add handleClick={openForm} />
 			</TitleBar>
 			<Form isOpen={isFormOpen} />
-			<PushToTalkButtonContainer>
-				<PushToTalkButton size="4rem" />
-				<ErrorPanel />
-			</PushToTalkButtonContainer>
+			<SpeechlyWrapper>
+				<PushToTalkButtonContainer>
+					<PushToTalkButton size="4rem" />
+					<ErrorPanel />
+				</PushToTalkButtonContainer>
+			</SpeechlyWrapper>
 			<Banner>
 				<Content>
 					<h2 style={{marginBottom: '1rem'}}>Hello, {userInfo.username}</h2>

@@ -82,8 +82,6 @@ const Crypto = () => {
 
 	if (isError) return <h1>{error}</h1>;
 
-	console.log(portfolioCoins);
-
 	return (
 		<Container>
 			<TitleBar>

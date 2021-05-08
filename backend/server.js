@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express');
 require('dotenv').config();
 const connectDB = require('./config/db');
@@ -21,6 +22,16 @@ app.use('/api/users', authRoute);
 app.use('/api/transactions', transactionsRoute);
 app.use('/api/books', booksRoute);
 app.use('/api/goals', goalsRoute);
+
+const currentPath = process.cwd();
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(currentPath, '/frontend/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(currentPath, 'frontend', 'build', 'index.html'))
+  )
+}
 
 app.use(errorHandler);
 

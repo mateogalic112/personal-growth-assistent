@@ -18,3 +18,21 @@ export const Illustration = styled.img`
         height: auto;
 	}
 `
+export const SpeechlyWrapper = styled.div`
+    position: fixed;
+    width: 4rem;
+    height: 4rem;
+    right: 5%;
+    bottom: 2%;
+
+    @media (min-width: 768px) {
+        width: 5rem;
+        height: 5rem;
+	}
+
+    & > div {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+`
