@@ -39,6 +39,8 @@ const Form = ({ isOpen }) => {
 						userInfo.token
 					)
 				);
+				setGoal('')
+				segment.words = []
 			}
 		}
 	}, [segment, dispatch, userInfo])
