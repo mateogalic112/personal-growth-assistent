@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { listGoals } from '../../redux/actions/goalActions';
 
-import { PushToTalkButtonContainer, PushToTalkButton, ErrorPanel }  from '@speechly/react-ui'
-
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -23,7 +21,7 @@ import Stats from './components/Stats'
 import Form from './components/Form'
 import Graph from './components/Graph'
 
-import {Content, Illustration, SpeechlyWrapper} from './style'
+import {Content, Illustration} from './style'
 
 import ProgressSvg from '../../assets/svg/progress.svg';
 
@@ -70,12 +68,7 @@ const Home = () => {
 				<Add handleClick={openForm} />
 			</TitleBar>
 			<Form isOpen={isFormOpen} />
-			<SpeechlyWrapper>
-				<PushToTalkButtonContainer>
-					<PushToTalkButton size="4rem" />
-					<ErrorPanel />
-				</PushToTalkButtonContainer>
-			</SpeechlyWrapper>
+			
 			<Banner>
 				<Content>
 					<h2 style={{marginBottom: '1rem'}}>Hello, {userInfo.username}</h2>

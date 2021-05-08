@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createTransaction } from '../../../../redux/actions/transactionActions';
+
+import { useSpeechContext } from '@speechly/react-client'
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -23,6 +25,8 @@ const Form = ({ isOpen }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
+	const { segment } = useSpeechContext()
+
 	const [state, setState] = useState({
 		name: '',
 		type: 'income',
@@ -35,8 +39,10 @@ const Form = ({ isOpen }) => {
 		setStartDate(date);
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const handleSubmit = useCallback(async (e) => {
+		if(e) {
+			e.preventDefault();
+		}
 		dispatch(
 			createTransaction(
 				state.name,
@@ -52,7 +58,7 @@ const Form = ({ isOpen }) => {
 			amount: '',
 		});
 		setStartDate(new Date());
-	};
+	}, [dispatch, state, userInfo, startDate]);
 
 	const { loading, error } = useSelector((state) => state.createTransaction);
 
@@ -63,13 +69,48 @@ const Form = ({ isOpen }) => {
 		});
 	};
 
-	const validateForm = () => {
+	const validateForm = useCallback(() => {
 		return state.name.length > 1 && parseFloat(state.amount) > 0;
-	};
+	}, [state]);
+
+	useEffect(() => {
+		if(segment) {
+			if(segment.intent.intent === 'income_transaction') {
+				setState({...state, type: 'income'});
+			} else if(segment.intent.intent === 'expense_transaction') {
+				setState({...state, type: 'expense'});
+			}
+			segment.entities.forEach(entity => {
+				switch(entity.type) {
+					case 'item':
+						setState({...state, name: entity.value})
+						break;
+					case 'amount':
+						setState({...state, amount: entity.value})
+						break;
+					case 'date':
+						handleDateChange(new Date(entity.value))
+						break;
+					default:
+						return;
+				}
+			})
+			if(segment.isFinal) {
+				if(validateForm()) {
+					handleSubmit()
+				}
+				segment.words = []
+			} 
+		}
+	// eslint-disable-next-line
+	}, [segment])
 
 	return (
-		<FormWrapper isOpen={isOpen}>
+		<FormWrapper isOpen={isOpen || segment?.words?.length > 0}>
 			<Subtitle>New Transaction</Subtitle>
+			<p>
+				{segment && segment.words.map(word => word.value).join(' ')}
+			</p>
 			<StyledForm onSubmit={handleSubmit}>
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
