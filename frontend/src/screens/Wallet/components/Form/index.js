@@ -89,7 +89,7 @@ const Form = ({ isOpen }) => {
 						setState({...state, amount: entity.value})
 						break;
 					case 'date':
-						handleDateChange(new Date(entity.value))
+						handleDateChange(new Date(entity.value) ?? new Date())
 						break;
 					default:
 						return;
