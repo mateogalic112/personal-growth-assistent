@@ -67,10 +67,10 @@ const NotesForm = ({ isOpen, book }) => {
 	}, [segment, userInfo])
 
 	return (
-		<FormWrapper isOpen={isOpen || segment?.words?.length > 0}>
+		<FormWrapper isOpen={isOpen || (segment?.words?.length > 0 && segment.intent.intent === 'add_note')}>
 			<StyledForm onSubmit={handleSubmit}>
 			<p>
-				{segment && segment.words.map(word => word.value).join(' ')}
+				{segment && segment.intent.intent === 'add_note' && segment.words.map(word => word.value).join(' ')}
 			</p>
 				{error && <Message error>{error}</Message>}
 				<InputField

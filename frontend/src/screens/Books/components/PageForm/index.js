@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { updateBook } from '../../../../redux/actions/bookActions';
 
+import { useSpeechContext } from '@speechly/react-client'
+
+
 import InputField from '../../../../components/InputField';
 import { AuthBtn } from '../../../../theme/Button';
 
@@ -15,6 +18,8 @@ import { RiFilePaper2Line } from 'react-icons/ri'
 const PageForm = ({book}) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
+
+	const { segment } = useSpeechContext()
 
 	const { success: successUpdate } = useSelector((state) => state.updateBook)
 
@@ -30,7 +35,9 @@ const PageForm = ({book}) => {
 
 
 	const handleSubmit = (e) => {
-		e.preventDefault();
+		if(e) {
+			e.preventDefault();
+		}
 
 		dispatch(
 			updateBook(
@@ -47,8 +54,35 @@ const PageForm = ({book}) => {
 		return page > 0 && page + book.currentPage <= book.pages;
 	};
 
+	useEffect(() => {
+		if(segment) {
+			if(segment.intent.intent === 'add_in_page') {
+				segment.entities.forEach(entity => {
+					switch(entity.type) {
+						case 'page':
+							setPage(Number(entity.value))
+							break;
+						default:
+							return;
+					}
+				})
+				if(segment.isFinal) {
+					if(validateForm()) {
+						handleSubmit()
+					}
+					segment.words = []
+				} 
+			}
+		}
+	// eslint-disable-next-line
+	}, [segment])
+
+
 	return (
 		<StyledForm onSubmit={handleSubmit}>
+			<p>
+				{segment && segment.intent.intent === 'add_in_page' && segment.words.map(word => word.value).join(' ')}
+			</p>
 			<PageFormWrapper>
 				<InputField
 					icon={<RiFilePaper2Line />}
