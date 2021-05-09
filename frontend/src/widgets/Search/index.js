@@ -39,7 +39,10 @@ const Search = () => {
 						return;
 				}
 			})
-			segment.words = []
+			if(segment.isFinal) {
+				setKeyword('')
+				segment.words = []
+			} 
 		}
 	// eslint-disable-next-line
 	}, [segment])
