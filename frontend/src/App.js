@@ -16,6 +16,8 @@ import AlertWrapper from './components/AlertWrapper';
 import Books from './screens/Books';
 import Search from './screens/Search';
 
+require('dotenv').config()
+
 const App = () => {
 	return (
 		<Router>
