@@ -121,6 +121,11 @@ const Form = ({ isOpen, coins, portfolioCoins }) => {
 					handleSubmit()
 				}
 				segment.words = []
+				setState({
+					selectedCoin: null,
+					type: 'expense',
+					amount: '',
+				});
 			} 
 		}
 	// eslint-disable-next-line

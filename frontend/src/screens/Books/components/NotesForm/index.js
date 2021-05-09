@@ -61,6 +61,7 @@ const NotesForm = ({ isOpen, book }) => {
 					)
 				);
 				segment.words = []
+				setNote('')
 			}
 		}
 		// eslint-disable-next-line

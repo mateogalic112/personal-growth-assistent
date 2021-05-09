@@ -71,6 +71,7 @@ const PageForm = ({book}) => {
 						handleSubmit()
 					}
 					segment.words = []
+					setPage('')
 				} 
 			}
 		}

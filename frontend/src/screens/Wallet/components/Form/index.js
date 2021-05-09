@@ -100,6 +100,11 @@ const Form = ({ isOpen }) => {
 					handleSubmit()
 				}
 				segment.words = []
+				setState({
+					name: '',
+					type: 'income',
+					amount: '',
+				});
 			} 
 		}
 	// eslint-disable-next-line
