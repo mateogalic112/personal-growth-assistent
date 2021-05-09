@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createTransaction } from '../../../../redux/actions/transactionActions';
+
+import { useSpeechContext } from '@speechly/react-client'
 
 import Select from 'react-select';
 
@@ -23,6 +25,8 @@ import { RadioField, RadioWrapper } from '../../../Register/style';
 const Form = ({ isOpen, coins, portfolioCoins }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
+
+	const { segment } = useSpeechContext()
 
 	const [selectedCoin, setSelectedCoin] = useState(null);
 
@@ -45,8 +49,17 @@ const Form = ({ isOpen, coins, portfolioCoins }) => {
 		label: coin.name,
 	}));
 
+	const setSelectedCoinBySpeech = (coinName) => {
+		const selectedCoinBySpeech = selectCoinsOptions.find(coin => coin.label.toLowerCase() === coinName);
+		if(selectedCoinBySpeech) {
+			setSelectedCoin(selectedCoinBySpeech)
+		}
+	}
+
 	const handleSubmit = async (e) => {
-		e.preventDefault();
+		if(e) {
+			e.preventDefault();
+		}
 		dispatch(
 			createTransaction(
 				selectedCoin?.value?.id,
@@ -81,15 +94,46 @@ const Form = ({ isOpen, coins, portfolioCoins }) => {
 	}
 
 	const validateForm = () => {
-
 		return selectedCoin && parseFloat(state.amount) > 0 && validateTransactionAmount();
 	};
+
+	useEffect(() => {
+		if(segment) {
+			if(segment.intent.intent === 'income_transaction') {
+				setState({...state, type: 'income'});
+			} else if(segment.intent.intent === 'expense_transaction') {
+				setState({...state, type: 'expense'});
+			}
+			segment.entities.forEach(entity => {
+				switch(entity.type) {
+					case 'item':
+						setSelectedCoinBySpeech(entity.value.toLowerCase())
+						break;
+					case 'amount':
+						setState({...state, amount: entity.value})
+						break;
+					default:
+						return;
+				}
+			})
+			if(segment.isFinal) {
+				if(validateForm()) {
+					handleSubmit()
+				}
+				segment.words = []
+			} 
+		}
+	// eslint-disable-next-line
+	}, [segment])
 
 	const { loading, error } = useSelector((state) => state.createTransaction);
 
 	return (
-		<FormWrapper isOpen={isOpen}>
+		<FormWrapper isOpen={isOpen || segment?.words?.length > 0}>
 			<Subtitle>New Transaction</Subtitle>
+			<p>
+				{segment && segment.words.map(word => word.value).join(' ')}
+			</p>
 			<StyledForm onSubmit={handleSubmit}>
 				{loading && <Loader />}
 				{error && <Message error>{error}</Message>}
