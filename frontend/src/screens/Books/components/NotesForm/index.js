@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+
+import { useSpeechContext } from '@speechly/react-client'
 
 import { updateBook } from '../../../../redux/actions/bookActions';
 
@@ -16,10 +18,14 @@ const NotesForm = ({ isOpen, book }) => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
+	const { segment } = useSpeechContext()
+
 	const [note, setNote] = useState('');
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
+		if(e) {
+			e.preventDefault();
+		}
 		dispatch(
 			updateBook(
 				userInfo.token,
@@ -40,9 +46,32 @@ const NotesForm = ({ isOpen, book }) => {
 		return note.length > 0;
 	};
 
+	useEffect(() => {
+		if(segment) {
+			if(segment.intent.intent === 'add_note' && segment.isFinal) {
+				const note = segment.words.map(w => w.value).join(' ').split('NOTE IS')[1]?.trim()
+				if(!note) {
+					return;
+				}
+				dispatch(
+					updateBook(
+						userInfo.token,
+						book._id,
+						{notes: [...book.notes, note]}
+					)
+				);
+				segment.words = []
+			}
+		}
+		// eslint-disable-next-line
+	}, [segment, userInfo])
+
 	return (
-		<FormWrapper isOpen={isOpen}>
+		<FormWrapper isOpen={isOpen || segment?.words?.length > 0}>
 			<StyledForm onSubmit={handleSubmit}>
+			<p>
+				{segment && segment.words.map(word => word.value).join(' ')}
+			</p>
 				{error && <Message error>{error}</Message>}
 				<InputField
 					icon={<RiFilePaper2Line />}

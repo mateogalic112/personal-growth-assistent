@@ -30,19 +30,21 @@ const Search = () => {
 
 	useEffect(() => {
 		if(segment) {
-			segment.entities.forEach(entity => {
-				switch(entity.type) {
-					case 'term':
-						setKeyword(entity.value.toLowerCase())
-						break;
-					default:
-						return;
-				}
-			})
-			if(segment.isFinal) {
-				setKeyword('')
-				segment.words = []
-			} 
+			if(segment.intent.intent === 'search_term') {
+				segment.entities.forEach(entity => {
+					switch(entity.type) {
+						case 'term':
+							setKeyword(entity.value.toLowerCase())
+							break;
+						default:
+							return;
+					}
+				})
+				if(segment.isFinal) {
+					setKeyword('')
+					segment.words = []
+				} 
+			}
 		}
 	// eslint-disable-next-line
 	}, [segment])
