@@ -7,10 +7,18 @@ import { BsSearch } from 'react-icons/bs';
 
 import { useDebounce } from '../../hooks/useDebounce'
 
+import { useSpeechContext } from '@speechly/react-client'
+
 const Search = () => {
 	const history = useHistory()
 
+	const { segment } = useSpeechContext()
+
 	const [keyword, setKeyword] = useState('')
+
+	const handleChange = (e) => {
+		setKeyword(e.target.value)
+	}
 
 	const debouncedSearchTerm = useDebounce(keyword, 750);
 
@@ -20,10 +28,21 @@ const Search = () => {
 		}
 	},[debouncedSearchTerm, history]);
 
-
-	const handleChange = (e) => {
-		setKeyword(e.target.value)
-	}
+	useEffect(() => {
+		if(segment) {
+			segment.entities.forEach(entity => {
+				switch(entity.type) {
+					case 'term':
+						setKeyword(entity.value.toLowerCase())
+						break;
+					default:
+						return;
+				}
+			})
+			segment.words = []
+		}
+	// eslint-disable-next-line
+	}, [segment])
 
 	return (
 		<SearchBar>
