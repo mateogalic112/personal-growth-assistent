@@ -1,48 +1,48 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
-import { createTransaction } from '../../../../redux/actions/transactionActions'
+import { createTransaction } from '../../../../redux/actions/transactionActions';
 
-import { useSpeechContext } from '@speechly/react-client'
+import { useSpeechContext } from '@speechly/react-client';
 
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-import InputField from '../../../../components/InputField'
-import { AuthBtn } from '../../../../theme/Button'
-import Loader from '../../../../components/Loader'
-import Message from '../../../../components/Message'
+import InputField from '../../../../components/InputField';
+import { AuthBtn } from '../../../../theme/Button';
+import Loader from '../../../../components/Loader';
+import Message from '../../../../components/Message';
 
-import { RiFilePaper2Line } from 'react-icons/ri'
-import { BiMoney } from 'react-icons/bi'
+import { RiFilePaper2Line } from 'react-icons/ri';
+import { BiMoney } from 'react-icons/bi';
 
-import { FormWrapper, StyledForm } from './style'
-import Subtitle from '../../../../components/Subtitle'
-import { RadioField, RadioWrapper } from '../../../Register/style'
+import { FormWrapper, StyledForm } from './style';
+import Subtitle from '../../../../components/Subtitle';
+import { RadioField, RadioWrapper } from '../../../Register/style';
 
 const Form = ({ isOpen }) => {
-	const dispatch = useDispatch()
-	const { userInfo } = useSelector((state) => state.userLogin)
+	const dispatch = useDispatch();
+	const { userInfo } = useSelector((state) => state.userLogin);
 
-	const { segment } = useSpeechContext()
+	const { segment } = useSpeechContext();
 
 	const [state, setState] = useState({
 		name: '',
 		type: 'income',
 		amount: '',
-	})
+	});
 
-	const [startDate, setStartDate] = useState(new Date())
+	const [startDate, setStartDate] = useState(new Date());
 
 	const handleDateChange = (date) => {
-		setStartDate(date)
-	}
+		setStartDate(date);
+	};
 
 	const handleSubmit = useCallback(
 		async (e) => {
 			if (e) {
-				e.preventDefault()
+				e.preventDefault();
 			}
 			dispatch(
 				createTransaction(
@@ -52,66 +52,66 @@ const Form = ({ isOpen }) => {
 					userInfo.token,
 					startDate
 				)
-			)
+			);
 			setState({
 				name: '',
 				type: 'income',
 				amount: '',
-			})
-			setStartDate(new Date())
+			});
+			setStartDate(new Date());
 		},
 		[dispatch, state, userInfo, startDate]
-	)
+	);
 
-	const { loading, error } = useSelector((state) => state.createTransaction)
+	const { loading, error } = useSelector((state) => state.createTransaction);
 
 	const handleChange = (e) => {
 		setState({
 			...state,
 			[e.target.name]: e.target.value,
-		})
-	}
+		});
+	};
 
 	const validateForm = useCallback(() => {
-		return state.name.length > 1 && parseFloat(state.amount) > 0
-	}, [state])
+		return state.name.length > 1 && parseFloat(state.amount) > 0;
+	}, [state]);
 
 	useEffect(() => {
 		if (segment) {
 			if (segment.intent.intent === 'income_transaction') {
-				setState({ ...state, type: 'income' })
+				setState({ ...state, type: 'income' });
 			} else if (segment.intent.intent === 'expense_transaction') {
-				setState({ ...state, type: 'expense' })
+				setState({ ...state, type: 'expense' });
 			}
 			segment.entities.forEach((entity) => {
 				switch (entity.type) {
 					case 'item':
-						setState({ ...state, name: entity.value })
-						break
+						setState({ ...state, name: entity.value });
+						break;
 					case 'amount':
-						setState({ ...state, amount: entity.value })
-						break
+						setState({ ...state, amount: entity.value });
+						break;
 					case 'date':
-						handleDateChange(new Date(entity.value))
-						break
+						handleDateChange(new Date(entity.value) ?? new Date());
+						break;
 					default:
-						return
+						return;
 				}
-			})
+			});
 			if (segment.isFinal) {
 				if (validateForm()) {
-					handleSubmit()
+					handleSubmit();
 				}
 				setState({
 					name: '',
 					type: 'income',
 					amount: '',
-				})
-				segment.words = []
+				});
+				segment.words = [];
 			}
 		}
 		// eslint-disable-next-line
-	}, [segment])
+	}, [segment]);
 
 	return (
 		<FormWrapper isOpen={isOpen || segment?.words?.length > 0}>
@@ -185,7 +185,7 @@ const Form = ({ isOpen }) => {
 				</AuthBtn>
 			</StyledForm>
 		</FormWrapper>
-	)
-}
+	);
+};
 
-export default Form
+export default Form;
