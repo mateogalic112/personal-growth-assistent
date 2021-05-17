@@ -1,52 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
-import { useQuery } from 'react-query';
+import { useQuery } from 'react-query'
 
-import Container from '../../layout/Container';
+import Container from '../../layout/Container'
 
-import Title from '../../components/TitleBar/Title';
-import TitleBar from '../../components/TitleBar';
-import Filter from '../../widgets/Filter';
-import NewsGrid from '../../layout/Grid/NewsGrid';
-import Loader from '../../components/Loader';
+import Title from '../../components/TitleBar/Title'
+import TitleBar from '../../components/TitleBar'
+import Filter from '../../widgets/Filter'
+import NewsGrid from '../../layout/Grid/NewsGrid'
+import Loader from '../../components/Loader'
 
-import { newsQuery } from '../../api/news';
+import { newsQuery } from '../../api/news'
 
-import FeaturedArticle from './components/FeaturedArticle';
-import NewsArticle from './components/NewsArticle';
-import NewsFilter from './components/NewsFilter';
+import FeaturedArticle from './components/FeaturedArticle'
+import NewsArticle from './components/NewsArticle'
+import NewsFilter from './components/NewsFilter'
 
-import { LoadMoreBtn } from '../../theme/Button';
+import { LoadMoreBtn } from '../../theme/Button'
 
 const News = () => {
-	const [articles, setArticles] = useState([]);
-	const [articleLimit, setArticleLimit] = useState(5);
-	const [isFilterOpen, setIsFilterOpen] = useState(false);
-	const [queryString, setQueryString] = useState('popular');
+	const [articles, setArticles] = useState([])
+	const [articleLimit, setArticleLimit] = useState(5)
+	const [isFilterOpen, setIsFilterOpen] = useState(false)
+	const [queryString, setQueryString] = useState('popular')
 
 	const { data, error, isLoading, isError } = useQuery(
 		['news', queryString],
 		() => newsQuery(queryString)
-	);
+	)
 
 	useEffect(() => {
 		if (!isLoading) {
-			setArticles(data.articles);
-			setArticleLimit(5);
+			setArticles(data.articles)
+			setArticleLimit(5)
 		}
-	}, [data, isLoading]);
+	}, [data, isLoading])
 
 	const toggleFilter = () => {
-		setIsFilterOpen((filterState) => !filterState);
-	};
+		setIsFilterOpen((filterState) => !filterState)
+	}
 
 	const loadMore = () => {
-		setArticleLimit((prevLimit) => prevLimit + 5);
-	};
+		setArticleLimit((prevLimit) => prevLimit + 5)
+	}
 
-	if (isLoading) return <Loader />;
+	if (isLoading) return <Loader />
 
-	if (isError) return <h1>{error.message}</h1>;
+	if (isError) return <h1>{error.message}</h1>
 
 	return (
 		<Container>
@@ -74,7 +74,7 @@ const News = () => {
 				<LoadMoreBtn onClick={loadMore}>Load More</LoadMoreBtn>
 			)}
 		</Container>
-	);
-};
+	)
+}
 
-export default News;
+export default News
