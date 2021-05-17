@@ -5,7 +5,7 @@
  * @return {string} (2021-03-29)
  */
 export const displayDate = (date) => {
-	return date.split('T')[0];
+  return date.split("T")[0];
 };
 
 /**
@@ -15,7 +15,7 @@ export const displayDate = (date) => {
  * @return {string} (10:45:30)
  */
 export const displayHour = (date) => {
-	return date.split('T')[1].replace('Z', '');
+  return date.split("T")[1].replace("Z", "");
 };
 
 /**
@@ -25,7 +25,7 @@ export const displayHour = (date) => {
  * @return {number} Monday => 0
  */
 export const getDayNumberInWeek = (date) => {
-	return new Date(date).getDay() % 7;
+  return new Date(date).getDay() % 7;
 };
 
 /**
@@ -35,13 +35,13 @@ export const getDayNumberInWeek = (date) => {
  * @return {date} Saturday, April 3, 2021
  */
 export const dateStringFormatter = (date) => {
-	const options = {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	};
-	return new Date(date).toLocaleDateString('en-US', options);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return new Date(date).toLocaleDateString("en-US", options);
 };
 
 /**
@@ -51,11 +51,11 @@ export const dateStringFormatter = (date) => {
  * @return {date} April, 2021
  */
 export const dateFormatter = (date) => {
-	const options = {
-		year: 'numeric',
-		month: 'long',
-	};
-	return new Date(date).toLocaleDateString('en-US', options);
+  const options = {
+    year: "numeric",
+    month: "long",
+  };
+  return new Date(date).toLocaleDateString("en-US", options);
 };
 
 /**
@@ -65,8 +65,24 @@ export const dateFormatter = (date) => {
  * @return {date | string} Saturday, April 3, 2021 | today
  */
 export const dateOrStringToday = (date) => {
-	if (new Date(date).toISOString().split('T')[0] !== new Date().toISOString().split('T')[0]) {
-		return dateStringFormatter(date);
-	}
-	return 'today' 
-}
+  if (
+    new Date(date).toISOString().split("T")[0] !==
+    new Date().toISOString().split("T")[0]
+  ) {
+    return dateStringFormatter(date);
+  }
+  return "today";
+};
+
+/**
+ * Get difference between passed date and now.
+ *
+ * @param {date} date
+ * @return {number} 1 | 2 | 3
+ */
+export const getDaysDiff = (date) => {
+  const today = new Date();
+  const parsedDate = new Date(date);
+  const diffTime = Math.abs(today.getTime() - parsedDate.getTime());
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+};
