@@ -1,8 +1,8 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { featuredBooks } from '../../data/books'
+import { featuredBooks } from '../../data/books';
 
 import { listBooks } from '../../redux/actions/bookActions';
 
@@ -11,15 +11,15 @@ import TitleBar from '../../components/TitleBar';
 import Pagination from '../../components/Pagination';
 import Title from '../../components/TitleBar/Title';
 import Add from '../../widgets/Add';
-import AddBook from './components/AddBook'
-import NotesForm from './components/NotesForm'
-import BookSlider from './components/BookSlider'
+import AddBook from './components/AddBook';
+import NotesForm from './components/NotesForm';
+import BookSlider from './components/BookSlider';
 import Subtitle from '../../components/Subtitle';
 import Table from './components/Table';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import CurrentBook from './components/CurrentBook';
-import Graph from './components/Graph'
+import Graph from './components/Graph';
 
 const LIMIT_FINISHED_BOOKS = 5;
 
@@ -27,9 +27,7 @@ const Books = () => {
 	const dispatch = useDispatch();
 	const { userInfo } = useSelector((state) => state.userLogin);
 
-	const { loading, error, books } = useSelector(
-		(state) => state.bookList
-	);
+	const { loading, error, books } = useSelector((state) => state.bookList);
 
 	useEffect(() => {
 		dispatch(listBooks(userInfo.token));
@@ -41,13 +39,12 @@ const Books = () => {
 		setIsFormOpen((isFormOpen) => !isFormOpen);
 	};
 
-	const finishedBooks = books.filter(book => !book.isCurrent);
-	const currentBook = books.find(book => book.isCurrent)
+	const finishedBooks = books.filter((book) => !book.isCurrent);
+	const currentBook = books.find((book) => book.isCurrent);
 
 	// Pagination
 	const pages = Math.ceil(finishedBooks.length / LIMIT_FINISHED_BOOKS);
 	const [currentPage, setCurrentPage] = useState(1);
-
 
 	return (
 		<Container>
@@ -60,33 +57,38 @@ const Books = () => {
 				<Subtitle>Currently reading</Subtitle>
 				<Add handleClick={openForm} />
 			</TitleBar>
-			{
-				currentBook ? <NotesForm book={currentBook} isOpen={isFormOpen} /> : <AddBook isOpen={isFormOpen} />
-			}
-			{ currentBook && <CurrentBook currentBook={currentBook} />
-			}
-			<div style={{marginBottom: '2rem'}}>
+			{currentBook ? (
+				<NotesForm book={currentBook} isOpen={isFormOpen} />
+			) : (
+				<AddBook isOpen={isFormOpen} />
+			)}
+			{currentBook && <CurrentBook currentBook={currentBook} />}
+			<div style={{ marginBottom: '2rem' }}>
 				<Subtitle>Finished Books</Subtitle>
-				{
-					loading ? <Loader /> : error ? <Message error={error}></Message> : (
-						<>
-							<Pagination
-								pages={[...Array(pages).keys()]}
-								currPage={currentPage}
-								setCurrentPage={setCurrentPage}
-							/>
-							<div style={{marginBottom: '1rem'}}></div>
-							<Table books={finishedBooks.slice(
+				{loading ? (
+					<Loader />
+				) : error ? (
+					<Message error>{error}</Message>
+				) : (
+					<>
+						<Pagination
+							pages={[...Array(pages).keys()]}
+							currPage={currentPage}
+							setCurrentPage={setCurrentPage}
+						/>
+						<div style={{ marginBottom: '1rem' }}></div>
+						<Table
+							books={finishedBooks.slice(
 								(currentPage - 1) * LIMIT_FINISHED_BOOKS,
 								currentPage * LIMIT_FINISHED_BOOKS
-							)} />
-						</>
-					)
-				}
+							)}
+						/>
+					</>
+				)}
 			</div>
 			<Graph books={finishedBooks} />
 		</Container>
-	)
-}
+	);
+};
 
-export default Books
+export default Books;

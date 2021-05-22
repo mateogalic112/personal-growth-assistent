@@ -36,7 +36,7 @@ const Wallet = () => {
 
 	if (loading) return <Loader />;
 
-	if (error) return <Message error={error} />;
+	if (error) return <Message error>{error}</Message>;
 
 	return (
 		<Container>
