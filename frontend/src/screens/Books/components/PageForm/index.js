@@ -20,15 +20,11 @@ const PageForm = ({ book }) => {
 
 	const { segment } = useSpeechContext();
 
-	const { success: successUpdate } = useSelector((state) => state.updateBook);
-
 	const [page, setPage] = useState('');
 
 	const handleChange = (e) => {
 		setPage(parseInt(e.target.value));
 	};
-
-	useEffect(() => {}, [successUpdate]);
 
 	const handleSubmit = useCallback(
 		(e) => {
