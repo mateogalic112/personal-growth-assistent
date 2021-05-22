@@ -9,10 +9,10 @@ export const ContainerCenter = styled.div`
 `;
 
 const Spinning = keyframes`
-    0% {
+    from {
         transform: rotate(0deg);
     }
-    100% {
+    to {
         transform: rotate(360deg);
     }
 `;
