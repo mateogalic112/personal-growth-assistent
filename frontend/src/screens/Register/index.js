@@ -18,6 +18,8 @@ import Title from '../../components/TitleBar/Title';
 
 import RegisterImage from '../../assets/svg/register.svg';
 
+import { useWindowSize } from '../../hooks/useWindowSize';
+
 import {
 	StyledForm,
 	LoginIllustration,
@@ -85,6 +87,8 @@ const Register = () => {
 		});
 	};
 
+	const { width } = useWindowSize();
+
 	return (
 		<div>
 			<StyledForm onSubmit={handleSubmit}>
@@ -94,93 +98,93 @@ const Register = () => {
 					<Title>Regsiter</Title>
 					<LoginIllustration
 						src={RegisterImage}
-						alt='Register illustartion'
+						alt="Register illustartion"
 					/>
 				</TitleBar>
 				<InputField
-					big
+					big={width > 768}
 					icon={<AiOutlineUser />}
 					input={
 						<input
-							type='username'
+							type="username"
 							required
-							name='username'
+							name="username"
 							value={state.username}
 							onChange={handleChange}
-							placeholder='Username'
+							placeholder="Username"
 						/>
 					}
 				/>
 				<InputField
-					big
+					big={width > 768}
 					icon={<AiOutlineMail />}
 					input={
 						<input
-							type='email'
+							type="email"
 							required
-							name='email'
+							name="email"
 							value={state.email}
 							onChange={handleChange}
-							placeholder='Email'
+							placeholder="Email"
 						/>
 					}
 				/>
 				<InputField
-					big
+					big={width > 768}
 					icon={<RiLockPasswordLine />}
 					input={
 						<input
-							type='password'
+							type="password"
 							required
-							name='password'
+							name="password"
 							value={state.password}
 							onChange={handleChange}
-							placeholder='Password'
+							placeholder="Password"
 						/>
 					}
 				/>
 				<InputField
-					big
+					big={width > 768}
 					icon={<Gi3DHammer />}
 					input={
 						<input
-							type='occupation'
+							type="occupation"
 							required
-							name='occupation'
+							name="occupation"
 							value={state.occupation}
 							onChange={handleChange}
-							placeholder='Occupation'
+							placeholder="Occupation"
 						/>
 					}
 				/>
 				<RadioWrapper>
 					<RadioField isSelected={state.gender === 'male'}>
 						<input
-							type='radio'
-							id='male'
-							name='gender'
-							value='male'
+							type="radio"
+							id="male"
+							name="gender"
+							value="male"
 							checked={state.gender === 'male'}
 							onChange={handleChange}
 						/>
-						<label htmlFor='male'>Male</label>
+						<label htmlFor="male">Male</label>
 					</RadioField>
 					<RadioField isSelected={state.gender === 'female'}>
 						<input
-							type='radio'
-							id='female'
-							name='gender'
-							value='female'
+							type="radio"
+							id="female"
+							name="gender"
+							value="female"
 							checked={state.gender === 'female'}
 							onChange={handleChange}
 						/>
-						<label htmlFor='female'>Female</label>
+						<label htmlFor="female">Female</label>
 					</RadioField>
 				</RadioWrapper>
 
 				<Select
-					name='interests'
-					placeholder='Interests'
+					name="interests"
+					placeholder="Interests"
 					onChange={setInterests}
 					styles={selectStyles}
 					options={options}
@@ -188,7 +192,7 @@ const Register = () => {
 				/>
 
 				<AuthBtn
-					type='submit'
+					type="submit"
 					disabled={!validateForm()}
 					style={{ marginTop: '1rem' }}
 				>
@@ -197,7 +201,7 @@ const Register = () => {
 
 				<FormRedirect>
 					<span>Already have an account?</span>
-					<Link to='/login'>Login</Link>
+					<Link to="/login">Login</Link>
 				</FormRedirect>
 			</StyledForm>
 		</div>

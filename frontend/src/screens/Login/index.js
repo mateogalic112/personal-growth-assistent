@@ -20,6 +20,8 @@ import { FormRedirect } from '../Register/style';
 import { StyledForm, LoginIllustration } from './style';
 import Message from '../../components/Message';
 
+import { useWindowSize } from '../../hooks/useWindowSize';
+
 const Login = () => {
 	const [state, setState] = useState({
 		email: '',
@@ -55,6 +57,8 @@ const Login = () => {
 		});
 	};
 
+	const { width } = useWindowSize();
+
 	return (
 		<div>
 			<StyledForm onSubmit={handleSubmit}>
@@ -64,43 +68,43 @@ const Login = () => {
 					<Title>Login</Title>
 					<LoginIllustration
 						src={LoginImage}
-						alt='Login illustartion'
+						alt="Login illustartion"
 					/>
 				</TitleBar>
 				<InputField
-					big
+					big={width > 768}
 					icon={<AiOutlineMail />}
 					input={
 						<input
-							type='email'
+							type="email"
 							required
-							name='email'
+							name="email"
 							value={state.email}
 							onChange={handleChange}
-							placeholder='Email'
+							placeholder="Email"
 						/>
 					}
 				/>
 				<InputField
-					big
+					big={width > 768}
 					icon={<RiLockPasswordLine />}
 					input={
 						<input
-							type='password'
+							type="password"
 							required
-							name='password'
+							name="password"
 							value={state.password}
 							onChange={handleChange}
-							placeholder='Password'
+							placeholder="Password"
 						/>
 					}
 				/>
-				<AuthBtn type='submit' disabled={!validateForm()}>
+				<AuthBtn type="submit" disabled={!validateForm()}>
 					Login
 				</AuthBtn>
 				<FormRedirect>
 					<span>Don't have an account?</span>
-					<Link to='/register'>Register</Link>
+					<Link to="/register">Register</Link>
 				</FormRedirect>
 			</StyledForm>
 		</div>

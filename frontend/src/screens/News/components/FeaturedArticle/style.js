@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	min-height: 360px;
-	padding: .75rem .5rem;
+	padding: 0.75rem 0.5rem;
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -66,12 +66,22 @@ export const Source = styled.p`
 `;
 
 export const Author = styled.p`
+	display: none;
 	font-size: 0.75rem;
+
+	@media (min-width: 768px) {
+		display: block;
+	}
 `;
 
 export const Published = styled.p`
 	margin-left: 0.5rem;
 	font-size: 0.75rem;
+	display: none;
+
+	@media (min-width: 768px) {
+		display: block;
+	}
 `;
 
 export const Button = styled.button`
