@@ -1,7 +1,7 @@
-import { useState, Fragment } from 'react'
-import {BsEye} from 'react-icons/bs'
-import {AiFillEyeInvisible} from 'react-icons/ai'
-import Add from '../../../../widgets/Add'
+import { useState, Fragment } from 'react';
+import { BsEye } from 'react-icons/bs';
+import { AiFillEyeInvisible } from 'react-icons/ai';
+import Add from '../../../../widgets/Add';
 
 import {
 	TableContainer,
@@ -13,8 +13,7 @@ import {
 } from './style';
 
 const Table = ({ books }) => {
-
-	const [openedNotes, setOpenedNotes] = useState([])
+	const [openedNotes, setOpenedNotes] = useState([]);
 
 	return (
 		<TableContainer>
@@ -28,33 +27,41 @@ const Table = ({ books }) => {
 
 				const handleClick = () => {
 					if (isIncluded) {
-						const newNotes = openedNotes.filter(note => note !== book.title)
+						const newNotes = openedNotes.filter(
+							(note) => note !== book.title
+						);
 						setOpenedNotes(newNotes);
 					} else {
-						setOpenedNotes([...openedNotes, book.title])
+						setOpenedNotes([...openedNotes, book.title]);
 					}
-				}
+				};
 
-				return <Fragment key={book.title}>
-					<TableNoteRow>
-						<Title>
-							{book.title}
-						</Title>
-						<Author>
-							{book.author}
-						</Author>
-						<Notes>
-							<Add handleClick={handleClick} icon={isIncluded ? <AiFillEyeInvisible /> :  <BsEye />} />
-						</Notes>
-					</TableNoteRow>
-					{
-						isIncluded && book.notes.map(note => (
-							<TableNoteRow note>
-								{note}
-							</TableNoteRow>
-						))
-					}
-				</Fragment>
+				return (
+					<Fragment key={book.title}>
+						<TableNoteRow>
+							<Title>{book.title}</Title>
+							<Author>{book.author}</Author>
+							<Notes>
+								<Add
+									handleClick={handleClick}
+									icon={
+										isIncluded ? (
+											<AiFillEyeInvisible />
+										) : (
+											<BsEye />
+										)
+									}
+								/>
+							</Notes>
+						</TableNoteRow>
+						{isIncluded &&
+							book.notes.map((note, idx) => (
+								<TableNoteRow key={idx} note>
+									{note}
+								</TableNoteRow>
+							))}
+					</Fragment>
+				);
 			})}
 		</TableContainer>
 	);

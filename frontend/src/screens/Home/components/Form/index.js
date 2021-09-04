@@ -65,7 +65,8 @@ const Form = ({ isOpen }) => {
 				segment.words = [];
 			}
 		}
-	}, [segment, dispatch, userInfo, handleSubmit, validateForm]);
+		// eslint-disable-next-line
+	}, [segment, userInfo]);
 
 	const handleChange = (e) => {
 		setGoal(e.target.value);

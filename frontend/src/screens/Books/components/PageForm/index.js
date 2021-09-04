@@ -54,7 +54,7 @@ const PageForm = ({ book }) => {
 				segment.entities.forEach((entity) => {
 					switch (entity.type) {
 						case 'page':
-							setPage(Number(entity.value));
+							setPage(parseInt(entity.value));
 							break;
 						default:
 							return;
@@ -68,7 +68,8 @@ const PageForm = ({ book }) => {
 				}
 			}
 		}
-	}, [segment, handleSubmit, validateForm]);
+		// eslint-disable-next-line
+	}, [segment]);
 
 	return (
 		<StyledForm onSubmit={handleSubmit}>

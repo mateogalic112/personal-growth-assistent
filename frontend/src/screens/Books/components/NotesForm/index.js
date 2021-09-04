@@ -67,7 +67,8 @@ const NotesForm = ({ isOpen, book }) => {
 				segment.words = [];
 			}
 		}
-	}, [segment, userInfo, handleSubmit, validateForm]);
+		// eslint-disable-next-line
+	}, [segment, userInfo]);
 
 	return (
 		<FormWrapper
