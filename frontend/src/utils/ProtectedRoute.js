@@ -13,7 +13,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 			{userInfo?.token ? <Component /> : <Redirect to='/login' />}
 			<SpeechlyWrapper>
 				<PushToTalkButtonContainer>
-					<PushToTalkButton size="4rem" />
+					<PushToTalkButton size="4rem" captureKey="S" />
 					<ErrorPanel />
 				</PushToTalkButtonContainer>
 			</SpeechlyWrapper>
